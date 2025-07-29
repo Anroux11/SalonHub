@@ -23,9 +23,12 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:where(.css-dev-only-do-not-override-it1oxp).ant-app {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
 }
 
 * {
