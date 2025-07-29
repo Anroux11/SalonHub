@@ -14,7 +14,7 @@ import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
 import Title from "antd/es/typography/Title";
 import { useStyles } from "@/app/employeeTechnician/style/styles";
 import "@ant-design/v5-patch-for-react-19";
-// import withAuth from "@/hoc/withAuth";
+import withAuth from "@/hoc/withAuth";
 
 const { Header, Sider, Content } = Layout;
 
@@ -141,5 +141,5 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default ClientLayout;
-// export default withAuth(ClientLayout, { allowedRoles: ["Client"] });
+// export default ClientLayout;
+export default withAuth(ClientLayout, { allowedRoles: ["Admin","Salon","EmployeeTechnician","Client"] });

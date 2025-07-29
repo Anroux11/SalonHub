@@ -139,4 +139,4 @@ const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) =
     );
 };
 
-export default withAuth(EmployeeTechnicianLayout, { allowedRoles: ["EmployeeTechnician"] });
+export default withAuth(EmployeeTechnicianLayout, { allowedRoles: ["Admin","Salon","EmployeeTechnician","Client"] });
