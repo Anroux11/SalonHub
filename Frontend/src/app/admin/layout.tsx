@@ -12,11 +12,9 @@ import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
 import Title from "antd/es/typography/Title";
 import { useStyles } from "./style/styles";
 
-import withAuth from "@/hoc/withAuth";
-
 const { Header, Sider, Content } = Layout;
 
-const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) => {
+const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -126,4 +124,4 @@ const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) =
   );
 };
 
-export default withAuth(EmployeeTechnicianLayout, {allowedRoles:["Admin"]});
+export default AdminLayout;
