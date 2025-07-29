@@ -1,0 +1,138 @@
+DEBUG 2025-07-29 20:41:20,696 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2025-07-29 20:41:22,129 [1    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2025-07-29 20:41:22,141 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.Web.Host.Startup.SalonHubWebHostModule, SalonHub.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,142 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.SalonHubWebCoreModule, SalonHub.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,142 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.SalonHubApplicationModule, SalonHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,143 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.SalonHubCoreModule, SalonHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,143 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,143 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,143 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.EntityFrameworkCore.SalonHubEntityFrameworkModule, SalonHub.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,144 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,145 [1    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2025-07-29 20:41:22,355 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:41:22,355 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:41:22,355 [1    ] o.Configuration.LanguageManagementConfig - Converted SalonHub (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:41:22,355 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:41:22,906 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: SalonHub.EntityFrameworkCore.SalonHubDbContext, SalonHub.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:41:22,980 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2025-07-29 20:41:23,006 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2025-07-29 20:41:23,012 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2025-07-29 20:41:23,016 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: SalonHub
+DEBUG 2025-07-29 20:41:23,019 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2025-07-29 20:41:23,023 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2025-07-29 20:41:23,032 [1    ] , Culture=neutral, PublicKeyToken=null]] - Start background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[SalonHub.MultiTenancy.Tenant, SalonHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SalonHub.Authorization.Users.User, SalonHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2025-07-29 20:41:23,042 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 12 classes define auto mapping attributes
+DEBUG 2025-07-29 20:41:23,042 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Users.Dto.CreateUserDto
+DEBUG 2025-07-29 20:41:23,044 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Users.Dto.UserDto
+DEBUG 2025-07-29 20:41:23,044 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Sessions.Dto.UserLoginInfoDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Roles.Dto.PermissionDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.MultiTenancy.Dto.TenantDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.Technicians.Dto.TechnicianDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.SalonAdmin.Dto.SalonDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.Reports.DTo.BookingDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.EmployeeTechnicians.Dto.EmployeeTechnicianDto
+DEBUG 2025-07-29 20:41:23,045 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.Clients.DTo.RegisterDTo
+INFO  2025-07-29 20:41:38,855 [1    ] tCore.Builder.RequestLocalizationOptions - Supported Request Localization Cultures: en,es-MX,fr,de,it,nl,pt-BR,tr,ru,ar,fa,ja,zh-Hans
+INFO  2025-07-29 20:41:39,068 [14   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/ - - -
+INFO  2025-07-29 20:41:39,104 [1    ] Microsoft.Hosting.Lifetime               - Application started. Press Ctrl+C to shut down.
+INFO  2025-07-29 20:41:39,106 [1    ] Microsoft.Hosting.Lifetime               - Hosting environment: Development
+INFO  2025-07-29 20:41:39,107 [1    ] Microsoft.Hosting.Lifetime               - Content root path: C:\Users\Anroux\Desktop\Development\Final-Project\SalonHub\Backend\src\SalonHub.Web.Host
+INFO  2025-07-29 20:41:39,224 [11   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'SalonHub.Web.Host.Controllers.HomeController.Index (SalonHub.Web.Host)'
+INFO  2025-07-29 20:41:39,244 [11   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller SalonHub.Web.Host.Controllers.HomeController (SalonHub.Web.Host).
+INFO  2025-07-29 20:41:40,688 [11   ] vc.Infrastructure.RedirectResultExecutor - Executing RedirectResult, redirecting to /swagger.
+INFO  2025-07-29 20:41:40,698 [11   ] c.Infrastructure.ControllerActionInvoker - Executed action SalonHub.Web.Host.Controllers.HomeController.Index (SalonHub.Web.Host) in 1446.9946ms
+INFO  2025-07-29 20:41:40,701 [11   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'SalonHub.Web.Host.Controllers.HomeController.Index (SalonHub.Web.Host)'
+INFO  2025-07-29 20:41:40,713 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2025-07-29 20:41:40,715 [11   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/ - 302 - - 1650.5330ms
+INFO  2025-07-29 20:41:40,757 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 41.9048ms
+INFO  2025-07-29 20:41:40,766 [11   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2025-07-29 20:41:40,776 [14   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_vs/browserLink - - -
+INFO  2025-07-29 20:41:40,778 [11   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16519 application/javascript;+charset=utf-8 7.8912ms
+INFO  2025-07-29 20:41:40,826 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_vs/browserLink - 200 - text/javascript;+charset=UTF-8 48.1358ms
+INFO  2025-07-29 20:41:40,838 [17   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2025-07-29 20:41:40,843 [17   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'SalonHub.Web.Host.Controllers.AntiForgeryController.SetCookie (SalonHub.Web.Host)'
+INFO  2025-07-29 20:41:40,858 [14   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2025-07-29 20:41:40,862 [17   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller SalonHub.Web.Host.Controllers.AntiForgeryController (SalonHub.Web.Host).
+INFO  2025-07-29 20:41:40,921 [14   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 63.4096ms
+INFO  2025-07-29 20:41:42,128 [14   ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2025-07-29 20:41:42,134 [14   ] c.Infrastructure.ControllerActionInvoker - Executed action SalonHub.Web.Host.Controllers.AntiForgeryController.SetCookie (SalonHub.Web.Host) in 1270.5585ms
+INFO  2025-07-29 20:41:42,136 [14   ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'SalonHub.Web.Host.Controllers.AntiForgeryController.SetCookie (SalonHub.Web.Host)'
+INFO  2025-07-29 20:41:42,139 [14   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 1301.3273ms
+DEBUG 2025-07-29 20:45:17,825 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2025-07-29 20:45:17,866 [1    ] Abp.Modules.AbpModuleManager             - Found 15 ABP modules in total.
+DEBUG 2025-07-29 20:45:17,874 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.Web.Host.Startup.SalonHubWebHostModule, SalonHub.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,875 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.SalonHubWebCoreModule, SalonHub.Web.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,875 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.SalonHubApplicationModule, SalonHub.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,875 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.SalonHubCoreModule, SalonHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,875 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,875 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,875 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,876 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,876 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SalonHub.EntityFrameworkCore.SalonHubEntityFrameworkModule, SalonHub.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,876 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,876 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,876 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,876 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,877 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,877 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=9.4.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:17,878 [1    ] Abp.Modules.AbpModuleManager             - 15 modules loaded.
+DEBUG 2025-07-29 20:45:17,917 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:45:17,917 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:45:17,917 [1    ] o.Configuration.LanguageManagementConfig - Converted SalonHub (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:45:17,917 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2025-07-29 20:45:18,134 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: SalonHub.EntityFrameworkCore.SalonHubDbContext, SalonHub.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2025-07-29 20:45:18,222 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2025-07-29 20:45:18,244 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2025-07-29 20:45:18,249 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2025-07-29 20:45:18,252 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: SalonHub
+DEBUG 2025-07-29 20:45:18,255 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2025-07-29 20:45:18,259 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2025-07-29 20:45:18,265 [1    ] , Culture=neutral, PublicKeyToken=null]] - Start background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[SalonHub.MultiTenancy.Tenant, SalonHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[SalonHub.Authorization.Users.User, SalonHub.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2025-07-29 20:45:18,276 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 12 classes define auto mapping attributes
+DEBUG 2025-07-29 20:45:18,276 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Users.Dto.CreateUserDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Users.Dto.UserDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Sessions.Dto.UserLoginInfoDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.Roles.Dto.PermissionDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.MultiTenancy.Dto.TenantDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.Technicians.Dto.TechnicianDto
+DEBUG 2025-07-29 20:45:18,278 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.SalonAdmin.Dto.SalonDto
+DEBUG 2025-07-29 20:45:18,279 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.Reports.DTo.BookingDto
+DEBUG 2025-07-29 20:45:18,279 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.EmployeeTechnicians.Dto.EmployeeTechnicianDto
+DEBUG 2025-07-29 20:45:18,279 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - SalonHub.CrudAppServiceses.Clients.DTo.RegisterDTo
+INFO  2025-07-29 20:45:33,854 [1    ] tCore.Builder.RequestLocalizationOptions - Supported Request Localization Cultures: en,es-MX,fr,de,it,nl,pt-BR,tr,ru,ar,fa,ja,zh-Hans
+INFO  2025-07-29 20:45:34,066 [11   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/ - - -
+INFO  2025-07-29 20:45:34,106 [1    ] Microsoft.Hosting.Lifetime               - Application started. Press Ctrl+C to shut down.
+INFO  2025-07-29 20:45:34,108 [1    ] Microsoft.Hosting.Lifetime               - Hosting environment: Development
+INFO  2025-07-29 20:45:34,110 [1    ] Microsoft.Hosting.Lifetime               - Content root path: C:\Users\Anroux\Desktop\Development\Final-Project\SalonHub\Backend\src\SalonHub.Web.Host
+INFO  2025-07-29 20:45:34,217 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'SalonHub.Web.Host.Controllers.HomeController.Index (SalonHub.Web.Host)'
+INFO  2025-07-29 20:45:34,237 [7    ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller SalonHub.Web.Host.Controllers.HomeController (SalonHub.Web.Host).
+INFO  2025-07-29 20:45:35,697 [7    ] vc.Infrastructure.RedirectResultExecutor - Executing RedirectResult, redirecting to /swagger.
+INFO  2025-07-29 20:45:35,707 [7    ] c.Infrastructure.ControllerActionInvoker - Executed action SalonHub.Web.Host.Controllers.HomeController.Index (SalonHub.Web.Host) in 1460.809ms
+INFO  2025-07-29 20:45:35,709 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'SalonHub.Web.Host.Controllers.HomeController.Index (SalonHub.Web.Host)'
+INFO  2025-07-29 20:45:35,728 [18   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/index.html - - -
+INFO  2025-07-29 20:45:35,736 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/ - 302 - - 1673.7896ms
+INFO  2025-07-29 20:45:35,794 [16   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/index.html - 200 - text/html;charset=utf-8 62.4971ms
+INFO  2025-07-29 20:45:35,812 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - - -
+INFO  2025-07-29 20:45:35,823 [11   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/_vs/browserLink - - -
+INFO  2025-07-29 20:45:35,833 [5    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_framework/aspnetcore-browser-refresh.js - 200 16519 application/javascript;+charset=utf-8 21.5183ms
+INFO  2025-07-29 20:45:35,874 [14   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/_vs/browserLink - 200 - text/javascript;+charset=UTF-8 51.4029ms
+INFO  2025-07-29 20:45:35,886 [14   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - - -
+INFO  2025-07-29 20:45:35,893 [14   ] ft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'SalonHub.Web.Host.Controllers.AntiForgeryController.SetCookie (SalonHub.Web.Host)'
+INFO  2025-07-29 20:45:35,903 [18   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - - -
+INFO  2025-07-29 20:45:35,906 [14   ] c.Infrastructure.ControllerActionInvoker - Route matched with {action = "SetCookie", controller = "AntiForgery", area = ""}. Executing controller action with signature Void SetCookie() on controller SalonHub.Web.Host.Controllers.AntiForgeryController (SalonHub.Web.Host).
+INFO  2025-07-29 20:45:35,971 [18   ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 67.4893ms
+INFO  2025-07-29 20:45:37,235 [7    ] .Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'Abp.Web.Models.AjaxResponse'.
+INFO  2025-07-29 20:45:37,250 [7    ] c.Infrastructure.ControllerActionInvoker - Executed action SalonHub.Web.Host.Controllers.AntiForgeryController.SetCookie (SalonHub.Web.Host) in 1339.4538ms
+INFO  2025-07-29 20:45:37,252 [7    ] ft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'SalonHub.Web.Host.Controllers.AntiForgeryController.SetCookie (SalonHub.Web.Host)'
+INFO  2025-07-29 20:45:37,256 [7    ] Microsoft.AspNetCore.Hosting.Diagnostics - Request finished HTTP/2 GET https://localhost:44311/AntiForgery/SetCookie - 200 - application/json;+charset=utf-8 1371.8887ms
