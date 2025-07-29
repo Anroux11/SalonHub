@@ -12,8 +12,6 @@ import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
 import Title from "antd/es/typography/Title";
 import { useStyles } from "./style/styles";
 
-import withAuth from "@/hoc/withAuth";
-
 const { Header, Sider, Content } = Layout;
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
@@ -126,5 +124,4 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// export default AdminLayout;
-export default withAuth(AdminLayout, {allowedRoles:["Admin","Salon","EmployeeTechnician","Client"]});
+export default AdminLayout;
