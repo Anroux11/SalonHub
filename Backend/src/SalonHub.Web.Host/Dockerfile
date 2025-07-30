@@ -8,7 +8,7 @@ COPY src/ ./src/
 
 WORKDIR /app/src/SalonHub.Web.Host
 RUN dotnet restore
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish --no-restore
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
