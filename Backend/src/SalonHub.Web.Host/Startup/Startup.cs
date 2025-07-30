@@ -48,13 +48,6 @@ namespace SalonHub.Web.Host.Startup
 
             services.AddSignalR();
 
-            // Sendgrid
-            //DotNetEnv.Env.TraversePath().Load("./.env");
-            //var key = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-            //services.AddSingleton<ISendGridClient>(new SendGridClient(key));
-            //services.AddTransient<ISendGridEmailService, SendGridEmailService>();
-
-
             // Configure CORS for angular2 UI
             services.AddCors(
                 options => options.AddPolicy(
@@ -76,8 +69,8 @@ namespace SalonHub.Web.Host.Startup
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             ConfigureSwagger(services);
 
-            //Configure Abp and Dependency Injection
-             services.AddAbpWithoutCreatingServiceProvider<SalonHubWebHostModule>(
+            // Configure Abp and Dependency Injection
+            services.AddAbpWithoutCreatingServiceProvider<SalonHubWebHostModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig(_hostingEnvironment.IsDevelopment()

@@ -1,30 +1,27 @@
 ﻿using Abp.Application.Services;
-using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.UI;
 using SalonHub.Authorization.Users;
-using SalonHub.CrudAppServiceses.Clients.DTo;
-using SalonHub.EmailService;
-using SendGrid;
+using SalonHub.CrudAppService.Clients.Dto;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace SalonHub.CrudAppServiceses.Clients
+namespace SalonHub.CrudAppService.Clients
 {
-    [AbpAllowAnonymous]
-    public class RegisterAppService : ApplicationService
+    public class ClientAppService : ApplicationService
     {
         private readonly UserManager _userManager;
         private readonly IRepository<User, long> _userRepository;
-        private readonly ISendGridEmailService _sendGridEmailService;
 
-        public RegisterAppService(UserManager userManager, ISendGridEmailService sendGrid)
+        public ClientAppService(UserManager userManager)
         {
             _userManager = userManager;
-            _sendGridEmailService = sendGrid;
         }
 
-        public async Task RegisterAsync(RegisterDTo input)
+        public async Task RegisterAsync(clientDto input)
         {
             var user = ObjectMapper.Map<User>(input);
             user.IsActive = true;
@@ -47,29 +44,17 @@ namespace SalonHub.CrudAppServiceses.Clients
                     await _userManager.AddToRoleAsync(user, "EmployeeTechnician");
                 }
 
-                await _sendGridEmailService.SendEmailAsync(
-                    input.EmailAddress,
-                    "Welcome to SalonHub",
-                    "<p>You have successfully registered. Thank you!</p>"
-                );
+                //await _sendGridEmailService.SendEmailAsync(
+                //    input.EmailAddress,
+                //    "Welcome to SalonHub",
+                //    "<p>You have successfully registered. Thank you!</p>"
+                //);
 
             }
             catch (Exception ex)
             {
                 throw new UserFriendlyException("No Client available:", ex.Message);
             }
-            await CurrentUnitOfWork.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(User user)
-        {
-            await _userRepository.UpdateAsync(user);
-            await CurrentUnitOfWork.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(User user)
-        {
-            await _userRepository.DeleteAsync(user);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
     }

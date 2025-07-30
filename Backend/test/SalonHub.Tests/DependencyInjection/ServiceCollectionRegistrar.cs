@@ -19,10 +19,10 @@ namespace SalonHub.Tests.DependencyInjection
 
             services.AddEntityFrameworkInMemoryDatabase();
 
-            var employeeTechnician = WindsorRegistrationHelper.CreateEmployeeTechnician(iocManager.IocContainer, services);
+            var serviceProvider = WindsorRegistrationHelper.CreateServiceProvider(iocManager.IocContainer, services);
 
             var builder = new DbContextOptionsBuilder<SalonHubDbContext>();
-            builder.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalEmployeeTechnician(employeeTechnician);
+            builder.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalServiceProvider(serviceProvider);
 
             iocManager.IocContainer.Register(
                 Component

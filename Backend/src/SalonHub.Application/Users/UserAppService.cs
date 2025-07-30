@@ -25,6 +25,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SalonHub.Users
 {
+    //[AbpAuthorize(PermissionNames.Pages_Users)]
     [AbpAllowAnonymous]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {

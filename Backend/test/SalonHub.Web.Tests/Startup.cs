@@ -27,7 +27,7 @@ namespace SalonHub.Web.Tests
             _appConfiguration = env.GetAppConfiguration();
         }
 
-        public IEmployeeTechnician ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkInMemoryDatabase();
 
@@ -68,13 +68,13 @@ namespace SalonHub.Web.Tests
             });
         }
 
-        private void UseInMemoryDb(IEmployeeTechnician employeeTechnician)
+        private void UseInMemoryDb(IServiceProvider serviceProvider)
         {
             var builder = new DbContextOptionsBuilder<SalonHubDbContext>();
-            builder.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalEmployeeTechnician(employeeTechnician);
+            builder.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalServiceProvider(serviceProvider);
             var options = builder.Options;
 
-            var iocManager = employeeTechnician.GetRequiredService<IIocManager>();
+            var iocManager = serviceProvider.GetRequiredService<IIocManager>();
             iocManager.IocContainer
                 .Register(
                     Component.For<DbContextOptions<SalonHubDbContext>>()

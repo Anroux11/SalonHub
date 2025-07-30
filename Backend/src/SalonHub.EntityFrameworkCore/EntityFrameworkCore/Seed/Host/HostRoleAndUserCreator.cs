@@ -8,11 +8,11 @@ using Microsoft.Extensions.Options;
 using SalonHub.Authorization;
 using SalonHub.Authorization.Roles;
 using SalonHub.Authorization.Users;
-using SalonHub.Domain.Addresses;
 using SalonHub.Domain.Salons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace SalonHub.EntityFrameworkCore.Seed.Host
 {
@@ -67,7 +67,6 @@ namespace SalonHub.EntityFrameworkCore.Seed.Host
                 EmployeeTechnicianRole = _context.Roles.Add(new Role(null, "EmployeeTechnician", "EmployeeTechnician") { IsStatic = true }).Entity;
                 _context.SaveChanges();
             }
-
 
             // Grant all permissions to admin role for host
 
@@ -126,11 +125,11 @@ namespace SalonHub.EntityFrameworkCore.Seed.Host
                 // Seeding salons
                 var gautengSalons = new List<Salon>
                 {
-                    new Salon { Name = "City of Johannesburg Metropolitan Salon", Address = new Address { City = "Johannesburg", Province = "Gauteng" }, Latitude = -26.1767M, Longitude = 27.9635M }, 
-                    new Salon { Name = "City of Tshwane Metropolitan Salon", Address = new Address { City = "Pretoria", Province = "Gauteng" }, Latitude = -25.7479M, Longitude = 28.2293M }, 
-                    new Salon { Name = "City of Ekurhuleni Metropolitan Salon", Address = new Address { City = "Germiston", Province = "Gauteng" }, Latitude = -26.2361M, Longitude = 28.1825M }, 
-                    new Salon { Name = "Sedibeng District Salon", Address = new Address { City = "Vanderbijlpark", Province = "Gauteng" }, Latitude = -26.7066M, Longitude = 27.8272M }, 
-                    new Salon { Name = "West Rand District Salon", Address = new Address { City = "Krugersdorp", Province = "Gauteng" }, Latitude = -26.1043M, Longitude = 27.7134M }
+                    new Salon { Name = "City of Johannesburg Metropolitan Salon"},
+                    new Salon { Name = "City of Tshwane Metropolitan Salon"},
+                    new Salon { Name = "City of Ekurhuleni Metropolitan Salon"},
+                    new Salon { Name = "Sedibeng District Salon"},
+                    new Salon { Name = "West Rand District Salon" }
 
                 };
 

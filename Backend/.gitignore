@@ -254,6 +254,3 @@ paket-files/
 src/SalonHub.Web.Mvc/secrets.json
 src/SalonHub.Web.Host/secrets.json
 src/SalonHub.Migrator/secrets.json
-
-*.env
-.env.*

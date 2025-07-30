@@ -1,18 +1,18 @@
-﻿using Abp.AspNetCore;
+﻿using System;
+using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
 using Abp.AspNetCore.SignalR;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using SalonHub.Authentication.JwtBearer;
 using SalonHub.Configuration;
 using SalonHub.EntityFrameworkCore;
-using System;
-using System.Text;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace SalonHub
 {

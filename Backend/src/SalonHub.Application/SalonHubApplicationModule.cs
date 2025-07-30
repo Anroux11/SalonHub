@@ -1,9 +1,7 @@
 ﻿using Abp.AutoMapper;
-using Abp.Events.Bus.Handlers;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using SalonHub.Authorization;
-//using SalonHub.EventBus;
 
 namespace SalonHub
 {
@@ -27,16 +25,6 @@ namespace SalonHub
                 // Scan the assembly for classes which inherit from AutoMapper.Profile
                 cfg => cfg.AddMaps(thisAssembly)
             );
-
         }
-
-        //public override void PostInitialize()
-        //{
-        //    var eventBus = IocManager.Resolve<IEventBus>();
-        //    var handler = IocManager.Resolve<EmployeeTechnicianEventHandler>();
-
-        //    eventBus.Subscribe<EmployeeTechnicianCreatedEvent>(handler.Handle);
-
-        //}
     }
 }
