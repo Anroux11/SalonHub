@@ -53,10 +53,10 @@ namespace SalonHub.Roles
         {
             var roles = await _roleManager
                 .Roles
-                //.WhereIf(
-                //    /*!input.Permission.IsNullOrWhiteSpace(),*/
-                //    r => r.Permissions.Any(rp => rp.Name == input.Permission && rp.IsGranted)
-                //)
+                .WhereIf(
+                    !input.Permission.IsNullOrWhiteSpace(),
+                    r => r.Permissions.Any(rp => rp.Name == input.Permission && rp.IsGranted)
+                )
                 .ToListAsync();
 
             return new ListResultDto<RoleListDto>(ObjectMapper.Map<List<RoleListDto>>(roles));

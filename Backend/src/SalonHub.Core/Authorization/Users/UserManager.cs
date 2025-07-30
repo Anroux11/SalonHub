@@ -12,7 +12,6 @@ using Abp.Organizations;
 using Abp.Runtime.Caching;
 using SalonHub.Authorization.Roles;
 using Abp.Authorization.Roles;
-using SalonHub.Domain.EmployeeTechnicians;
 
 namespace SalonHub.Authorization.Users
 {
@@ -27,7 +26,7 @@ namespace SalonHub.Authorization.Users
           IEnumerable<IPasswordValidator<User>> passwordValidators,
           ILookupNormalizer keyNormalizer,
           IdentityErrorDescriber errors,
-          EmployeeTechnician services,
+          IServiceProvider services,
           ILogger<UserManager<User>> logger,
           IPermissionManager permissionManager,
           IUnitOfWorkManager unitOfWorkManager,
@@ -46,7 +45,7 @@ namespace SalonHub.Authorization.Users
               passwordValidators,
               keyNormalizer,
               errors,
-              (IServiceProvider)services,
+              services,
               logger,
               permissionManager,
               unitOfWorkManager,

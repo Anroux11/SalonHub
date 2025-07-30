@@ -4,7 +4,6 @@ using Abp.Reflection.Extensions;
 using Abp.Runtime.Security;
 using Abp.Timing;
 using Abp.Zero;
-using Abp.Timing;
 using Abp.Zero.Configuration;
 using SalonHub.Authorization.Roles;
 using SalonHub.Authorization.Users;
@@ -21,7 +20,6 @@ namespace SalonHub
         public override void PreInitialize()
         {
             Clock.Provider = ClockProviders.Utc;
-
             Configuration.Auditing.IsEnabledForAnonymousUsers = true;
 
             // Declare entity types

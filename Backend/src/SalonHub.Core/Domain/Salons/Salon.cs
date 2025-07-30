@@ -1,7 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
-using SalonHub.Domain.Addresses;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace SalonHub.Domain.Salons
 {
@@ -9,10 +7,10 @@ namespace SalonHub.Domain.Salons
     {
         public virtual string Name { get; set; }
 
-        public Address Address { get; set; }
+        //public Address Address { get; set; }
 
-        public virtual decimal Latitude { get; set; }
-        public virtual decimal Longitude { get; set; }
+        //public virtual decimal Latitude { get; set; }
+        //public virtual decimal Longitude { get; set; }
 
     }
 }

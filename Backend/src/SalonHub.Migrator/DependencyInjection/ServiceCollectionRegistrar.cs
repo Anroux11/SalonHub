@@ -13,7 +13,7 @@ namespace SalonHub.Migrator.DependencyInjection
 
             IdentityRegistrar.Register(services);
 
-            WindsorRegistrationHelper.CreateEmployeeTechnician(iocManager.IocContainer, services);
+            WindsorRegistrationHelper.CreateServiceProvider(iocManager.IocContainer, services);
         }
     }
 }

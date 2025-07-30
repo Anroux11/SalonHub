@@ -3,14 +3,14 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
-using SalonHub.CrudAppServiceses.Reports.DTo;
 using SalonHub.Domain.Bookings;
 using SalonHub.Domain.Salons;
 using SalonHub.Domain.EmployeeTechnicians;
 using System;
 using System.Threading.Tasks;
+using SalonHub.CrudAppService.Bookings.Dto;
 
-namespace SalonHub.CrudAppServiceses.Reports
+namespace SalonHub.CrudAppService.Bookings
 {
     [AbpAuthorize] // will restrict to role "Client"
     public class BookingAppService : AsyncCrudAppService<
@@ -83,7 +83,7 @@ namespace SalonHub.CrudAppServiceses.Reports
         public override async Task<PagedResultDto<BookingDto>> GetAllAsync(PagedAndSortedResultRequestDto input)
         {
             var bookings = await _bookingRepository
-                .GetAllIncluding(i => i.bookingAddress, i => i.Salon, s => s.employeeTechnician).ToListAsync();
+                .GetAllIncluding( i => i.Salon, s => s.employeeTechnician).ToListAsync();
             return await base.GetAllAsync(input);
         }
     }
