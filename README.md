@@ -32,15 +32,12 @@ SalonHub/
 ## Features
 
 - **User Management:** Clients can register and login. Admins can register users working for a specific salon while the salons can add service providers.
-- **Booking Reporting:** Clients can create a quick report or a full detailed report. A quick report takes in your location while a full report can have a description and a photo of the       pothole can be attached to the full report.
-- **Salon Selection:** Reports will can take your location which will add the Salon of the area.
+- **Bookings:** Clients can create booking. 
 - **Role-Based Access:** Secure access for different user roles.
 - **Responsive UI:** Built with Ant Design for a modern look and feel.
 
 ---
 ## Integrations
-
-- Google(Maps)
 - Google(Gemini AI)
 - SupaBase s3 Bucket Storage(Photo Storage)
 
