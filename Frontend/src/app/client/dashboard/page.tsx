@@ -38,10 +38,10 @@ import {
   useBookingState,
 } from "@/providers/booking-provider";
 import { useImageActions } from "@/providers/image-provider";
-import BookingList from "@/components/salon-components/bookings";
 import { useStyles } from "./style/styles";
 import dayjs from "dayjs";
 import { useSalonState } from "@/providers/salon-provider";
+import DashboardBookingList from "@/components/salon-components/dashboardBooking";
 
 type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
 
@@ -54,7 +54,6 @@ const range = (start: number, end: number) => {
 };
 
 const disabledDate: RangePickerProps["disabledDate"] = (current) => {
-  // Can not select days before today and today
   return current && current < dayjs().endOf("day");
 };
 
@@ -97,7 +96,6 @@ const ClientDashboard: React.FC = () => {
   // };
 
   const handleAddBooking = async () => {
-    debugger;
     try {
       const values = await form.validateFields();
 
@@ -120,8 +118,9 @@ const ClientDashboard: React.FC = () => {
         status: "Submitted",
         imageUrl,
         bookingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
-        salonName: sessionStorage.getItem("salon") || "",
-        salonId: parseInt(sessionStorage.getItem("userId") ?? "0"),
+        // salonName: values.salonName,
+        salonName: sessionStorage.getItem("salonName") || "",
+        // salonId: parseInt(sessionStorage.getItem("userId") ?? "0"),
         // salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
         employeeTechnicianName: "Unallocated",
         employeeTechnicianId: parseInt(sessionStorage.getItem("userId") ?? "0"),
@@ -199,7 +198,7 @@ const ClientDashboard: React.FC = () => {
 
       <Divider orientation="left">Recent Bookings</Divider>
       <Card className={styles.bookingCard}>
-        <BookingList />
+        <DashboardBookingList />
       </Card>
       <Modal
         title={

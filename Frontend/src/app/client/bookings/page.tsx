@@ -17,6 +17,7 @@ import {
   useBookingState,
 } from "@/providers/booking-provider";
 import { IBooking } from "@/providers/booking-provider/context";
+import { Divider } from 'antd/es';
 
 const BookingListPage: React.FC = () => {
   const { styles } = useStyles();
@@ -49,16 +50,18 @@ const BookingListPage: React.FC = () => {
     },
     {
       title: "Name of Hairdresser",
-      key: "city",
+      key: "employeeTechnicianName",
       render: (_, record) => record.employeeTechnicianName || "-",
     },
     {
       title: "Service Requested",
+      dataIndex: "service",
       key: "service",
-      render: (_, record) => record.service|| "-",
+      render: (_, record) => record.service || "-",
     },
     {
       title: "Date and Time",
+      dataIndex: "date",
       key: "date",
       render: (_, record) => record.date || "-",
     },
@@ -70,7 +73,7 @@ const BookingListPage: React.FC = () => {
         const color =
           status === "Submitted"
             ? "yellow"
-            : status === "Completed"
+            : status === "Approved"
               ? "blue"
               : "orange";
         return <Tag color={color}>{status}</Tag>;
@@ -108,7 +111,7 @@ const BookingListPage: React.FC = () => {
           />
 
           <Modal
-            title={selectedBooking ? `Reference No: ${selectedBooking.id}` : ""}
+            title="Booking Details"
             open={modalVisible}
             onCancel={handleCancel}
             footer={
@@ -132,9 +135,6 @@ const BookingListPage: React.FC = () => {
                   {selectedBooking.salonName}
                 </p>
                 <p>
-                  <strong>Status:</strong> {selectedBooking.status}
-                </p>
-                <p>
                   <strong>Name of Hairdresser:</strong>{" "}
                   {selectedBooking.employeeTechnicianName || "-"}
                 </p>
@@ -143,9 +143,12 @@ const BookingListPage: React.FC = () => {
                   {selectedBooking.service || "-"}
                 </p>
                 <p>
-                  <strong>Salon:</strong>{" "}
-                  {selectedBooking.salonName || "-"}
+                  <strong>Date and Time:</strong> {selectedBooking.date || "-"}
+                  </p>
+                <p>
+                  <strong>Status:</strong> {selectedBooking.status}
                 </p>
+                <Divider />
               </>
             )}
           </Modal>

@@ -104,8 +104,27 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
   const columns: ColumnsType<IBooking> = [
     {
       title: "Salon Name",
-      dataIndex: "description",
-      key: "description",
+      dataIndex: "salonName",
+      key: "salonName",
+    },
+    
+    {
+      title: "Name of Hairdresser",
+      dataIndex: "employeeTechnicianName",
+      key: "employeeTechnician",
+      render: (srvP) => srvP || "-",
+    },
+    {
+      title: "Service Requested",
+      dataIndex: "serviceRequested",
+      key: "serviceRequested",
+      render: (srvP) => srvP || "-",
+    },
+    {
+      title: "Date & Time",
+      dataIndex: "date",
+      key: "date",
+      render: (srvP) => srvP || "-",
     },
     {
       title: "Status",
@@ -115,24 +134,6 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
         const color = status === "Assigned" ? "green" : status === "Completed" ? "blue" : "orange";
         return <Tag color={color}>{status}</Tag>;
       },
-    },
-    {
-      title: "Name of Hairdresser",
-      dataIndex: "employeeTechnicianName",
-      key: "employeeTechnician",
-      render: (srvP) => srvP || "-",
-    },
-    {
-      title: "Service Requested",
-      dataIndex: "employeeTechnicianName",
-      key: "employeeTechnician",
-      render: (srvP) => srvP || "-",
-    },
-    {
-      title: "Date & Time",
-      dataIndex: "employeeTechnicianName",
-      key: "employeeTechnician",
-      render: (srvP) => srvP || "-",
     },
     {
       title: "Action",
@@ -168,7 +169,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
           />
 
           <Modal
-            title={selectedBooking ? `Booking: ${selectedBooking.id}` : ""}
+            title="Booking Details"
             open={modalVisible}
             onCancel={handleCancel}
             footer={
