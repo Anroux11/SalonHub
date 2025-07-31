@@ -7,8 +7,8 @@ import {
     MenuUnfoldOutlined,
     LogoutOutlined,
     HomeOutlined,
-    FileTextOutlined,
-    SettingOutlined,
+    EditOutlined,
+    PushpinOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
 import Title from "antd/es/typography/Title";
@@ -22,6 +22,14 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
         token: { colorBgContainer },
     } = theme.useToken();
 
+    let loggedInUser = "Guest";
+    if (typeof sessionStorage !== 'undefined') {
+          const storedData = sessionStorage.getItem("user");
+            if (storedData) {
+                loggedInUser = storedData;
+            }
+        }
+
     const [collapsed, setCollapsed] = useState(false);
     const [logoutModalVisible, setLogoutModalVisible] = useState(false);
     
@@ -32,7 +40,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
     const getSelectedKey = () => {
         if (pathname.includes("/dashboard")) return "1";
         if (pathname.includes("/bookings")) return "2";
-        if (pathname.includes("/settings")) return "3";
+        if (pathname.includes("/salons")) return "3";
         return "1";
     };
 
@@ -71,7 +79,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
                     onClick={(info) => {
                         if (info.key === "1") router.push("/client/dashboard");
                         if (info.key === "2") router.push("/client/bookings");
-                        if (info.key === "3") router.push("/client/settings");
+                        if (info.key === "3") router.push("/client/salons");
                     }}
                     items={[
                         {
@@ -81,13 +89,13 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
                         },
                         {
                             key: "2",
-                            icon: <FileTextOutlined />,
+                            icon: <EditOutlined />,
                             label: "Bookings",
                         },
                         {
                             key: "3",
-                            icon: <SettingOutlined />,
-                            label: "Settings",
+                            icon: <PushpinOutlined />,
+                            label: "Salons",
                         },
                     ]}
                 />
@@ -117,7 +125,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
             <Layout>
                 <Header className={styles.headerTitle}>
                     <Title level={2} className={styles.title}>
-                        Client Dashboard
+                        Welcome, {loggedInUser}
                     </Title>
                 </Header>
 

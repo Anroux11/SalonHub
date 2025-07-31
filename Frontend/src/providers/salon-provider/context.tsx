@@ -1,9 +1,7 @@
 import { createContext } from "react";
-import { Address } from "../booking-provider/context";
 export interface ISalon {
   id: string;
   name: string;
-  buildingAddress: Address[];
   latitude: string;
   longitude: string;
 }

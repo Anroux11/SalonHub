@@ -1,3 +1,5 @@
+"use client";
+
 import { getAxiosInstance } from "../../utils/axiosInstance";
 import {
   INITIAL_STATE,
@@ -34,7 +36,7 @@ export const ClientProvider = ({
 
   const getClientList = async () => {
     dispatch(getClientListPending());
-    const endpoint = `services/app/User/GetAll`;
+    const endpoint = `/services/app/User/GetAll`;
     await instance
       .get(endpoint)
       .then((response) => {

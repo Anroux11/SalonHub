@@ -83,14 +83,14 @@ const Login = () => {
           <div className={styles.splitLeft}>
             <div className={styles.centered}>
               <Image
-                src="/AppLogo-Words.png"
+                src="/AppLogo-Big.png"
                 alt="Profile"
                 width={350}
                 height={350}
               ></Image>
-              <h1 style={{color: "#00e1e4"}}>Manage Your Clients</h1>
-              <h1 style={{color: "#00e1e4"}}>Manage Your Appointments</h1>
-              <h1 style={{color: "#00e1e4"}}>Manage Your Inventory</h1>
+              <h1 style={{color: "#00e1e4", fontWeight: "10", fontSize: "30px"}}>Manage Your Clients</h1>
+              <h1 style={{color: "#00e1e4", fontWeight: "10"}}>Manage Your Appointments</h1>
+              <h1 style={{color: "#00e1e4", fontWeight: "10"}}>Manage Your Inventory</h1>
               
             </div>
           </div>

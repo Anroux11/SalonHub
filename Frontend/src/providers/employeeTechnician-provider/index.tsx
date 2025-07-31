@@ -1,3 +1,5 @@
+"use client";
+
 import { getAxiosInstance } from "../../utils/axiosInstance";
 import {
   INITIAL_STATE,
@@ -50,17 +52,9 @@ export const EmployeeTechnicianProvider = ({
             id: employeeTechnician.id,
             name: employeeTechnician.name ?? "",
             email: employeeTechnician.email ?? "",
-            buildingAddress: {
-              city: employeeTechnician.address?.city ?? "Unknown",
-              province: employeeTechnician.address?.province ?? "Unknown",
-            },
-            address: {
-              city: employeeTechnician.address?.city ?? "Unknown",
-              province: employeeTechnician.address?.province ?? "Unknown",
-            },
             password: employeeTechnician.password ?? "",
-            latitude: employeeTechnician.latitude ?? "",
-            longitude: employeeTechnician.longitude ?? "",
+            jobTitle: employeeTechnician.jobTitle ?? "",
+            contactNumber: employeeTechnician.contactNumber ?? 0,
             salonId: employeeTechnician.salonId ?? "",
             salonName: employeeTechnician.salonName ?? "",
           })

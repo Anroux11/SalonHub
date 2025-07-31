@@ -228,20 +228,20 @@ const AddUser = () => {
               >
                 <Select
                 >
-                  <Select.Option value="City of Ekurhuleni Metropolitan Salon">
-                    City of Ekurhuleni Metropolitan Salon
+                  <Select.Option value="Princess Hair">
+                    Princess Hair
                   </Select.Option>
-                  <Select.Option value="City of Johannesburg Metropolitan Salon">
-                    City of Johannesburg Metropolitan Salon
+                  <Select.Option value="The Salon of Beauty">
+                    The Salon of Beauty
                   </Select.Option>
-                  <Select.Option value="City of Tshwane Metropolitan Salon">
-                    City of Tshwane Metropolitan Salon
+                  <Select.Option value="Beauty Salon">
+                    Beauty Salon
                   </Select.Option>
-                  <Select.Option value="Sedibeng District Salon">
-                    Sedibeng District Salon
+                  <Select.Option value="Sams Place">
+                    Sams Place
                   </Select.Option>
-                  <Select.Option value="West Rand District Salon">
-                    West Rand District Salon
+                  <Select.Option value="The Hair Studio">
+                    The Hair Studio
                   </Select.Option>
                 </Select>
               </Form.Item>

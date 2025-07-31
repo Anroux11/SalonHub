@@ -1,3 +1,5 @@
+"use client";
+
 import { getAxiosInstance } from "../../utils/axiosInstance";
 import { jwtDecode } from "jwt-decode";
 import { useClientActions } from "../client-provider";
@@ -254,11 +256,9 @@ export const CurrentUserProvider = ({
         const salonName = result || "";
         sessionStorage.setItem("salonName", salonName);
 
-        const result2 = response.data.result.user.name;
+        const _user = response?.data?.result?.user?.name || "unknown";
 
-        const employeeTechnicianName = result2 || "";
-
-        sessionStorage.setItem("employeeTechnicianName", employeeTechnicianName);
+        sessionStorage.setItem("user", _user);
 
         sessionStorage.setItem(
           "currentUser",
