@@ -1,14 +1,11 @@
 import { createContext } from "react";
-import { Address } from "../booking-provider/context";
 export interface IEmployeeTechnician {
     id?: string;
     name: string;
     email: string;
-    address?: Address;
-    buildingAddress?: Address;
     password: string;
-    latitude: string;
-    longitude: string;
+    jobTitle?: string;
+    contactNumber?: number;
     salonId?: string //might chnge
     salonName: string;
 }

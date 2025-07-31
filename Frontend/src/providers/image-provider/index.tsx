@@ -19,7 +19,7 @@ export const ImageProvider = ({
     const timeStamp = Date.now();
     const filePath = `/${timeStamp}_${file.name}`;
     const { error } = await supabase.storage
-      .from("salonHub-photos")
+      .from("salonhub")
       .upload(filePath, file, {
         cacheControl: "3600",
         upsert: true,
@@ -34,7 +34,7 @@ export const ImageProvider = ({
     dispatch(uploadImageSuccess());
     const {
       data: { publicUrl },
-    } = supabase.storage.from("salonHub-photos").getPublicUrl(filePath);
+    } = supabase.storage.from("salonhub").getPublicUrl(filePath);
     return publicUrl;
   };
 

@@ -23,9 +23,14 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.css-dev-only-do-not-override-it1oxp.ant-app {
+  font-family:Georgia, 'Times New Roman', Times, serif
 }
 
 * {

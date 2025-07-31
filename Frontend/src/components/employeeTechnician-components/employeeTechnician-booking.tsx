@@ -185,7 +185,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
                   )}
 
                 </p>
-                <p><strong>Description:</strong> {selectedBooking.description}</p>
+                <p><strong>Description:</strong> {selectedBooking.status}</p>
                 <p><strong>Status:</strong> {selectedBooking.status}</p>
                 <p><strong>Salon Name:</strong> {selectedBooking.salonName || "-"}</p>
               </>

@@ -1,3 +1,5 @@
+"use client";
+
 import { getAxiosInstance } from "../../utils/axiosInstance";
 import {
   INITIAL_STATE,
@@ -41,7 +43,6 @@ export const SalonProvider = ({
         .then((response) => {
           const filteredData = response.data.data.map((salon: ISalon) => ({
             name: salon.name ?? "",
-            buildingAddress: salon.buildingAddress ?? "",
             latitude: salon.latitude ?? "",
             longitude: salon.longitude ?? "",
           }));

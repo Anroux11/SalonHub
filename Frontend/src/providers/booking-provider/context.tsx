@@ -1,23 +1,16 @@
 import { createContext } from "react";
 export interface IBooking {
   id?: string;
-  description?: string;
+  date: string;
+  service: string;
   status: string;
   imageUrl?: string;
-  bookingAddress?: Address;
-  latitude: number;
-  longitude: number;
-  salonName?: string;
-  reportingUserId?: number;
+  salonName: string;
+  salonId?: number;
+  bookingUserId?: number;
+  employeeTechnicianId: number;
   employeeTechnicianName?: string; 
 }
-export interface Address {
-  province: string;
-  city: string;
-  creationTime?: string;
-  isDeleted?: boolean;
-}
-
 export interface IBookingStateContext {
   isPending: boolean;
   isSuccess: boolean;

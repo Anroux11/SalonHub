@@ -1,497 +1,307 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Card,
   Col,
-  Descriptions,
+  DatePicker,
   Divider,
-  Flex,
   Form,
+  GetProps,
   Input,
   message,
   Modal,
   Row,
   Space,
-  Spin,
-  Typography,
+  // Spin,
+  // Typography,
   Upload,
 } from "antd/es";
 import {
   PlusOutlined,
-  EnvironmentOutlined,
+  // EnvironmentOutlined,
   FileTextOutlined,
-  ClockCircleOutlined,
+  // ClockCircleOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import {
-  dashboardStyles,
-  cardStyles,
-  buttonStyles,
+  // dashboardStyles,
+  // cardStyles,
+  // buttonStyles,
   modalStyles,
 } from "./style/styles";
-import { Address, IBooking } from "@/providers/booking-provider/context";
-import { useBookingActions } from "@/providers/booking-provider";
+import { IBooking } from "@/providers/booking-provider/context";
+import {
+  useBookingActions,
+  useBookingState,
+} from "@/providers/booking-provider";
 import { useImageActions } from "@/providers/image-provider";
+import BookingList from "@/components/salon-components/bookings";
+import { useStyles } from "./style/styles";
+import dayjs from "dayjs";
+import { useSalonState } from "@/providers/salon-provider";
 
-const { Text } = Typography;
+type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
 
-const ClientMap = dynamic(
-  () => import("@/components/client-components/client-map"),
-  {
-    ssr: false,
+const range = (start: number, end: number) => {
+  const result = [];
+  for (let i = start; i < end; i++) {
+    result.push(i);
   }
-);
+  return result;
+};
+
+const disabledDate: RangePickerProps["disabledDate"] = (current) => {
+  // Can not select days before today and today
+  return current && current < dayjs().endOf("day");
+};
+
+const disabledDateTime = () => ({
+  disabledHours: () => range(0, 24).splice(7, 18),
+  disabledMinutes: () => range(60, 60),
+});
+
+// const { Text } = Typography;
 
 const ClientDashboard: React.FC = () => {
   const router = useRouter();
   const [form] = Form.useForm();
-  const [position, setPosition] = useState<[number, number] | null>(null);
-  const [address, setAddress] = useState("");
-  const [province, setProvince] = useState("");
-  const [city, setCity] = useState("");
-  const [salon, setSalon] = useState("");
-  const [quickReportModalVisible, setQuickReportModalVisible] = useState(false);
-  const [fullReportModalVisible, setFullReportModalVisible] = useState(false);
-  const [fullReport, setFullReport] = useState<IBooking[]>([]);
+
+  // const [salon, setSalon] = useState("");
+  const [bookingModalVisible, setBookingModalVisible] = useState(false);
+  const [booking, setBooking] = useState<IBooking[]>([]);
   const { createBooking } = useBookingActions();
   const { uploadImage } = useImageActions();
+  const { bookings } = useBookingState();
+  const { salons } = useSalonState();
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const coords: [number, number] = [
-          pos.coords.latitude,
-          pos.coords.longitude,
-        ];
-        setPosition(coords);
-        updateMemoryStorage(coords);
-        reverseGeocode(coords[0], coords[1]);
-      },
-      () => {
-        const defaultCoords: [number, number] = [-26.2041, 28.0473];
-        setPosition(defaultCoords);
-        updateMemoryStorage(defaultCoords);
-        reverseGeocode(defaultCoords[0], defaultCoords[1]);
-        message.error("Failed to retrieve your location. Using default.");
-      }
-    );
-  }, []);
+  const { styles } = useStyles();
 
-  const confirmQuickReport = () => {
-    const addressPayload: Address = {
-      city: sessionStorage.getItem("city") || "",
-      province: sessionStorage.getItem("province") || "",
-    };
-    const payload: IBooking = {
-      description: "Quick Report",
-      status: "Submitted",
-      latitude: position ? position[0] : 0,
-      longitude: position ? position[1] : 0,
-      bookingAddress: addressPayload,
-      reportingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
-      salonName: sessionStorage.getItem("salon") || "",
-      employeeTechnicianName: "Unallocated",
-    };
-    createBooking(payload);
-    setQuickReportModalVisible(false);
-    router.push("/client/bookings");
-  };
-  const updateMemoryStorage = (coords: [number, number]) => {
-    sessionStorage.setItem("lat", coords[0].toString());
-    sessionStorage.setItem("lng", coords[1].toString());
-  };
+  // const initialDate = dayjs("2025-07-30");
 
-  const reverseGeocode = async (lat: number, lon: number) => {
-    try {
-      const res = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
-      );
-      const data = await res.json();
-      const addr = data.address || {};
+  // const loggedInUser = sessionStorage.getItem("user");
 
-      const newAddress = data.display_name || "";
-      const newProvince = addr.state || "";
-      const newCity = addr.city || addr.town || addr.village || "";
-      const newSalon = addr.county || addr.salon || "";
+  const handleBooking = () => setBookingModalVisible(true);
 
-      setAddress(newAddress);
-      setProvince(newProvince);
-      setCity(newCity);
-      setSalon(newSalon);
+  // const handleCreateBooking = () => {
+  //   form.setFieldsValue({
+  //     salonId: salon,
+  //     latitude: position?.[0] || "",
+  //     longitude: position?.[1] || "",
+  //     city,
+  //     province,
+  //   });
+  //   setFullReportModalVisible(true);
+  // };
 
-      form.setFieldsValue({
-        province: newProvince,
-        city: newCity,
-        salonId: newSalon,
-      });
-
-      sessionStorage.setItem("address", newAddress);
-      sessionStorage.setItem("province", newProvince);
-      sessionStorage.setItem("city", newCity);
-      sessionStorage.setItem("salon", newSalon);
-    } catch {
-      setAddress("");
-      setProvince("");
-      setCity("");
-      setSalon("");
-      form.setFieldsValue({
-        province: "",
-        city: "",
-        salonId: "",
-      });
-    }
-  };
-
-  const handleMarkerDragEnd = (coords: [number, number]) => {
-    setPosition(coords);
-    form.setFieldsValue({
-      latitude: coords[0],
-      longitude: coords[1],
-    });
-    updateMemoryStorage(coords);
-    reverseGeocode(coords[0], coords[1]);
-  };
-
-  const handleQuickReport = () => setQuickReportModalVisible(true);
-
-  const handleCreateBooking = () => {
-    form.setFieldsValue({
-      salonId: salon,
-      latitude: position?.[0] || "",
-      longitude: position?.[1] || "",
-      city,
-      province,
-    });
-    setFullReportModalVisible(true);
-  };
-
-  const handleAddFullReport = async () => {
+  const handleAddBooking = async () => {
+    debugger;
     try {
       const values = await form.validateFields();
 
       const file = values.imageUrl?.[0]?.originFileObj;
       if (!file) {
-        message.error("Please upload a pothole image.");
+        message.error("Please upload a Photo.");
         return;
       }
 
       const imageUrl = await uploadImage(file);
+      // const imageUrl = "url";
       if (!imageUrl) {
-        message.error("Failed to upload pothole image.");
+        message.error("Failed to upload image.");
         return;
       }
 
       const payload: IBooking = {
-        description: values.description,
+        date: values.date,
+        service: values.service,
         status: "Submitted",
         imageUrl,
-        latitude: values.latitude,
-        longitude: values.longitude,
-        bookingAddress: {
-          city: values.city,
-          province: values.province,
-        },
-        reportingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
+        bookingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
         salonName: sessionStorage.getItem("salon") || "",
+        salonId: parseInt(sessionStorage.getItem("userId") ?? "0"),
+        // salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
         employeeTechnicianName: "Unallocated",
+        employeeTechnicianId: parseInt(sessionStorage.getItem("userId") ?? "0"),
       };
 
       await createBooking(payload);
 
-      setFullReport([...fullReport, payload]);
-      message.success("Pothole report submitted successfully!");
-      setFullReportModalVisible(false);
+      setBooking([...booking, payload]);
+      message.success("Booking made successfully!");
+      setBookingModalVisible(false);
       form.resetFields();
       router.push("/client/bookings");
     } catch (error) {
       console.error("Submit error:", error);
-      message.error("Something went wrong while submitting your report.");
+      message.error("Something went wrong while submitting your booking.");
     }
   };
 
-  if (!position) {
-    return (
-      <Flex
-        justify="center"
-        align="center"
-        style={dashboardStyles.loadingContainer}
-      >
-        <Card style={cardStyles.loadingCard}>
-          <Spin size="large" />
-          <div style={dashboardStyles.loadingText}>
-            Loading your location...
-          </div>
-        </Card>
-      </Flex>
-    );
-  }
-
   return (
-    <div style={dashboardStyles.container}>
-      <Row gutter={[24, 24]}>
-        <Col span={24}>
-          <Card
-            title={
-              <Space>
-                <EnvironmentOutlined />
-                Your Map Location
-              </Space>
-            }
-            style={cardStyles.standard}
-          >
-            <ClientMap
-              position={position}
-              onMarkerDragEnd={handleMarkerDragEnd}
-            />
+    <div className={styles.dashboardContainer}>
+      <Row gutter={[15, 15]} className={styles.summaryRow}>
+        <Col xs={24} sm={30} md={12}>
+          <Card className={styles.summaryCard}>
+            <h3>Bookings</h3>
+            <p className="count">{bookings?.length || 0}</p>
+            <p>Total Bookings</p>
           </Card>
         </Col>
-
-        <Col xs={24} lg={12}>
-          <Card
-            title={
-              <Space>
-                <EnvironmentOutlined />
-                Current Location
-              </Space>
-            }
-            style={cardStyles.standard}
-          >
-            <Descriptions column={1} size="small">
-              <Descriptions.Item label="Address">{address}</Descriptions.Item>
-              <Descriptions.Item label="Coordinates">
-                <Text code>
-                  {position[0].toFixed(6)}, {position[1].toFixed(6)}
-                </Text>
-              </Descriptions.Item>
-              <Descriptions.Item label="Province">{province}</Descriptions.Item>
-              <Descriptions.Item label="City">{city}</Descriptions.Item>
-              <Descriptions.Item label="Salon">
-                {salon}
-              </Descriptions.Item>
-            </Descriptions>
+        <Col xs={24} sm={30} md={12}>
+          <Card className={styles.summaryCard}>
+            <h3>Salons</h3>
+            <p className="count">{salons?.length || 0}</p>
+            <p>Total Salons Added</p>
           </Card>
         </Col>
-
-        <Col xs={24} lg={12}>
-          <Card
-            title={
-              <Space>
-                <PlusOutlined />
-                Actions
-              </Space>
-            }
-            style={cardStyles.standard}
-          >
-            <Row gutter={[16, 16]}>
-              <Col span={12}>
-                <Button
-                  type="primary"
-                  size="large"
-                  block
-                  icon={<ClockCircleOutlined />}
-                  onClick={handleQuickReport}
-                  style={buttonStyles.primary}
-                >
-                  Quick Report
-                </Button>
-                <Text
-                  type="secondary"
-                  style={dashboardStyles.buttonDescription}
-                >
-                  Submit a quick booking report
-                </Text>
-              </Col>
-
-              <Col span={12}>
-                <Button
-                  type="default"
-                  size="large"
-                  block
-                  icon={<FileTextOutlined />}
-                  onClick={handleCreateBooking}
-                  style={buttonStyles.secondary}
-                >
-                  Detailed Report
-                </Button>
-                <Text
-                  type="secondary"
-                  style={dashboardStyles.buttonDescription}
-                >
-                  Create a comprehensive report with details
-                </Text>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-
-        {fullReport.length > 0 && (
-          <Col span={24}>
-            <Card title="Recent Reports" style={cardStyles.standard}>
-              <Row gutter={[16, 16]}>
-                {fullReport.map((report, index) => (
-                  <Col xs={24} md={12} lg={8} key={index}>
-                    <Card size="small" style={cardStyles.reportCard}>
-                      <Text strong>{report.description}</Text>
-                      <br />
-                      <Text type="secondary">Status: {report.status}</Text>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </Card>
-          </Col>
-        )}
       </Row>
 
-      <Modal
-        open={quickReportModalVisible}
-        title={
-          <Space>
-            <ClockCircleOutlined />
-            Confirm Quick Report
-          </Space>
-        }
-        onCancel={() => setQuickReportModalVisible(false)}
-        onOk={confirmQuickReport}
-        okText="Yes, Create Report"
-        cancelText="Cancel"
-        centered
-        style={modalStyles.standard}
-      >
-        <div style={modalStyles.content}>
-          <Text>
-            Are you sure you want to create a quick report for your current
-            location?
-          </Text>
-          <Divider />
-          <Descriptions column={1} size="small">
-            <Descriptions.Item label="Location">
-              {position[0].toFixed(6)}, {position[1].toFixed(6)}
-            </Descriptions.Item>
-            <Descriptions.Item label="Salon">
-              {salon}
-            </Descriptions.Item>
-          </Descriptions>
-        </div>
-      </Modal>
+      <Divider orientation="left">Quick Actions</Divider>
+      <Row gutter={[16, 16]} className={styles.quickActionsRow}>
+        <Col xs={24} sm={8}>
+          <Button
+            type="primary"
+            size="large"
+            block
+            className={styles.quickActionButton}
+            onClick={() => router.push("./bookings")}
+          >
+            View all Bookings
+          </Button>
+        </Col>
 
-      {/* Full Report Modal */}
+        <Col xs={24} sm={8}>
+          <Button
+            type="default"
+            size="large"
+            block
+            className={styles.quickActionButton}
+            onClick={handleBooking}
+          >
+            Create Booking
+          </Button>
+        </Col>
+        <Col xs={24} sm={8}>
+          <Button
+            type="primary"
+            size="large"
+            block
+            className={styles.quickActionButton}
+            onClick={() => router.push("./salons")}
+          >
+            Salons
+          </Button>
+        </Col>
+      </Row>
+
+      <Divider orientation="left">Recent Bookings</Divider>
+      <Card className={styles.bookingCard}>
+        <BookingList />
+      </Card>
       <Modal
         title={
           <Space>
             <FileTextOutlined />
-            Add Full Report
+            Add Booking
           </Space>
         }
-        open={fullReportModalVisible}
-        onCancel={() => setFullReportModalVisible(false)}
+        open={bookingModalVisible}
+        onCancel={() => setBookingModalVisible(false)}
         footer={
           <Space>
-            <Button onClick={() => setFullReportModalVisible(false)}>
+            <Button onClick={() => setBookingModalVisible(false)}>
               Cancel
             </Button>
-            <Button type="primary" onClick={handleAddFullReport}>
+            <Button type="primary" onClick={handleAddBooking}>
               Submit
             </Button>
           </Space>
         }
-        width={900}
+        width={400}
         centered
         style={modalStyles.large}
       >
-        <Form form={form} layout="vertical">
-          <Row gutter={[24, 16]}>
-            <Col xs={24} lg={12}>
-              <Form.Item
-                name="description"
-                label="Description"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter report description",
-                  },
-                ]}
-              >
-                <Input.TextArea
-                  rows={4}
-                  placeholder="Describe the booking..."
-                />
-              </Form.Item>
+        <Form form={form} layout="vertical" initialValues={{ date: dayjs() }}>
+          <Form.Item
+            name="date"
+            label="Date"
+            rules={[
+              {
+                required: true,
+                message: "Please choose a Date",
+              },
+            ]}
+          >
+            <Space direction="vertical" size={12}>
+              <DatePicker
+                format="YYYY-MM-DD HH:mm"
+                disabledDate={disabledDate}
+                disabledTime={disabledDateTime}
+                showTime={{ defaultValue: dayjs("00:00:00", "HH:mm") }}
+              />
+            </Space>
+          </Form.Item>
 
-              <Form.Item
-                label="Upload Image"
-                name="imageUrl"
-                valuePropName="fileList"
-                getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
-              >
-                <Upload
-                  listType="picture-card"
-                  beforeUpload={() => false}
-                  maxCount={1}
-                >
-                  <button type="button">
-                    <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>Upload</div>
-                  </button>
-                </Upload>
-              </Form.Item>
-            </Col>
+          <Form.Item
+            name="employeeTechnicianName"
+            label="Name of Hairdresser"
+            rules={[
+              {
+                required: true,
+                message: "Please enter name of your hairdresser",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-            <Col xs={24} lg={12}>
-              <Form.Item label="Adjust Your Location">
-                <Space direction="vertical" style={{ width: "100%" }}>
-                  <div style={modalStyles.mapContainer}>
-                    <ClientMap
-                      position={position}
-                      onMarkerDragEnd={handleMarkerDragEnd}
-                    />
-                  </div>
-                </Space>
-              </Form.Item>
+          <Form.Item
+            name="service"
+            label="Service Requested"
+            rules={[
+              {
+                required: true,
+                message: "Please input the service you want",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-              <Row gutter={[16, 8]}>
-                <Col span={12}>
-                  <Form.Item name="latitude" label="Latitude">
-                    <Input readOnly value={position[0]} />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item name="longitude" label="Longitude">
-                    <Input readOnly value={position[1]} />
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
+          <Form.Item
+            name="salonName"
+            label="Salon Name"
+            rules={[
+              {
+                required: true,
+                message: "Please enter the Salon Name",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
+          <Form.Item
+            label="Upload Image"
+            name="imageUrl"
+            valuePropName="fileList"
+            getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
+          >
+            <Upload
+              listType="picture-card"
+              beforeUpload={() => false}
+              maxCount={1}
+            >
+              <button type="button">
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </button>
+            </Upload>
+          </Form.Item>
           <Divider />
-
-          <Row gutter={[16, 8]}>
-            <Col xs={24} md={8}>
-              <Form.Item name="province" label="Province">
-                <Input readOnly value={province} />
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-              <Form.Item name="city" label="City">
-                <Input readOnly value={city} />
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-              <Form.Item
-                name="salonId"
-                label="Salon"
-                rules={[
-                  { required: true, message: "Salon is required" },
-                ]}
-              >
-                <Input readOnly value={salon} />
-              </Form.Item>
-            </Col>
-          </Row>
         </Form>
       </Modal>
     </div>

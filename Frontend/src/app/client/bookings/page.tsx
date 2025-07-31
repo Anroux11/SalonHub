@@ -18,7 +18,7 @@ import {
 } from "@/providers/booking-provider";
 import { IBooking } from "@/providers/booking-provider/context";
 
-const BookingListPage = () => {
+const BookingListPage: React.FC = () => {
   const { styles } = useStyles();
   const { bookings, isPending } = useBookingState();
   const { getBookingList } = useBookingActions();
@@ -43,24 +43,24 @@ const BookingListPage = () => {
 
   const columns: ColumnsType<IBooking> = [
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "Salon Name",
+      dataIndex: "salonName",
+      key: "salonName",
     },
     {
-      title: "City",
+      title: "Name of Hairdresser",
       key: "city",
-      render: (_, record) => record.bookingAddress?.city || "-",
+      render: (_, record) => record.employeeTechnicianName || "-",
     },
     {
-      title: "Province",
-      key: "province",
-      render: (_, record) => record.bookingAddress?.province || "-",
+      title: "Service Requested",
+      key: "service",
+      render: (_, record) => record.service|| "-",
     },
     {
-      title: "Salon",
-      key: "salon",
-      render: (_, record) => record.salonName || "-",
+      title: "Date and Time",
+      key: "date",
+      render: (_, record) => record.date || "-",
     },
     {
       title: "Status",
@@ -128,19 +128,19 @@ const BookingListPage = () => {
                   )}
                 </p>
                 <p>
-                  <strong>Description:</strong>{" "}
-                  {selectedBooking.description}
+                  <strong>Salon Name:</strong>{" "}
+                  {selectedBooking.salonName}
                 </p>
                 <p>
                   <strong>Status:</strong> {selectedBooking.status}
                 </p>
                 <p>
-                  <strong>City:</strong>{" "}
-                  {selectedBooking.bookingAddress?.city || "-"}
+                  <strong>Name of Hairdresser:</strong>{" "}
+                  {selectedBooking.employeeTechnicianName || "-"}
                 </p>
                 <p>
-                  <strong>Province:</strong>{" "}
-                  {selectedBooking.bookingAddress?.province || "-"}
+                  <strong>Service Requested:</strong>{" "}
+                  {selectedBooking.service || "-"}
                 </p>
                 <p>
                   <strong>Salon:</strong>{" "}

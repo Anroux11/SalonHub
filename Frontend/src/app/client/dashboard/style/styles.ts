@@ -1,9 +1,9 @@
 import { CSSProperties } from 'react';
+import { createStyles, css } from "antd-style";
 
 export const dashboardStyles = {
   container: {
     padding: '24px',
-    backgroundColor: '#f0f2f5',
     minHeight: '100vh',
   } as CSSProperties,
 
@@ -149,3 +149,40 @@ export const enhancedStyles = {
     border: '1px solid rgba(0,0,0,0.06)',
   } as CSSProperties,
 };
+
+export const useStyles = createStyles({
+  dashboardContainer: css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 24px;
+  `,
+  summaryRow: css`
+    width: 100%;
+    margin-bottom: 24px;
+  `,
+  summaryCard: css`
+    h3 {
+      margin-bottom: 8px;
+    }
+    p {
+      margin: 0;
+    }
+    .count {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  `,
+  quickActionsRow: css`
+    width: 100%;
+    margin-bottom: 24px;
+  `,
+  quickActionButton: css`
+    width: 100%;
+  `,
+  bookingCard: css`
+    width: 100%;
+  `,
+
+});

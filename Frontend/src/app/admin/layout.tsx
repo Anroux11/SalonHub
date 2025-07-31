@@ -49,7 +49,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       >
         <div className={styles.imageContainer}>
           <Image
-            src="/AppLogo-Dashboard.png"
+            src="/AppLogo-Small.png"
             alt="Logo"
             width={collapsed ? 40 : 70}
             height={collapsed ? 40 : 70}

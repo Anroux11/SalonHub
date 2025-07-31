@@ -1,3 +1,4 @@
+'use client';
 import { getAxiosInstance } from "../../utils/axiosInstance";
 import {
   INITIAL_STATE,
@@ -46,26 +47,19 @@ export const BookingProvider = ({
         const salon = (sessionStorage.getItem("salonName") || "").toString();
         const filteredData = response.data.result.items
           .filter((booking: IBooking) =>
-            booking.reportingUserId === userId ||
+            booking.bookingUserId === userId ||
             booking.salonName === salon || booking.employeeTechnicianName === sessionStorage.getItem("employeeTechnicianName")
           )
-          .sort((a: IBooking, b: IBooking) =>
-            new Date(b.bookingAddress?.creationTime ?? "").getTime() -
-            new Date(a.bookingAddress?.creationTime ?? "").getTime()
-          )
+          // .sort((a: IBooking, b: IBooking) =>
+          //   new Date(b.bookingAddress?.creationTime ?? "").getTime() -
+          //   new Date(a.bookingAddress?.creationTime ?? "").getTime()
+          // )
           .map((booking: IBooking) => ({
             id: booking.id ?? "",
-            description: booking.description ?? "",
             status: booking.status ?? "",
             imageUrl: booking.imageUrl ?? "",
-            latitude: booking.latitude ?? null,
-            longitude: booking.longitude ?? null,
-            bookingAddress: {
-              city: booking.bookingAddress?.city ?? "Unknown",
-              province: booking.bookingAddress?.province ?? "Unknown",
-            },
             salonName: booking.salonName ?? "",
-            reportingUserId: booking.reportingUserId ?? 0,
+            reportingUserId: booking.bookingUserId ?? 0,
             employeeTechnicianName: booking.employeeTechnicianName ?? "",
           }));
         dispatch(getBookingListSuccess(filteredData));
@@ -92,7 +86,7 @@ export const BookingProvider = ({
 
   const createBooking = async (booking: IBooking) => {
     dispatch(createBookingPending());
-    const endpoint = `services/app/Booking/Create`;
+    const endpoint = `/services/app/Booking/Create`;
     await instance
       .post(endpoint, booking)
       .then((response) => {

@@ -6,8 +6,6 @@ import type { ColumnsType } from "antd/es/table";
 import { useStyles } from "./style/styles";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
 import { useEmployeeTechnicianActions, useEmployeeTechnicianState } from "@/providers/employeeTechnician-provider";
-import { Address } from "@/providers/booking-provider/context";
-
 
 const EmployeeTechnicianPage = () => {
   const { styles } = useStyles();
@@ -31,14 +29,13 @@ const EmployeeTechnicianPage = () => {
     setLoading(true);
     try {
       const values = await form.validateFields();
-      const addressPayload: Address = { city: values.city, province: "Gauteng" };
+
       const payload: IEmployeeTechnician = {
         name: values.name,
         email: values.email,
-        address: addressPayload,
         password: values.password,
-        latitude: "0",
-        longitude: "0",
+        jobTitle: values.jobTitle,
+        contactNumber: values.contactNumber,
         salonName: sessionStorage.getItem("salonName") || "",
       };
 
@@ -68,12 +65,12 @@ const EmployeeTechnicianPage = () => {
     {
       title: "City",
       key: "address",
-      render: (_, record) => record.address?.city
+      render: (_, record) => record.jobTitle || "-",
     },
     {
       title: "Province",
       key: "address",
-      render: (_, record) => record.address?.province
+      render: (_, record) => record.contactNumber || ""
     },
   ];
 
@@ -147,15 +144,15 @@ const EmployeeTechnicianPage = () => {
                 <Input.Password />
               </Form.Item>
               <Form.Item
-                name="city"
-                label="City"
-                rules={[{ required: true, message: "Please enter the address" }]}
+                name="jobTitle"
+                label="Job Title"
+                rules={[{ required: true, message: "Please enter the Job Title" }]}
               >
                 <Input />
               </Form.Item>
               <Form.Item
-                name="province"
-                label="Province"
+                name="contactNumber"
+                label="Contact Number"
                 rules={[{ required: true, message: "Please enter the address" }]}
               >
                 <Input />
