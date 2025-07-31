@@ -2,11 +2,11 @@
 
 import { Row, Col, Card, Button, Divider } from "antd/es";
 import { useRouter } from "next/navigation";
-import BookingList from "@/components/salon-components/bookings";
 import { useStyles } from "./style/styles";
 import { useBookingState, useBookingActions } from "@/providers/booking-provider";
 import { useEmployeeTechnicianState, useEmployeeTechnicianActions } from "@/providers/employeeTechnician-provider";
 import { useEffect } from "react";
+import DashboardBookingList from "@/components/salon-components/dashboardBooking";
 
 const EmployeeTechnicianPage = () => {
     const router = useRouter();
@@ -14,7 +14,6 @@ const EmployeeTechnicianPage = () => {
 
     const { bookings } = useBookingState();
     const { getBookingList } = useBookingActions();
-
 
     const { employeeTechnicians } = useEmployeeTechnicianState();
     const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
@@ -66,14 +65,14 @@ const EmployeeTechnicianPage = () => {
                         className={styles.quickActionButton}
                         onClick={() => router.push("./employeeTechnician")}
                     >
-                        View all Service Providers
+                        View all Employees
                     </Button>
                 </Col>
             </Row>
 
-            <Divider orientation="left">Recent Bookings</Divider>
+            <Divider orientation="left">Recent Bookings in Salon</Divider>
             <Card className={styles.bookingCard}>
-                <BookingList bookings={bookings?.slice(0, 3) || []} />
+                <DashboardBookingList bookings={bookings?.slice(0, 3) || []} />
             </Card>
 
         </div>

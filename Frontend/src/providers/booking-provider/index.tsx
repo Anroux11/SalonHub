@@ -61,6 +61,8 @@ export const BookingProvider = ({
             salonName: booking.salonName ?? "",
             reportingUserId: booking.bookingUserId ?? 0,
             employeeTechnicianName: booking.employeeTechnicianName ?? "",
+            date: booking.date ?? "",
+            service: booking.service ?? "",
           }));
         dispatch(getBookingListSuccess(filteredData));
       })

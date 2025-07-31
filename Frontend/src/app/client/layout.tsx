@@ -22,7 +22,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
         token: { colorBgContainer },
     } = theme.useToken();
 
-    let loggedInUser = "Guest";
+let loggedInUser = "Guest";
     if (typeof sessionStorage !== 'undefined') {
           const storedData = sessionStorage.getItem("user");
             if (storedData) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Table, Button, Modal, Form, Input, Space, message, Flex, Spin } from "antd/es";
+import { Table, Button, Modal, Form, Input, Space, message, Flex, Spin, Divider } from "antd/es";
 import type { ColumnsType } from "antd/es/table";
 import { useStyles } from "./style/styles";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
@@ -63,13 +63,13 @@ const EmployeeTechnicianPage = () => {
       render: (_, record) => record.email || "-",
     },
     {
-      title: "City",
+      title: "Job Title",
       key: "address",
       render: (_, record) => record.jobTitle || "-",
     },
     {
-      title: "Province",
-      key: "address",
+      title: "Contact Number",
+      key: "contactNumber",
       render: (_, record) => record.contactNumber || ""
     },
   ];
@@ -89,9 +89,9 @@ const EmployeeTechnicianPage = () => {
       ) : (
         <div className={styles.employeeTechnicianContainer}>
           <div style={{ width: "100%", display: "flex", justifyContent: "space-between", marginBottom: "16px" }}>
-            <h2 style={{ margin: 0 }}>Service Provider List</h2>
+            <h2 style={{ margin: 0 }}>Employee List</h2>
             <Button type="primary" onClick={() => setModalVisible(true)}>
-              Add Service Provider
+              Add Employee
             </Button>
           </div>
 
@@ -119,7 +119,7 @@ const EmployeeTechnicianPage = () => {
             <Form form={form} layout="vertical">
               <Form.Item
                 name="name"
-                label="Service Provider Name"
+                label="Employee Name"
                 rules={[{ required: true, message: "Please enter Service Provider name" }]}
               >
                 <Input />
@@ -157,6 +157,7 @@ const EmployeeTechnicianPage = () => {
               >
                 <Input />
               </Form.Item>
+              <Divider />
             </Form>
           </Modal>
         </div>
