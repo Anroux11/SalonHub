@@ -102,22 +102,17 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
   };
 
   const columns: ColumnsType<IBooking> = [
+  
     {
-      title: "Salon Name",
-      dataIndex: "salonName",
-      key: "salonName",
-    },
-    
-    {
-      title: "Name of Hairdresser",
+      title: "Name of Employee",
       dataIndex: "employeeTechnicianName",
       key: "employeeTechnician",
       render: (srvP) => srvP || "-",
     },
     {
       title: "Service Requested",
-      dataIndex: "serviceRequested",
-      key: "serviceRequested",
+      dataIndex: "service",
+      key: "service",
       render: (srvP) => srvP || "-",
     },
     {
@@ -214,9 +209,11 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
                   )}
 
                 </p>
-                {/* <p><strong>Description:</strong> {selectedBooking.description}</p> */}
-                <p><strong>Status:</strong> {selectedBooking.status}</p>
-                <p><strong>Service Provider:</strong> {selectedBooking.employeeTechnicianName || "-"}</p>
+                <p><strong>Name of Employee:</strong> {selectedBooking.employeeTechnicianName}</p>
+                <p><strong>Service Requested:</strong> {selectedBooking.service}</p>
+                <p><strong>Date & Time:</strong> {selectedBooking.date || "-"}</p>
+                <p><strong>Status:</strong> {selectedBooking.status || "-"}</p>
+
               </>
             )}
 

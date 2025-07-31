@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SalonHub.EntityFrameworkCore;
@@ -11,9 +12,11 @@ using SalonHub.EntityFrameworkCore;
 namespace SalonHub.Migrations
 {
     [DbContext(typeof(SalonHubDbContext))]
-    partial class SalonHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250731132349_Phone")]
+    partial class Phone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1645,9 +1648,6 @@ namespace SalonHub.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<int>("ContactNumber")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp with time zone");

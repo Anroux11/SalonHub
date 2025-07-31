@@ -24,6 +24,8 @@ namespace SalonHub.CrudAppService.EmployeeTechnicians.Dto
         public string Password { get; set; }
 
         public string JobTitle { get; set; }
+        [Phone]
+       public int ContactNumber { get; set; }
 
         //public Address Address { get; set; }
         public Guid SalonId { get; set; }

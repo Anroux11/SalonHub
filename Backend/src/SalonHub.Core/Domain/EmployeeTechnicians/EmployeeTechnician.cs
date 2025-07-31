@@ -19,6 +19,8 @@ namespace SalonHub.Domain.EmployeeTechnicians
 
         public virtual string JobTitle { get; set; }
 
+        public virtual int ContactNumber { get; set; }
+
         //public virtual Address Address { get; set; }
 
         //public virtual decimal Latitude { get; set; }
