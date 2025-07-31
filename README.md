@@ -1,6 +1,6 @@
 # SalonHub
 
-SalonHub is a full-stack web application for reporting and managing pothole. It features a robust .NET backend and a modern Next.js frontend, supporting user registration, booking tracking, and salon management.
+SalonHub is a full-stack web application for booking Appointments at a salon and manage your bookings. It features a robust .NET backend and a modern Next.js frontend, supporting user registration, booking, and salon management.
 
 ## Project Structure
 
