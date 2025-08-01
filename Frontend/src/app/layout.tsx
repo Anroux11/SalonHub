@@ -14,6 +14,7 @@ import { EmployeeTechnicianProvider } from "@/providers/employeeTechnician-provi
 import { BookingProvider } from "@/providers/booking-provider";
 import { ClientProvider } from "@/providers/client-provider";
 import { ImageProvider } from "@/providers/image-provider";
+import { SalonProvider } from "../providers/salon-provider/index";
 
 export default function RootLayout({
   children,
@@ -64,23 +65,25 @@ export default function RootLayout({
         <body
         // style={{ display: "inline-flex", width: "100vw", height: "100vh" }}
         >
-          <CurrentUserProvider>
-            <ImageProvider>
-              <ClientProvider>
-                <BookingProvider>
-                  <EmployeeTechnicianProvider>
-                    <SalonRegisterProvider>
-                      <ClientRegisterProvider>
-                        <UserLoginProvider>
-                          <AntdApp>{children}</AntdApp>
-                        </UserLoginProvider>
-                      </ClientRegisterProvider>
-                    </SalonRegisterProvider>
-                  </EmployeeTechnicianProvider>
-                </BookingProvider>
-              </ClientProvider>
-            </ImageProvider>
-          </CurrentUserProvider>
+          <SalonProvider>
+            <CurrentUserProvider>
+              <ImageProvider>
+                <ClientProvider>
+                  <BookingProvider>
+                    <EmployeeTechnicianProvider>
+                      <SalonRegisterProvider>
+                        <ClientRegisterProvider>
+                          <UserLoginProvider>
+                            <AntdApp>{children}</AntdApp>
+                          </UserLoginProvider>
+                        </ClientRegisterProvider>
+                      </SalonRegisterProvider>
+                    </EmployeeTechnicianProvider>
+                  </BookingProvider>
+                </ClientProvider>
+              </ImageProvider>
+            </CurrentUserProvider>
+          </SalonProvider>
         </body>
       </ConfigProvider>
     </html>

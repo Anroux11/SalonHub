@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using SalonHub.Authorization.Users;
 using SalonHub.Domain.EmployeeTechnicians;
+using SalonHub.Domain.SalonServices;
 using SalonHub.Domain.Salons;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,9 +28,14 @@ namespace SalonHub.Domain.Bookings
 
         public string SalonName { get; set; }
 
-        // Connect the service provider
+        // Connect the employee technician
         public Guid? EmployeeTechnicianId { get; set; }
         [ForeignKey("EmployeeTechnicianId")]
         public EmployeeTechnician employeeTechnician { get; set; }
+        
+        // Connect the salon service
+        public Guid? SalonServiceId { get; set; }
+        [ForeignKey("SalonServiceId")]
+        public SalonService salonService { get; set; }
     }
 }

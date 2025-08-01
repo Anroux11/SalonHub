@@ -41,10 +41,8 @@ export const SalonProvider = ({
       await instance
         .get(endpoint)
         .then((response) => {
-          const filteredData = response.data.data.map((salon: ISalon) => ({
+          const filteredData = response.data.result.items.map((salon: ISalon) => ({
             name: salon.name ?? "",
-            latitude: salon.latitude ?? "",
-            longitude: salon.longitude ?? "",
           }));
           dispatch(getSalonListSuccess(filteredData));
         })

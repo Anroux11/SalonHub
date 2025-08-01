@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -13,6 +13,7 @@ import {
   message,
   Modal,
   Row,
+  Select,
   Space,
   // Spin,
   // Typography,
@@ -40,8 +41,17 @@ import {
 import { useImageActions } from "@/providers/image-provider";
 import { useStyles } from "./style/styles";
 import dayjs from "dayjs";
-import { useSalonState } from "@/providers/salon-provider";
+import { useSalonActions, useSalonState } from "@/providers/salon-provider";
 import DashboardBookingList from "@/components/salon-components/dashboardBooking";
+import {
+  useEmployeeTechnicianActions,
+  useEmployeeTechnicianState,
+} from "@/providers/employeeTechnician-provider";
+// import { useEmployeeTechnicianActions, useSalonState } from "@/providers/salon-provider";
+// import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
+// import { useEmployeeTechnicianState } from "@/providers/employeeTechnician-provider";
+import { ISalon } from "../../../providers/salon-provider/context";
+import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
 
 type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
 
@@ -62,38 +72,59 @@ const disabledDateTime = () => ({
   disabledMinutes: () => range(60, 60),
 });
 
-// const { Text } = Typography;
-
 const ClientDashboard: React.FC = () => {
   const router = useRouter();
   const [form] = Form.useForm();
-
-  // const [salon, setSalon] = useState("");
+  const [salonList, setSalonList] = useState<ISalon[]>([]);
+  const [employeeTechinicianList, setEmployeeTechinicianList] = useState<
+    IEmployeeTechnician[]
+  >([]);
   const [bookingModalVisible, setBookingModalVisible] = useState(false);
   const [booking, setBooking] = useState<IBooking[]>([]);
   const { createBooking } = useBookingActions();
   const { uploadImage } = useImageActions();
   const { bookings } = useBookingState();
+  // const { salons } = useSalonState();
+  const { styles } = useStyles();
+  const { Option } = Select;
+  const handleBooking = () => setBookingModalVisible(true);
+  const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
+  const { getSalonList } = useSalonActions();
+
+  const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] =
+    useState<IEmployeeTechnician | null>(null);
+  const [selectedSalon, setSelectedSalon] = useState<ISalon | null>(null);
+  const { employeeTechnicians } = useEmployeeTechnicianState();
   const { salons } = useSalonState();
 
-  const { styles } = useStyles();
+  useEffect(() => {
+    getSalonList();
+  }, [""]);
 
-  // const initialDate = dayjs("2025-07-30");
+  useEffect(() => {
+    if (salons?.length) {
+      setSalonList(salons);
+    }
+  }, [salons]);
 
-  // const loggedInUser = sessionStorage.getItem("user");
+  useEffect(() => {
+    if (selectedSalon) {
+      sessionStorage.setItem("salonName", JSON.stringify(selectedSalon));
+      getEmployeeTechnicianList();
+    }
+  }, [selectedSalon]);
 
-  const handleBooking = () => setBookingModalVisible(true);
+  useEffect(() => {
+    if (employeeTechnicians?.length) {
+      setEmployeeTechinicianList(employeeTechnicians);
+    }
+  }, [employeeTechnicians]);
 
-  // const handleCreateBooking = () => {
-  //   form.setFieldsValue({
-  //     salonId: salon,
-  //     latitude: position?.[0] || "",
-  //     longitude: position?.[1] || "",
-  //     city,
-  //     province,
-  //   });
-  //   setFullReportModalVisible(true);
-  // };
+  useEffect(() => {
+    if (selectedEmployeeTechnician) {
+      
+    }
+  }, [selectedEmployeeTechnician]);
 
   const handleAddBooking = async () => {
     try {
@@ -121,7 +152,7 @@ const ClientDashboard: React.FC = () => {
         // salonName: values.salonName,
         salonName: sessionStorage.getItem("salonName") || "",
         // salonId: parseInt(sessionStorage.getItem("userId") ?? "0"),
-        // salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
+        salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
         employeeTechnicianName: "Unallocated",
         employeeTechnicianId: parseInt(sessionStorage.getItem("userId") ?? "0"),
       };
@@ -245,6 +276,35 @@ const ClientDashboard: React.FC = () => {
           </Form.Item>
 
           <Form.Item
+            name="salonName"
+            label="Salon Name"
+            rules={[
+              {
+                required: true,
+                message: "Please enter the Salon Name",
+              },
+            ]}
+          >
+            <Select
+              placeholder="Select name of Salon"
+              style={{ width: "100%" }}
+              onChange={(value) =>
+                setSelectedSalon(
+                  salonList?.find((et) => et.id === value) || null
+                )
+              }
+              value={selectedSalon?.id}
+            >
+              {salonList?.map((sal) => (
+                <Option key={sal.id} value={sal.name}>
+                  {sal.name}
+                </Option>
+              ))}
+            </Select>
+            {/* <Input /> */}
+          </Form.Item>
+
+          <Form.Item
             name="employeeTechnicianName"
             label="Name of Hairdresser"
             rules={[
@@ -254,7 +314,23 @@ const ClientDashboard: React.FC = () => {
               },
             ]}
           >
-            <Input />
+            <Select
+              placeholder="Select name of Hairdresse"
+              style={{ width: "100%" }}
+              onChange={(value) =>
+                setSelectedEmployeeTechnician(
+                  employeeTechinicianList?.find((et) => et.id === value) || null
+                )
+              }
+              value={selectedEmployeeTechnician?.id}
+            >
+              {employeeTechinicianList?.map((emT) => (
+                <Option key={emT.id} value={emT.id}>
+                  {emT.name}
+                </Option>
+              ))}
+            </Select>
+            {/* <Input/> */}
           </Form.Item>
 
           <Form.Item
@@ -264,19 +340,6 @@ const ClientDashboard: React.FC = () => {
               {
                 required: true,
                 message: "Please input the service you want",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="salonName"
-            label="Salon Name"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the Salon Name",
               },
             ]}
           >

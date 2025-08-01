@@ -1625,6 +1625,9 @@ namespace SalonHub.Migrations
                     b.Property<string>("SalonName")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("SalonServiceId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Service")
                         .HasColumnType("text");
 
@@ -1636,6 +1639,8 @@ namespace SalonHub.Migrations
                     b.HasIndex("EmployeeTechnicianId");
 
                     b.HasIndex("SalonId");
+
+                    b.HasIndex("SalonServiceId");
 
                     b.ToTable("Bookings");
                 });
@@ -1690,6 +1695,52 @@ namespace SalonHub.Migrations
                     b.HasIndex("SalonId");
 
                     b.ToTable("EmployeeTechnicians");
+                });
+
+            modelBuilder.Entity("SalonHub.Domain.SalonServices.SalonService", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("SalonId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SalonId");
+
+                    b.ToTable("SalonServices");
                 });
 
             modelBuilder.Entity("SalonHub.Domain.Salons.Salon", b =>
@@ -2021,12 +2072,29 @@ namespace SalonHub.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SalonHub.Domain.SalonServices.SalonService", "salonService")
+                        .WithMany()
+                        .HasForeignKey("SalonServiceId");
+
                     b.Navigation("Salon");
 
                     b.Navigation("employeeTechnician");
+
+                    b.Navigation("salonService");
                 });
 
             modelBuilder.Entity("SalonHub.Domain.EmployeeTechnicians.EmployeeTechnician", b =>
+                {
+                    b.HasOne("SalonHub.Domain.Salons.Salon", "Salon")
+                        .WithMany()
+                        .HasForeignKey("SalonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Salon");
+                });
+
+            modelBuilder.Entity("SalonHub.Domain.SalonServices.SalonService", b =>
                 {
                     b.HasOne("SalonHub.Domain.Salons.Salon", "Salon")
                         .WithMany()

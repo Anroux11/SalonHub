@@ -21,6 +21,14 @@ const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) =
         token: { colorBgContainer },
     } = theme.useToken();
 
+    let loggedInUser = "Guest";
+    if (typeof sessionStorage !== 'undefined') {
+          const storedData = sessionStorage.getItem("user");
+            if (storedData) {
+                loggedInUser = storedData;
+            }
+        }
+
     const [collapsed, setCollapsed] = useState(false);
     const [logoutModalVisible, setLogoutModalVisible] = useState(false);
     const { styles } = useStyles();
@@ -115,7 +123,7 @@ const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) =
             <Layout>
                 <Header className={styles.headerTitle}>
                     <Title level={2} className={styles.title}>
-                        Service Provider Dashboard
+                       Hi, {loggedInUser}
                     </Title>
                 </Header>
 

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SalonHub.Domain.Bookings;
 using SalonHub.Domain.Salons;
 using SalonHub.Domain.EmployeeTechnicians;
+using SalonHub.Domain.SalonServices;
 using System;
 using System.Threading.Tasks;
 using SalonHub.CrudAppService.Bookings.Dto;
@@ -19,13 +20,15 @@ namespace SalonHub.CrudAppService.Bookings
         private readonly IRepository<Booking, Guid> _bookingRepository;
         private readonly IRepository<Salon, Guid> _salonRepository;
         private readonly IRepository<EmployeeTechnician, Guid> _employeeTechnicianRepository;
+        private readonly IRepository<SalonService, Guid> _salonServiceRepository;
 
-        public BookingAppService(IRepository<Booking, Guid> bookingRepository, IRepository<Salon, Guid> salon, IRepository<EmployeeTechnician, Guid> employeeTechnician)
+        public BookingAppService(IRepository<Booking, Guid> bookingRepository, IRepository<Salon, Guid> salon, IRepository<EmployeeTechnician, Guid> employeeTechnician,  IRepository<SalonService, Guid> salonService)
             : base(bookingRepository)
         {
             _bookingRepository = bookingRepository;
             _salonRepository = salon;
             _employeeTechnicianRepository = employeeTechnician;
+            _salonServiceRepository = salonService;
         }
 
         public async Task<Guid> GetSalonIdByNameAsync(string name)
@@ -45,17 +48,32 @@ namespace SalonHub.CrudAppService.Bookings
 
         public async Task<Guid> GetEmployeeTechnicianIdByNameAsync(string name)
         {
-            var serviceprovider = await _employeeTechnicianRepository.FirstOrDefaultAsync(
+            var employeeTech = await _employeeTechnicianRepository.FirstOrDefaultAsync(
                 m => m.Name.ToLower() == name.ToLower()
             );
 
-            if (serviceprovider == null)
+            if (employeeTech == null)
             {
-                Logger.Error($"Service provider with name '{name}' not found.");
-                throw new Exception("Service provider not found");
+                Logger.Error($"Employee Technician with name '{name}' not found.");
+                throw new Exception("Employee Technician not found");
             }
 
-            return serviceprovider.Id;
+            return employeeTech.Id;
+        }
+        
+        public async Task<Guid> GetSalonServiceIdByNameAsync(string name)
+        {
+            var salonService = await _salonServiceRepository.FirstOrDefaultAsync(
+                m => m.Name.ToLower() == name.ToLower()
+            );
+
+            if (salonService == null)
+            {
+                Logger.Error($"Salon Service with name '{name}' not found.");
+                throw new Exception("Salon Service not found");
+            }
+
+            return salonService.Id;
         }
 
         public override async Task<BookingDto> CreateAsync(BookingDto input)
@@ -63,8 +81,11 @@ namespace SalonHub.CrudAppService.Bookings
             var salonId = await GetSalonIdByNameAsync(input.SalonName);
             input.SalonId = salonId;
 
-            var serviceproviderId = await GetEmployeeTechnicianIdByNameAsync(input.EmployeeTechnicianName);
-            input.EmployeeTechnicianId = serviceproviderId;
+            var employeeTechnicianId = await GetEmployeeTechnicianIdByNameAsync(input.EmployeeTechnicianName);
+            input.EmployeeTechnicianId = employeeTechnicianId;
+            
+            var salonServiceId = await GetSalonServiceIdByNameAsync(input.SalonServiceName);
+            input.SalonServiceId = salonServiceId;
 
             return await base.CreateAsync(input);
         }
@@ -74,8 +95,11 @@ namespace SalonHub.CrudAppService.Bookings
             var salonId = await GetSalonIdByNameAsync(input.SalonName);
             input.SalonId = salonId;
 
-            var serviceproviderId = await GetEmployeeTechnicianIdByNameAsync(input.EmployeeTechnicianName);
-            input.EmployeeTechnicianId = serviceproviderId;
+            var employeeTechnicianId = await GetEmployeeTechnicianIdByNameAsync(input.EmployeeTechnicianName);
+            input.EmployeeTechnicianId = employeeTechnicianId;
+            
+            var salonServiceId = await GetSalonServiceIdByNameAsync(input.SalonServiceName);
+            input.SalonServiceId = salonServiceId;
 
             return await base.UpdateAsync(input);
         }

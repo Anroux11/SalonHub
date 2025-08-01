@@ -37,9 +37,9 @@ const EmployeeTechnicianPage = () => {
                 </Col>
                 <Col xs={24} sm={10} md={12}>
                     <Card className={styles.summaryCard}>
-                        <h3>Service Providers</h3>
+                        <h3>Employees</h3>
                         <p className="count">{employeeTechnicians?.length || 0}</p>
-                        <p>Total Service Providers</p>
+                        <p>Total Employees</p>
                     </Card>
                 </Col>
             </Row>

@@ -224,13 +224,13 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
                   placeholder="Select Service Provider"
                   style={{ width: "100%" }}
                   onChange={(value) =>
-                    setSelectedEmployeeTechnician(employeeTechnicians?.find((sp) => sp.id === value) || null)
+                    setSelectedEmployeeTechnician(employeeTechnicians?.find((et) => et.id === value) || null)
                   }
                   value={selectedEmployeeTechnician?.id}
                 >
-                  {employeeTechnicians?.map((srvP) => (
-                    <Option key={srvP.id} value={srvP.id}>
-                      {srvP.name}
+                  {employeeTechnicians?.map((emT) => (
+                    <Option key={emT.id} value={emT.id}>
+                      {emT.name}
                     </Option>
                   ))}
                 </Select>

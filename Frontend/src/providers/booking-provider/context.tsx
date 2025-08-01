@@ -6,7 +6,7 @@ export interface IBooking {
   status: string;
   imageUrl?: string;
   salonName: string;
-  salonId?: number;
+  salonId?: string;
   bookingUserId?: number;
   employeeTechnicianId: number;
   employeeTechnicianName?: string; 

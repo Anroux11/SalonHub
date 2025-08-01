@@ -252,6 +252,7 @@ export const CurrentUserProvider = ({
     await instance
       .get(endpoint)
       .then((response) => {
+        console.log("user res", response)
         const result = response.data.result.user.name;
         const salonName = result || "";
         sessionStorage.setItem("salonName", salonName);
