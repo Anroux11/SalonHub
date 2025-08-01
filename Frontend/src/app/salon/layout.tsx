@@ -9,7 +9,7 @@ import {
     HomeOutlined,
     EditOutlined,
     UsergroupAddOutlined,
-    DropboxOutlined,
+    ScissorOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
 import Title from "antd/es/typography/Title";
@@ -40,7 +40,7 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
         if (pathname.includes("/dashboard")) return "1";
         if (pathname.includes("/bookings")) return "2";
         if (pathname.includes("/employeeTechnician")) return "3";
-        if (pathname.includes("/inventory")) return "4";
+        if (pathname.includes("/salonServices")) return "4";
         return "1";
     };
 
@@ -80,7 +80,7 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
                         if (info.key === "1") router.push("/salon/dashboard");
                         if (info.key === "2") router.push("/salon/bookings");
                         if (info.key === "3") router.push("/salon/employeeTechnician");
-                        if (info.key === "4") router.push("/salon/inventory");
+                        if (info.key === "4") router.push("/salon/salonServices");
                     }}
                     items={[
                         {
@@ -100,8 +100,8 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
                         },
                         {
                             key: "4",
-                            icon: <DropboxOutlined />,
-                            label: "Inventory",
+                            icon: <ScissorOutlined />,
+                            label: "Services",
                         },
                     ]}
                 />

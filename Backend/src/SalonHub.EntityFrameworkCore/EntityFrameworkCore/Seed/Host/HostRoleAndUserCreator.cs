@@ -122,25 +122,6 @@ namespace SalonHub.EntityFrameworkCore.Seed.Host
                 _context.UserRoles.Add(new UserRole(null, adminUserForHost.Id, adminRoleForHost.Id));
                 _context.SaveChanges();
 
-                // Seeding salons
-                var gautengSalons = new List<Salon>
-                {
-                    new Salon { Name = "City of Johannesburg Metropolitan Salon"},
-                    new Salon { Name = "City of Tshwane Metropolitan Salon"},
-                    new Salon { Name = "City of Ekurhuleni Metropolitan Salon"},
-                    new Salon { Name = "Sedibeng District Salon"},
-                    new Salon { Name = "West Rand District Salon" }
-
-                };
-
-                foreach (var salon in gautengSalons)
-                {
-                    if (!_context.Salons.Any(m => m.Name == salon.Name))
-                    {
-                        Console.WriteLine($"Seeding salon: {salon.Name}");
-                        _context.Salons.Add(salon);
-                    }
-                }
                 _context.SaveChanges();
             }
         }

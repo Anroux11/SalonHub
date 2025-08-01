@@ -88,9 +88,9 @@ const Login = () => {
                 width={350}
                 height={350}
               ></Image>
-              <h1 style={{color: "#00e1e4", fontWeight: "10", fontSize: "30px"}}>Manage Your Clients</h1>
-              <h1 style={{color: "#00e1e4", fontWeight: "10"}}>Manage Your Appointments</h1>
-              <h1 style={{color: "#00e1e4", fontWeight: "10"}}>Manage Your Inventory</h1>
+              <h1 style={{color: "#969aa2ff", fontWeight: "10", fontSize: "30px"}}>Manage Your Clients</h1>
+              <h1 style={{color:"#969aa2ff", fontWeight: "10"}}>Manage Your Appointments</h1>
+              <h1 style={{color: "#969aa2ff", fontWeight: "10"}}>Manage Your Services</h1>
               
             </div>
           </div>

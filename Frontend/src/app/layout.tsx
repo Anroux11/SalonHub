@@ -15,6 +15,7 @@ import { BookingProvider } from "@/providers/booking-provider";
 import { ClientProvider } from "@/providers/client-provider";
 import { ImageProvider } from "@/providers/image-provider";
 import { SalonProvider } from "../providers/salon-provider/index";
+import { SalonServiceProvider } from "@/providers/salonService-provider";
 
 export default function RootLayout({
   children,
@@ -30,7 +31,7 @@ export default function RootLayout({
             colorPrimary: "#00e1e4",
             colorInfo: "#00e1e4",
             colorTextBase: "#ffffff",
-            colorBgBase: "#212428",
+            colorBgBase: "#2a2a2cff",
             fontSize: 14,
             wireframe: false,
           },
@@ -65,6 +66,7 @@ export default function RootLayout({
         <body
         // style={{ display: "inline-flex", width: "100vw", height: "100vh" }}
         >
+          <SalonServiceProvider>
           <SalonProvider>
             <CurrentUserProvider>
               <ImageProvider>
@@ -82,8 +84,9 @@ export default function RootLayout({
                   </BookingProvider>
                 </ClientProvider>
               </ImageProvider>
-            </CurrentUserProvider>
+              </CurrentUserProvider>
           </SalonProvider>
+          </SalonServiceProvider>
         </body>
       </ConfigProvider>
     </html>

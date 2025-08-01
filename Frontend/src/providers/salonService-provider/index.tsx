@@ -26,7 +26,7 @@ import {
   deleteSalonServiceSuccess,
   deleteSalonServiceError,
 } from "./actions";
-import { useCurrentUserActions } from "../auth-provider";
+// import { useCurrentUserActions } from "../auth-provider";
 
 export const SalonServiceProvider = ({
   children,
@@ -35,7 +35,7 @@ export const SalonServiceProvider = ({
 }) => {
   const [state, dispatch] = useReducer(SalonServiceReducer, INITIAL_STATE);
   const instance = getAxiosInstance();
-  const { currentUser } = useCurrentUserActions();
+  // const { currentUser } = useCurrentUserActions();
 
   const getSalonServiceList = async () => {
     dispatch(getSalonServiceListPending());
@@ -43,7 +43,7 @@ export const SalonServiceProvider = ({
     await instance
       .get(endpoint)
       .then((response) => {
-        currentUser();
+        // currentUser();
         const salon = (sessionStorage.getItem("salonName") || "").toString();
         const filteredData = response.data.result.items
           .filter((salonService: ISalonService) => salonService.salonName === salon)

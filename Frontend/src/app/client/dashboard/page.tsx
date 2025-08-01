@@ -315,7 +315,7 @@ const ClientDashboard: React.FC = () => {
             ]}
           >
             <Select
-              placeholder="Select name of Hairdresse"
+              placeholder="Select name of Hairdresser"
               style={{ width: "100%" }}
               onChange={(value) =>
                 setSelectedEmployeeTechnician(
