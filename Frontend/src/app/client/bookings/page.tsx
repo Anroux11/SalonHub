@@ -127,6 +127,7 @@ const BookingListPage: React.FC = () => {
                     <Image
                       width={200}
                       src={selectedBooking.imageUrl}
+                      alt="Booking Image"
                     />
                   )}
                 </p>

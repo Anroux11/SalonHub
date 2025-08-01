@@ -17,6 +17,8 @@ namespace SalonHub.CrudAppService.Bookings.Dto
         public long BookingUserId { get; set; }
         public Guid? EmployeeTechnicianId { get; set; }
         public string? EmployeeTechnicianName { get; set; }
+        public Guid? SalonServiceId { get; set; }
+        public string? SalonServiceName { get; set; }
     }
 }
 ;

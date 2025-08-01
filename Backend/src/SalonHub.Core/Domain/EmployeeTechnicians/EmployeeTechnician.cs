@@ -21,11 +21,6 @@ namespace SalonHub.Domain.EmployeeTechnicians
 
         public virtual int ContactNumber { get; set; }
 
-        //public virtual Address Address { get; set; }
-
-        //public virtual decimal Latitude { get; set; }
-        //public virtual decimal Longitude { get; set; }
-
         public Guid SalonId { get; set; }
         [ForeignKey("SalonId")]
         public virtual Salon Salon { get; set; }

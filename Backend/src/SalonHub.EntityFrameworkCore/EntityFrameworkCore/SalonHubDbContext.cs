@@ -4,6 +4,7 @@ using SalonHub.Authorization.Roles;
 using SalonHub.Authorization.Users;
 using SalonHub.Domain.Bookings;
 using SalonHub.Domain.EmployeeTechnicians;
+using SalonHub.Domain.SalonServices;
 using SalonHub.Domain.Salons;
 using SalonHub.MultiTenancy;
 using System.Net;
@@ -16,6 +17,7 @@ namespace SalonHub.EntityFrameworkCore
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Salon> Salons { get; set; }
         public DbSet<EmployeeTechnician> EmployeeTechnicians { get; set; }
+        public DbSet<SalonService> SalonServices { get; set; }
         //public DbSet<Technician> Technicians { get; set; }
         //public DbSet<Address> Addresses { get; set; }
         public SalonHubDbContext(DbContextOptions<SalonHubDbContext> options)
