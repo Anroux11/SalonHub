@@ -161,6 +161,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
             className={styles.bookingTable}
             pagination={{ pageSize: 5 }}
             rowKey="id"
+            scroll={{x: "max-content"}}
           />
 
           <Modal

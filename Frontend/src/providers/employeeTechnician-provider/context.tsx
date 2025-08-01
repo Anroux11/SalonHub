@@ -5,7 +5,7 @@ export interface IEmployeeTechnician {
     email: string;
     password: string;
     jobTitle?: string;
-    contactNumber?: number;
+    contactNumber: number;
     salonId?: string //might chnge
     salonName: string;
 }

@@ -23,7 +23,7 @@ const EmployeeTechnicianPage = () => {
 
   useEffect(() => {
     getEmployeeTechnicianList();
-  }, [""]);
+  }, []);
 
   const handleAddEmployeeTechnician = async () => {
     setLoading(true);
@@ -42,10 +42,11 @@ const EmployeeTechnicianPage = () => {
       createEmployeeTechnician(payload);
       setModalVisible(false);
       form.resetFields();
-      message.success(`Added Service Provider ${values.name}`);
+      getEmployeeTechnicianList();
+      message.success(`Added Employee ${values.name}`);
     } catch (error) {
-      console.error("Error adding service provider:", error);
-      message.error("Failed to add Service Provider");
+      console.error("Error adding Employee:", error);
+      message.error("Failed to add Employee");
     }
 
     setLoading(false);
@@ -153,7 +154,7 @@ const EmployeeTechnicianPage = () => {
               <Form.Item
                 name="contactNumber"
                 label="Contact Number"
-                rules={[{ required: true, message: "Please enter the address" }]}
+                rules={[{ required: true, message: "Please enter the Contact Number" }]}
               >
                 <Input />
               </Form.Item>

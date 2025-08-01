@@ -42,8 +42,8 @@ export const useStyles = createStyles({
   `,
 
   sinceText: css`
-    font-size: 18px;
-    color: #686D76;
+    font-size: 25px;
+    color: #8f9298ff;
     margin-top: 5px;
     margin-bottom: 20px;
   `,
@@ -75,20 +75,22 @@ export const useStyles = createStyles({
 
   orangeButton: css`
     background-color: #00e1e4 !important;
-    border: none !important;
+    
     font-weight: bold;
     width: 200px;
     margin-bottom: 20px;
 
     &:hover {
-      background-color: transparent;
+      background-color: transparent !important;
+      border-color: #00e1e4 !important;
+      color: #00e1e4 !important;
     }
   `,
 
   smallText: css`
     margin: 10px 0;
-    font-size: 18px;
-    color: #686D76;
+    font-size: 20px;
+    color: #8c8f94ff;
   `,
 
   button: css`
@@ -99,5 +101,9 @@ export const useStyles = createStyles({
     font-weight: bold;
     margin-top: 10px;
 
+    &:hover {
+      background-color: #00e1e4 !important;
+      color: white !important;
+    }
   `,
 });

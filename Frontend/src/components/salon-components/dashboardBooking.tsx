@@ -71,6 +71,7 @@ const DashboardBookingList = ({ bookings: passedBookings }: { bookings?: IBookin
             className={styles.bookingTable}
             pagination={{ pageSize: 5 }}
             rowKey="id"
+            scroll={{x: "max-content"}}
           />
         </div>
     </>

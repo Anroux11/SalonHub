@@ -7,6 +7,7 @@ import { useBookingState, useBookingActions } from "@/providers/booking-provider
 import { useEmployeeTechnicianState, useEmployeeTechnicianActions } from "@/providers/employeeTechnician-provider";
 import { useEffect } from "react";
 import DashboardBookingList from "@/components/salon-components/dashboardBooking";
+import { useSalonServiceActions, useSalonServiceState } from "@/providers/salonService-provider";
 
 const EmployeeTechnicianPage = () => {
     const router = useRouter();
@@ -18,28 +19,38 @@ const EmployeeTechnicianPage = () => {
     const { employeeTechnicians } = useEmployeeTechnicianState();
     const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
 
+    const { salonServices} = useSalonServiceState();
+    const { getSalonServiceList } = useSalonServiceActions();
 
     useEffect(() => {
         getBookingList();
         getEmployeeTechnicianList();
+        getSalonServiceList();
     }, [""]);
 
 
     return (
         <div className={styles.dashboardContainer}>
             <Row gutter={[20, 20]} className={styles.summaryRow}>
-                <Col xs={24} sm={10} md={12}>
+                <Col xs={24} sm={10} md={8}>
                     <Card className={styles.summaryCard}>
                         <h3>Bookings</h3>
                         <p className="count">{bookings?.length || 0}</p>
                         <p>Total Bookings</p>
                     </Card>
                 </Col>
-                <Col xs={24} sm={10} md={12}>
+                <Col xs={24} sm={10} md={8}>
                     <Card className={styles.summaryCard}>
                         <h3>Employees</h3>
                         <p className="count">{employeeTechnicians?.length || 0}</p>
                         <p>Total Employees</p>
+                    </Card>
+                </Col>
+                <Col xs={24} sm={10} md={8}>
+                    <Card className={styles.summaryCard}>
+                        <h3>Services</h3>
+                        <p className="count">{salonServices?.length || 0}</p>
+                        <p>Total Services</p>
                     </Card>
                 </Col>
             </Row>

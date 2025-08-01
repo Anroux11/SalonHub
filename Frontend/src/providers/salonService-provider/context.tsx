@@ -5,7 +5,7 @@ export interface ISalonService {
     description: string;
     price: string;
     salonId?: string //might chnge
-    salonName: string;
+    salonName?: string;
 }
 
 export interface ISalonServiceStateContext {
