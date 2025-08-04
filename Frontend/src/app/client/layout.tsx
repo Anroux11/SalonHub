@@ -9,6 +9,7 @@ import {
     HomeOutlined,
     EditOutlined,
     PushpinOutlined,
+    AliwangwangOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
 import Title from "antd/es/typography/Title";
@@ -41,6 +42,7 @@ let loggedInUser = "Guest";
         if (pathname.includes("/dashboard")) return "1";
         if (pathname.includes("/bookings")) return "2";
         if (pathname.includes("/salons")) return "3";
+        if (pathname.includes("/chatbot")) return "4";
         return "1";
     };
 
@@ -80,6 +82,7 @@ let loggedInUser = "Guest";
                         if (info.key === "1") router.push("/client/dashboard");
                         if (info.key === "2") router.push("/client/bookings");
                         if (info.key === "3") router.push("/client/salons");
+                        if (info.key === "4") router.push("/client/chatbot");
                     }}
                     items={[
                         {
@@ -96,6 +99,11 @@ let loggedInUser = "Guest";
                             key: "3",
                             icon: <PushpinOutlined />,
                             label: "Salons",
+                        },
+                        {
+                            key: "4",
+                            icon: <AliwangwangOutlined />,
+                            label: "Chatbot",
                         },
                     ]}
                 />

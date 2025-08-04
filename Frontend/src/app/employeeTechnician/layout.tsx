@@ -8,7 +8,7 @@ import {
     LogoutOutlined,
     HomeOutlined,
     FileTextOutlined,
-    WechatOutlined
+    AliwangwangOutlined
 } from "@ant-design/icons";
 import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
 import Title from "antd/es/typography/Title";
@@ -38,7 +38,7 @@ const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) =
     const getSelectedKey = () => {
         if (pathname.includes("/dashboard")) return "1";
         if (pathname.includes("/bookings")) return "2";
-        if (pathname.includes("/gemini")) return "3";
+        if (pathname.includes("/chatbot")) return "3";
         return "1";
     };
 
@@ -77,7 +77,7 @@ const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) =
                     onClick={(info) => {
                         if (info.key === "1") router.push("/employeeTechnician/dashboard");
                         if (info.key === "2") router.push("/employeeTechnician/bookings");
-                        if (info.key === "3") router.push("/employeeTechnician/gemini");
+                        if (info.key === "3") router.push("/employeeTechnician/chatbot");
                     }}
                     items={[
                         {
@@ -92,8 +92,8 @@ const EmployeeTechnicianLayout = ({ children }: { children: React.ReactNode }) =
                         },
                         {
                             key: "3",
-                            icon: <WechatOutlined />,
-                            label: "Interact with AI",
+                            icon: <AliwangwangOutlined />,
+                            label: "Chatbot",
                         },
                     ]}
                 />

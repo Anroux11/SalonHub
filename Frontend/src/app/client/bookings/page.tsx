@@ -108,6 +108,7 @@ const BookingListPage: React.FC = () => {
             className={styles.bookingTable}
             rowKey="id"
             pagination={{ pageSize: 5 }}
+             scroll={{x: "max-content"}}
           />
 
           <Modal

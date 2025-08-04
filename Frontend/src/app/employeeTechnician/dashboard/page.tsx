@@ -55,7 +55,7 @@ const EmployeeTechnicianPage = () => {
                         size="large"
                         block
                         className={styles.quickActionButton}
-                        onClick={() => router.push("./gemini")}
+                        onClick={() => router.push("./chatbot")}
                     >
                         Interact with AI
                     </Button>
