@@ -23,7 +23,7 @@ const EmployeeTechnicianPage = () => {
 
   useEffect(() => {
     getEmployeeTechnicianList();
-  }, []);
+  }, [employeeTechnicians]);
 
   const handleAddEmployeeTechnician = async () => {
     setLoading(true);

@@ -157,7 +157,7 @@ export const useStyles = createStyles({
   `,
 
   logoText: css`
-    color: #00e1e4;
+    color: #FF9323;
     font-size: 24px;
     font-weight: bold;
     margin: 0;
@@ -170,8 +170,8 @@ export const useStyles = createStyles({
     width: 300px;
     fontWeight: bold;
     background-color: transparent;
-    border-color: #00e1e4;
-    color: #00e1e4;
+    border-color: #FF9323;
+    color: #FF9323;
     }
   `,
 });

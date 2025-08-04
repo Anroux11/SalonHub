@@ -26,7 +26,7 @@ const EmployeeTechnicianPage = () => {
     return (
         <div className={styles.dashboardContainer}>
             <Row gutter={[16, 16]} className={styles.summaryRow}>
-                <Col xs={24} sm={30} md={10}>
+                <Col xs={24} sm={30} md={24}>
                     <Card className={styles.summaryCard}>
                         <h3>Bookings</h3>
                         <p className="count">{bookings?.length || 0}</p>
@@ -37,7 +37,7 @@ const EmployeeTechnicianPage = () => {
 
             <Divider orientation="left">Quick Actions</Divider>
             <Row gutter={[16, 16]} className={styles.quickActionsRow}>
-                <Col xs={24} sm={8}>
+                <Col xs={24} sm={12}>
                     <Button
                         type="primary"
                         size="large"
@@ -49,7 +49,7 @@ const EmployeeTechnicianPage = () => {
                     </Button>
                 </Col>
                 
-                <Col xs={24} sm={8}>
+                <Col xs={24} sm={12}>
                     <Button
                         type="dashed"
                         size="large"
