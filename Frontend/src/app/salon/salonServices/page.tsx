@@ -13,7 +13,6 @@ const SalonServicePage = () => {
   const { salonServices} = useSalonServiceState();
   const { getSalonServiceList } = useSalonServiceActions();
 
-
   const [modalVisible, setModalVisible] = useState(false);
   const { createSalonService } = useSalonServiceActions();
 
@@ -24,6 +23,10 @@ const SalonServicePage = () => {
   useEffect(() => {
     getSalonServiceList();
   }, [""]);
+
+  useEffect(() => {
+    getSalonServiceList();
+  }, [salonServices]);
 
   const handleAddSalonService = async () => {
     setLoading(true);
@@ -40,7 +43,6 @@ const SalonServicePage = () => {
       createSalonService(payload);
       setModalVisible(false);
       form.resetFields();
-      getSalonServiceList();
       message.success(`Added Salon Service ${values.name}`);
     } catch (error) {
       console.error("Error adding Salon Service:", error);

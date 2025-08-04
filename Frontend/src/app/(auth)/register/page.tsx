@@ -83,7 +83,7 @@ const RegistrationForm = () => {
                 width={300}
                 height={300}
               ></Image>
-              <Title style={{color: "#00e1e4"}}>To Get Started...please register to SalonHub</Title>
+              <Title style={{color: "#969aa2ff"}}>To Get Started...please register to SalonHub</Title>
             </div>
           </div>
 

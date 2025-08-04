@@ -26,8 +26,7 @@ const EmployeeTechnicianPage = () => {
         getBookingList();
         getEmployeeTechnicianList();
         getSalonServiceList();
-    }, [""]);
-
+    }, []);
 
     return (
         <div className={styles.dashboardContainer}>

@@ -151,8 +151,9 @@ const ClientDashboard: React.FC = () => {
         bookingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
         // salonName: values.salonName,
         salonName: sessionStorage.getItem("salonName") || "",
+        salonId: parseInt(sessionStorage.getItem("salonId") ?? "0"),
         // salonId: parseInt(sessionStorage.getItem("userId") ?? "0"),
-        salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
+        // salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
         employeeTechnicianName: "Unallocated",
         employeeTechnicianId: parseInt(sessionStorage.getItem("userId") ?? "0"),
       };
@@ -325,7 +326,7 @@ const ClientDashboard: React.FC = () => {
               value={selectedEmployeeTechnician?.id}
             >
               {employeeTechinicianList?.map((emT) => (
-                <Option key={emT.id} value={emT.id}>
+                <Option key={emT.id} value={emT.name}>
                   {emT.name}
                 </Option>
               ))}

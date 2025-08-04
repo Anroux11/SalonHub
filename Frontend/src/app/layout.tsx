@@ -28,8 +28,8 @@ export default function RootLayout({
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#00e1e4",
-            colorInfo: "#00e1e4",
+            colorPrimary: "#FF9323",
+            colorInfo: "#FF9323",
             colorTextBase: "#ffffff",
             colorBgBase: "#2a2a2cff",
             fontSize: 14,
@@ -37,27 +37,27 @@ export default function RootLayout({
           },
           components: {
             Divider: {
-              colorSplit: "#00e1e4",
+              colorSplit: "#FF9323",
             },
             Menu: {
-              colorPrimaryBorder: "#00e1e4",
+              colorPrimaryBorder: "#FF9323",
             },
             Calendar: {
               itemActiveBg: "rgb(104,109,118)",
             },
             Card: {
-              colorBorderSecondary: "#00e1e4",
+              colorBorderSecondary: "#FF9323",
             },
             Collapse: {
-              colorBorder: "#00e1e4",
+              colorBorder: "#FF9323",
             },
             List: {
-              colorBorder: "#00e1e4",
-              colorSplit: "#00e1e4",
+              colorBorder: "#FF9323",
+              colorSplit: "#FF9323",
             },
             Table: {
-              colorPrimaryBorder: "#00e1e4",
-              colorSplit: "#00e1e4",
+              colorPrimaryBorder: "#FF9323",
+              colorSplit: "#FF9323",
             },
           },
           algorithm: darkAlgorithm,

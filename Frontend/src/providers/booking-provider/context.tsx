@@ -6,7 +6,7 @@ export interface IBooking {
   status: string;
   imageUrl?: string;
   salonName: string;
-  salonId?: string;
+  salonId?: number;
   bookingUserId?: number;
   employeeTechnicianId: number;
   employeeTechnicianName?: string; 
@@ -30,6 +30,7 @@ export const INITIAL_STATE: IBookingStateContext = {
   isPending: false,
   isSuccess: false,
   isError: false,
+  bookings: []
 };
 
 export const BookingStateContext =
