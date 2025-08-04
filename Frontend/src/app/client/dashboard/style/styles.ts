@@ -173,6 +173,7 @@ export const useStyles = createStyles({
       font-size: 24px;
       font-weight: bold;
     }
+    background: linear-gradient(90deg, #072544ff, #FF9323);
   `,
   quickActionsRow: css`
     width: 100%;

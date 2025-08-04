@@ -1,0 +1,61 @@
+"use client";
+
+import { useEffect } from "react";
+import { Table } from "antd/es";
+import type { ColumnsType } from "antd/es/table";
+import { useStyles } from "../../app/salon/bookings/style/styles";
+import {
+  useBookingActions,
+} from "@/providers/booking-provider";
+import { useEmployeeTechnicianActions, useEmployeeTechnicianState } from "@/providers/employeeTechnician-provider";
+import "@ant-design/v5-patch-for-react-19";
+import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
+
+
+
+const SalonEmployees = ({ employeeTechnicians: passedEmployees }: { employeeTechnicians?: IEmployeeTechnician[] }) => {
+  const { styles } = useStyles();
+  const { employeeTechnicians: contextEmployeeTechnicians } = useEmployeeTechnicianState();
+  const employeeTechnicians = passedEmployees ?? contextEmployeeTechnicians;
+  const { getBookingList } = useBookingActions();
+  const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
+
+  useEffect(() => {
+    getBookingList();
+    getEmployeeTechnicianList();
+  }, [SalonEmployees]);
+
+  const columns: ColumnsType<IEmployeeTechnician> = [
+    {
+      title: "Name of Hairdresser/Technician",
+      dataIndex: "name",
+      key: "name",
+      render: (_, record) => record.name || "-",
+    },
+    
+    {
+      title: "Job Title",
+      dataIndex: "jobTitle",
+      key: "jobTitle",
+      render: (_, record) => record.jobTitle || "-",
+    },
+
+  ];
+
+  return (
+    <>
+        <div className={styles.bookingContainer}>
+          <Table
+            columns={columns}
+            dataSource={employeeTechnicians}
+            className={styles.bookingTable}
+            pagination={{ pageSize: 5 }}
+            rowKey="id"
+            scroll={{x: "max-content"}}
+          />
+        </div>
+    </>
+  );
+};
+
+export default SalonEmployees;

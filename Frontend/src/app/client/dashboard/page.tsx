@@ -297,7 +297,7 @@ const ClientDashboard: React.FC = () => {
               value={selectedSalon?.id}
             >
               {salonList?.map((sal) => (
-                <Option key={sal.id} value={sal.id}>
+                <Option key={sal.name} value={sal.name}>
                   {sal.name}
                 </Option>
               ))}
