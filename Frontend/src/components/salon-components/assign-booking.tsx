@@ -26,17 +26,17 @@ const AssignBooking: React.FC = () => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Assign
+        Confirm
       </Button>
       <Modal
         open={open}
-        title="Select Service Provider"
+        title="Select an Employee"
         onOk={handleOk}
         onCancel={handleCancel}
         footer={(_, { CancelBtn }) => (
           <>
           <Button htmlType="submit" type="primary">
-            Assign Booking
+            Confirm Booking
           </Button>
         <CancelBtn />
           </>

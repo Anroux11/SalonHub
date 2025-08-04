@@ -31,7 +31,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
   const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] = useState<IEmployeeTechnician | null>(
     null
   )
-  const [assignMode, setAssignMode] = useState(false);
+  const [bookingMode, setBookingMode] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -43,13 +43,13 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
 
   const handleView = (booking: IBooking, employeeTechnician?: IEmployeeTechnician) => {
     setSelectedBooking(booking);
-    setAssignMode(false);
+    setBookingMode(false);
     setSelectedEmployeeTechnician(employeeTechnician ?? null);
     setModalVisible(true);
   };
 
   const handleAssign = () => {
-    setAssignMode(true);
+    setBookingMode(true);
   };
 
   const handleConfirmAssign = async () => {
@@ -59,17 +59,17 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
 
       const payload: IBooking = {
         ...selectedBooking,
-        status: "Assigned",
+        status: "Confirmed",
         employeeTechnicianName: selectedEmployeeTechnician?.name,
       }
       await updateBooking(payload);
       setModalVisible(false);
-      message.success(`Assigned to ${selectedEmployeeTechnician.name}`);
+      message.success(`Booking Confirmed`);
       getBookingList();
     } catch (error) {
 
       console.error(error);
-      message.error("Assigning Booking failed");
+      message.error("Booking failed");
     }
 
     setLoading(false);
@@ -126,7 +126,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
       dataIndex: "status",
       key: "status",
       render: (status) => {
-        const color = status === "Assigned" ? "green" : status === "Completed" ? "blue" : "orange";
+        const color = status === "Confirmed" ? "green" : status === "Completed" ? "blue" : "orange";
         return <Tag color={color}>{status}</Tag>;
       },
     },
@@ -134,7 +134,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Button type="link" onClick={() => handleView(record, employeeTechnicians?.find(sp => sp.name === record.employeeTechnicianName))}>
+        <Button type="primary" onClick={() => handleView(record, employeeTechnicians?.find(sp => sp.name === record.employeeTechnicianName))}>
           View
         </Button>
       ),
@@ -169,15 +169,15 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
             open={modalVisible}
             onCancel={handleCancel}
             footer={
-              assignMode ? (
+              bookingMode ? (
                 <Space>
-                  <Button onClick={() => setAssignMode(false)}>Back</Button>
+                  <Button onClick={() => setBookingMode(false)}>Back</Button>
                   <Button
                     type="primary"
                     disabled={!selectedEmployeeTechnician}
                     onClick={handleConfirmAssign}
                   >
-                    Confirm Assignment
+                    Confirm Booking
                   </Button>
                 </Space>
               ) : (
@@ -188,14 +188,14 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
                     </Button>
                   )}
                   {selectedBooking?.status !== "Completed" && (
-                    <Button onClick={handleAssign}>Assign</Button>
+                    <Button onClick={handleAssign}>Confirm</Button>
                   )}
                   <Button onClick={handleCancel}>Close</Button>
                 </Space>
               )
             }
           >
-            {selectedBooking && !assignMode && (
+            {selectedBooking && !bookingMode && (
               <>
                 <p>
                   {selectedBooking.imageUrl && (
@@ -218,11 +218,11 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
               </>
             )}
 
-            {assignMode && (
+            {bookingMode && (
               <>
-                <p>Select a Service Provider to assign this booking:</p>
+                <p>Select an Employee to confirm Booking:</p>
                 <Select
-                  placeholder="Select Service Provider"
+                  placeholder="Select Employee"
                   style={{ width: "100%" }}
                   onChange={(value) =>
                     setSelectedEmployeeTechnician(employeeTechnicians?.find((et) => et.id === value) || null)
