@@ -22,7 +22,7 @@ const SalonServices = ({}: { salonServices?: ISalonService[] }) => {
   const { getSalonServiceList } = useSalonServiceActions();
 
   useEffect(() => {
-    getBookingList();
+    // getBookingList();
     // getEmployeeTechnicianList();
     getSalonServiceList();
   }, [""]);
@@ -50,7 +50,7 @@ const SalonServices = ({}: { salonServices?: ISalonService[] }) => {
     {
       title: "Price",
       dataIndex: "price",
-      key: "jobTitle",
+      key: "price",
       render: (_, record) => record.price || "-",
     },
 

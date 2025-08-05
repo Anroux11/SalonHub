@@ -95,10 +95,12 @@ const ClientDashboard: React.FC = () => {
   const { getSalonList } = useSalonActions();
   const { getSalonServiceList } = useSalonServiceActions();
   
-  const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] =
-  useState<IEmployeeTechnician | null>(null);
-  const [selectedSalonService, setSelectedSalonService] =
-  useState<ISalonService | null>(null);
+  const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] = useState<string | null>(null);
+  const [selectedSalonService, setSelectedSalonService] = useState<string | null>(null);
+  // const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] =
+  // useState<IEmployeeTechnician | null>(null);
+  // const [selectedSalonService, setSelectedSalonService] =
+  // useState<ISalonService | null>(null);
   const [selectedSalon, setSelectedSalon] = useState<string | null>(null);
   const { employeeTechnicians } = useEmployeeTechnicianState();
   const { salons } = useSalonState();
@@ -164,14 +166,13 @@ const ClientDashboard: React.FC = () => {
         status: "Submitted",
         imageUrl,
         bookingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
-        // salonName: values.salonName,
-        salonName: sessionStorage.getItem("salon-name") || "",
-        salonId: parseInt(sessionStorage.getItem("salonId") ?? "0"),
-        // salonId: parseInt(sessionStorage.getItem("userId") ?? "0"),
-        // salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
+        salonName: values.salonName,
+        salonId: sessionStorage.getItem("salonId") ?? "0",
         employeeTechnicianName: values.employeeTechnicianName,
-        employeeTechnicianId: parseInt(sessionStorage.getItem("userId") ?? "0"),
-      };
+        employeeTechnicianId: values.employeeTechnicianName,
+        salonServiceId: values.service,
+        salonServiceName: values.service
+      }
 
       await createBooking(payload);
 
@@ -337,13 +338,14 @@ const ClientDashboard: React.FC = () => {
               style={{ width: "100%" }}
               onChange={(value) =>
                 setSelectedEmployeeTechnician(
-                  employeeTechinicianList?.find((et) => et.id === value) || null
+                  // employeeTechinicianList?.find((et) => et.id === value) || null
+                  value
                 )
               }
-              value={selectedEmployeeTechnician?.id}
+              value={selectedEmployeeTechnician}
             >
               {employeeTechinicianList?.map((emT) => (
-                <Option key={emT.id} value={emT.id}>
+                <Option key={emT.name} value={emT.name}>
                   {emT.name}
                 </Option>
               ))}
@@ -366,13 +368,14 @@ const ClientDashboard: React.FC = () => {
               style={{ width: "100%" }}
               onChange={(value) =>
                 setSelectedSalonService(
-                  salonServiceList?.find((ss) => ss.id === value) || null
+                  // salonServiceList?.find((ss) => ss.id === value) || null
+                  value
                 )
               }
-              value={selectedSalonService?.id}
+              value={selectedSalonService}
             >
               {salonServiceList?.map((serR) => (
-                <Option key={serR.id} value={serR.id}>
+                <Option key={serR.name} value={serR.name}>
                   {serR.name}
                 </Option>
               ))}

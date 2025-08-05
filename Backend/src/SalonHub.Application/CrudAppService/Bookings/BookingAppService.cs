@@ -98,7 +98,7 @@ namespace SalonHub.CrudAppService.Bookings
             var employeeTechnicianId = await GetEmployeeTechnicianIdByNameAsync(input.EmployeeTechnicianName);
             input.EmployeeTechnicianId = employeeTechnicianId;
             
-            var salonServiceId = await GetSalonServiceIdByNameAsync(input.SalonServiceName);
+            var salonServiceId = await GetSalonServiceIdByNameAsync(input.service);
             input.SalonServiceId = salonServiceId;
 
             return await base.UpdateAsync(input);

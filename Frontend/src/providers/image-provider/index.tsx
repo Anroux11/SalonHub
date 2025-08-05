@@ -17,7 +17,7 @@ export const ImageProvider = ({
   const uploadImage = async (file: File): Promise<string> => {
     dispatch(uploadImagePending());
     const timeStamp = Date.now();
-    const filePath = `/${timeStamp}_${file.name}`;
+    const filePath = `${timeStamp}_${file.name}`;
     const { error } = await supabase.storage
       .from("salonhub")
       .upload(filePath, file, {
