@@ -44,7 +44,7 @@ export const SalonServiceProvider = ({
       .get(endpoint)
       .then((response) => {
         // currentUser();
-        const salon = (sessionStorage.getItem("salonName") || "").toString();
+        const salon = (sessionStorage.getItem("salon-name") || "").toString();
         const filteredData = response.data.result.items
           .filter((salonService: ISalonService) => salonService.salonName === salon)
           .map(
@@ -57,7 +57,6 @@ export const SalonServiceProvider = ({
             salonName: salonService.salonName ?? "",
           })
         );
-        console.log("Filtered Salon Service Providers:", filteredData);
         dispatch(getSalonServiceListSuccess(filteredData));
       })
       .catch((error) => {

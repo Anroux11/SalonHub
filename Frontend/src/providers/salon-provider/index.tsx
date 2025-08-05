@@ -66,11 +66,11 @@ export const SalonProvider = ({
       });
   };
 
-  const createSalon = async (trainer: ISalon) => {
+  const createSalon = async (salon: ISalon) => {
     dispatch(createSalonPending());
-    const endpoint = `/salon`;
+    const endpoint = `/services/app/Salon/Create`;
     await instance
-      .post(endpoint, trainer)
+      .post(endpoint, salon)
       .then((response) => {
         dispatch(createSalonSuccess(response.data));
       })

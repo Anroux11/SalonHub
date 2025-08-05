@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services;
 using Abp.Domain.Repositories;
 using Abp.UI;
+using Potholio.EmailService;
 using SalonHub.Authorization.Users;
 using SalonHub.CrudAppService.Clients.Dto;
 using System;
@@ -15,10 +16,12 @@ namespace SalonHub.CrudAppService.Clients
     {
         private readonly UserManager _userManager;
         private readonly IRepository<User, long> _userRepository;
+        private readonly ISendGridEmailService _sendGridEmailService;
 
-        public ClientAppService(UserManager userManager)
+        public ClientAppService(UserManager userManager, ISendGridEmailService sendGrid)
         {
             _userManager = userManager;
+            _sendGridEmailService = sendGrid;
         }
 
         public async Task RegisterAsync(clientDto input)
@@ -44,11 +47,11 @@ namespace SalonHub.CrudAppService.Clients
                     await _userManager.AddToRoleAsync(user, "EmployeeTechnician");
                 }
 
-                //await _sendGridEmailService.SendEmailAsync(
-                //    input.EmailAddress,
-                //    "Welcome to SalonHub",
-                //    "<p>You have successfully registered. Thank you!</p>"
-                //);
+                await _sendGridEmailService.SendEmailAsync(
+                    input.EmailAddress,
+                    "Welcome to SalonHub",
+                    "<p>You have successfully registered to our platform. Thank you!</p>"
+                );
 
             }
             catch (Exception ex)

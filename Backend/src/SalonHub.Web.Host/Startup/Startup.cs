@@ -1,22 +1,24 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using Abp.AspNetCore;
+using Abp.AspNetCore.Mvc.Antiforgery;
+using Abp.AspNetCore.SignalR.Hubs;
+using Abp.Castle.Logging.Log4Net;
+using Abp.Extensions;
+using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Castle.Facilities.Logging;
-using Abp.AspNetCore;
-using Abp.AspNetCore.Mvc.Antiforgery;
-using Abp.Castle.Logging.Log4Net;
-using Abp.Extensions;
+using Microsoft.OpenApi.Models;
+using Potholio.EmailService;
 using SalonHub.Configuration;
 using SalonHub.Identity;
-using Abp.AspNetCore.SignalR.Hubs;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using SendGrid;
+using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace SalonHub.Web.Host.Startup
 {
@@ -47,6 +49,12 @@ namespace SalonHub.Web.Host.Startup
             AuthConfigurer.Configure(services, _appConfiguration);
 
             services.AddSignalR();
+
+            DotNetEnv.Env.TraversePath().Load("./.env");
+            var key = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+            services.AddSingleton<ISendGridClient>(new SendGridClient(key));
+            services.AddTransient<ISendGridEmailService, SendGridEmailService>();
+
 
             // Configure CORS for angular2 UI
             services.AddCors(

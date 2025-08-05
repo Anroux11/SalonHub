@@ -50,10 +50,6 @@ export const BookingProvider = ({
             booking.bookingUserId === userId ||
             booking.salonName === salon || booking.employeeTechnicianName === sessionStorage.getItem("employeeTechnicianName")
           )
-          // .sort((a: IBooking, b: IBooking) =>
-          //   new Date(b.bookingAddress?.creationTime ?? "").getTime() -
-          //   new Date(a.bookingAddress?.creationTime ?? "").getTime()
-          // )
           .map((booking: IBooking) => ({
             id: booking.id ?? "",
             status: booking.status ?? "",

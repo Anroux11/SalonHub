@@ -27,6 +27,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   const getSelectedKey = () => {
     if (pathname.includes("/dashboard")) return "1";
+    if (pathname.includes("/salons")) return "2";
     return "1";
   };
 
@@ -63,13 +64,19 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           mode="inline"
           selectedKeys={[getSelectedKey()]}
           onClick={(info) => {
-            if (info.key === "1") router.push("/employeeTechnician/dashboard");
+            if (info.key === "1") router.push("/admin/dashboard");
+            if (info.key === "2") router.push("/admin/salons");
           }}
           items={[
             {
               key: "1",
               icon: <HomeOutlined />,
               label: "Users",
+            },
+            {
+              key: "2",
+              icon: <HomeOutlined />,
+              label: "Salons",
             },
           ]}
         />

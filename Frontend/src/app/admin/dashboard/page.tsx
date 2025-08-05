@@ -17,11 +17,10 @@ import {
 import type { ColumnsType } from "antd/es/table";
 import { useStyles } from "./style/styles";
 import { IClient } from "@/providers/client-provider/context";
-import {
-  useClientActions,
-  useClientState,
-} from "@/providers/client-provider";
+import { useClientActions, useClientState } from "@/providers/client-provider";
 import { useRegisterClientActions } from "@/providers/auth-provider";
+import { ISalon } from "@/providers/salon-provider/context";
+import { useSalonState } from "@/providers/salon-provider";
 
 type Client = {
   key: string;
@@ -50,8 +49,11 @@ const AddUser = () => {
   const { registerClient } = useRegisterClientActions();
   const [form] = Form.useForm();
   const { getClientList } = useClientActions();
-
+  const [selectedSalon, setSelectedSalon] = useState<ISalon | null>(null);
+  const [salonList, setSalonList] = useState<ISalon[]>([]);
+  const { Option } = Select;
   const { clients } = useClientState();
+  const { salons } = useSalonState();
 
   const handleRegister: FormProps<Client>["onFinish"] = async (values) => {
     setLoading(true);
@@ -89,14 +91,18 @@ const AddUser = () => {
       form.resetFields();
       message.success(`New User added Successfully`);
     });
-
   };
+
+   useEffect(() => {
+    if (salons?.length) {
+      setSalonList(salons);
+    }
+  }, [salons]);
 
   useEffect(() => {
     // fetchClients();
     getClientList();
   }, [""]);
-
 
   const columns: ColumnsType<IClient> = [
     {
@@ -218,32 +224,31 @@ const AddUser = () => {
 
               <Form.Item
                 name="name"
-                label="Choose Salon"
+                label="Salon Name"
                 rules={[
                   {
                     required: true,
-                    message: "Please Select Salon",
+                    message: "Please enter the Salon Name",
                   },
                 ]}
               >
                 <Select
+                  placeholder="Select name of Salon"
+                  style={{ width: "100%" }}
+                  onChange={(value) =>
+                    setSelectedSalon(
+                      salonList?.find((et) => et.id === value) || null
+                    )
+                  }
+                  value={selectedSalon?.id}
                 >
-                  <Select.Option value="Princess Hair">
-                    Princess Hair
-                  </Select.Option>
-                  <Select.Option value="The Salon of Beauty">
-                    The Salon of Beauty
-                  </Select.Option>
-                  <Select.Option value="Beauty Salon">
-                    Beauty Salon
-                  </Select.Option>
-                  <Select.Option value="Sams Place">
-                    Sams Place
-                  </Select.Option>
-                  <Select.Option value="The Hair Studio">
-                    The Hair Studio
-                  </Select.Option>
+                  {salonList?.map((sal) => (
+                    <Option key={sal.name} value={sal.name}>
+                      {sal.name}
+                    </Option>
+                  ))}
                 </Select>
+                {/* <Input /> */}
               </Form.Item>
             </Form>
           </Modal>

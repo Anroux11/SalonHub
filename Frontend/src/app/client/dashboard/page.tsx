@@ -9,7 +9,6 @@ import {
   Divider,
   Form,
   GetProps,
-  Input,
   message,
   Modal,
   Row,
@@ -52,6 +51,8 @@ import {
 // import { useEmployeeTechnicianState } from "@/providers/employeeTechnician-provider";
 import { ISalon } from "../../../providers/salon-provider/context";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
+import { ISalonService } from "@/providers/salonService-provider/context";
+import { useSalonServiceActions, useSalonServiceState } from "@/providers/salonService-provider";
 
 type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
 
@@ -79,26 +80,33 @@ const ClientDashboard: React.FC = () => {
   const [employeeTechinicianList, setEmployeeTechinicianList] = useState<
     IEmployeeTechnician[]
   >([]);
+  const [salonServiceList, setSalonServiceList] = useState<
+    ISalonService[]
+  >([]);
   const [bookingModalVisible, setBookingModalVisible] = useState(false);
   const [booking, setBooking] = useState<IBooking[]>([]);
   const { createBooking } = useBookingActions();
   const { uploadImage } = useImageActions();
   const { bookings } = useBookingState();
-  // const { salons } = useSalonState();
   const { styles } = useStyles();
   const { Option } = Select;
   const handleBooking = () => setBookingModalVisible(true);
   const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
   const { getSalonList } = useSalonActions();
-
+  const { getSalonServiceList } = useSalonServiceActions();
+  
   const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] =
-    useState<IEmployeeTechnician | null>(null);
-  const [selectedSalon, setSelectedSalon] = useState<ISalon | null>(null);
+  useState<IEmployeeTechnician | null>(null);
+  const [selectedSalonService, setSelectedSalonService] =
+  useState<ISalonService | null>(null);
+  const [selectedSalon, setSelectedSalon] = useState<string | null>(null);
   const { employeeTechnicians } = useEmployeeTechnicianState();
   const { salons } = useSalonState();
+  const { salonServices } = useSalonServiceState();
 
   useEffect(() => {
     getSalonList();
+    getSalonServiceList();
   }, [""]);
 
   useEffect(() => {
@@ -109,8 +117,9 @@ const ClientDashboard: React.FC = () => {
 
   useEffect(() => {
     if (selectedSalon) {
-      sessionStorage.setItem("salonName", JSON.stringify(selectedSalon));
+      sessionStorage.setItem("salon-name", selectedSalon);
       getEmployeeTechnicianList();
+      getSalonServiceList();
     }
   }, [selectedSalon]);
 
@@ -119,6 +128,12 @@ const ClientDashboard: React.FC = () => {
       setEmployeeTechinicianList(employeeTechnicians);
     }
   }, [employeeTechnicians]);
+
+  useEffect(() => {
+    if (salonServices?.length) {
+      setSalonServiceList(salonServices);
+    }
+  }, [salonServices]);
 
   useEffect(() => {
     if (selectedEmployeeTechnician) {
@@ -150,11 +165,11 @@ const ClientDashboard: React.FC = () => {
         imageUrl,
         bookingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
         // salonName: values.salonName,
-        salonName: sessionStorage.getItem("salonName") || "",
+        salonName: sessionStorage.getItem("salon-name") || "",
         salonId: parseInt(sessionStorage.getItem("salonId") ?? "0"),
         // salonId: parseInt(sessionStorage.getItem("userId") ?? "0"),
         // salonId: "25736945-bb70-4433-b7a4-2dbb7f1d6628",
-        employeeTechnicianName: "Unallocated",
+        employeeTechnicianName: values.employeeTechnicianName,
         employeeTechnicianId: parseInt(sessionStorage.getItem("userId") ?? "0"),
       };
 
@@ -232,6 +247,7 @@ const ClientDashboard: React.FC = () => {
       <Card className={styles.bookingCard}>
         <DashboardBookingList />
       </Card>
+
       <Modal
         title={
           <Space>
@@ -291,10 +307,11 @@ const ClientDashboard: React.FC = () => {
               style={{ width: "100%" }}
               onChange={(value) =>
                 setSelectedSalon(
-                  salonList?.find((et) => et.id === value) || null
+                  // salonList?.find((et) => et.id === value) || null
+                  value
                 )
               }
-              value={selectedSalon?.id}
+              value={selectedSalon}
             >
               {salonList?.map((sal) => (
                 <Option key={sal.name} value={sal.name}>
@@ -340,11 +357,27 @@ const ClientDashboard: React.FC = () => {
             rules={[
               {
                 required: true,
-                message: "Please input the service you want",
+                message: "Please choose a service",
               },
             ]}
           >
-            <Input />
+            <Select
+              placeholder="Select a Service"
+              style={{ width: "100%" }}
+              onChange={(value) =>
+                setSelectedSalonService(
+                  salonServiceList?.find((ss) => ss.id === value) || null
+                )
+              }
+              value={selectedSalonService?.id}
+            >
+              {salonServiceList?.map((serR) => (
+                <Option key={serR.id} value={serR.id}>
+                  {serR.name}
+                </Option>
+              ))}
+            </Select>
+            {/* <Input/> */}
           </Form.Item>
 
           <Form.Item
