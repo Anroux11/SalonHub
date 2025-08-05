@@ -7,26 +7,31 @@ import { useStyles } from "../../app/salon/bookings/style/styles";
 import {
   useBookingActions,
 } from "@/providers/booking-provider";
-import { useEmployeeTechnicianActions } from "@/providers/employeeTechnician-provider";
 import "@ant-design/v5-patch-for-react-19";
 import { ISalonService } from "@/providers/salonService-provider/context";
 import { useSalonServiceActions, useSalonServiceState } from "@/providers/salonService-provider";
 
 
 
-const SalonServices = ({ salonServices: passedSalonServices }: { salonServices?: ISalonService[] }) => {
+const SalonServices = ({}: { salonServices?: ISalonService[] }) => {
   const { styles } = useStyles();
-  const { salonServices: contextSalonServices } = useSalonServiceState();
-  const salonServices = passedSalonServices ?? contextSalonServices;
+  const { salonServices } = useSalonServiceState();
+  // const salonServices = passedSalonServices ?? contextSalonServices;
   const { getBookingList } = useBookingActions();
-  const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
+  // const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
   const { getSalonServiceList } = useSalonServiceActions();
 
   useEffect(() => {
     getBookingList();
-    getEmployeeTechnicianList();
+    // getEmployeeTechnicianList();
     getSalonServiceList();
-  }, [SalonServices]);
+  }, [""]);
+
+  useEffect(() => {
+    // getBookingList();
+    // getEmployeeTechnicianList();
+    // getSalonServiceList();
+  }, [salonServices]);
 
   const columns: ColumnsType<ISalonService> = [
     {
@@ -61,6 +66,7 @@ const SalonServices = ({ salonServices: passedSalonServices }: { salonServices?:
             pagination={{ pageSize: 3 }}
             rowKey="id"
             scroll={{x: "max-content"}}
+            loading={!salonServices}
           />
         </div>
     </>

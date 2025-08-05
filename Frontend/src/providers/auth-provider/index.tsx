@@ -188,7 +188,7 @@ export const UserLoginProvider = ({
         sessionStorage.setItem("token", token);
         sessionStorage.setItem("role", userRole);
         sessionStorage.setItem("userId", userId);
-
+      
         currentUser();
 
         dispatch(getUserLoginSuccess(token));
@@ -252,10 +252,9 @@ export const CurrentUserProvider = ({
     await instance
       .get(endpoint)
       .then((response) => {
-        console.log("user res", response)
         const result = response.data.result.user.name;
         const salonName = result || "";
-        sessionStorage.setItem("salonName", salonName);
+        sessionStorage.setItem("salon-name", salonName);
 
         const _user = response?.data?.result?.user?.name || "unknown";
 

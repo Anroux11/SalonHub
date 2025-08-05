@@ -26,7 +26,7 @@ import {
   deleteEmployeeTechnicianSuccess,
   deleteEmployeeTechnicianError,
 } from "./actions";
-import { useCurrentUserActions } from "../auth-provider";
+// import { useCurrentUserActions } from "../auth-provider";
 
 export const EmployeeTechnicianProvider = ({
   children,
@@ -35,7 +35,6 @@ export const EmployeeTechnicianProvider = ({
 }) => {
   const [state, dispatch] = useReducer(EmployeeTechnicianReducer, INITIAL_STATE);
   const instance = getAxiosInstance();
-  const { currentUser } = useCurrentUserActions();
 
   const getEmployeeTechnicianList = async () => {
     dispatch(getEmployeeTechnicianListPending());
@@ -43,8 +42,9 @@ export const EmployeeTechnicianProvider = ({
     await instance
       .get(endpoint)
       .then((response) => {
-        currentUser();
-        const salon = (sessionStorage.getItem("salonName") || "").toString();
+        // currentUser();
+        // const salon = (sessionStorage.getItem("salonName") || "").toString();
+        const salon = (sessionStorage.getItem("salon-name") || "").toString();
         const filteredData = response.data.result.items
           .filter((employeeTechnician: IEmployeeTechnician) => employeeTechnician.salonName === salon)
           .map(
@@ -59,7 +59,7 @@ export const EmployeeTechnicianProvider = ({
             salonName: employeeTechnician.salonName ?? "",
           })
         );
-        console.log("Filtered Service Providers:", filteredData);
+
         dispatch(getEmployeeTechnicianListSuccess(filteredData));
       })
       .catch((error) => {

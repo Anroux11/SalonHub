@@ -1,9 +1,7 @@
 import { createContext } from "react";
 export interface ISalon {
-  id: string;
+  id?: string;
   name: string;
-  latitude: string;
-  longitude: string;
 }
 export interface ISalonStateContext {
   isPending: boolean; 

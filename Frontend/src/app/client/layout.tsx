@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import { useRouter, usePathname } from "next/navigation";
 import {
     MenuFoldOutlined,
@@ -30,6 +30,10 @@ let loggedInUser = "Guest";
                 loggedInUser = storedData;
             }
         }
+    
+    useEffect(() => {
+        
+    })
 
     const [collapsed, setCollapsed] = useState(false);
     const [logoutModalVisible, setLogoutModalVisible] = useState(false);

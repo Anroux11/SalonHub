@@ -11,19 +11,26 @@ import { useEmployeeTechnicianActions, useEmployeeTechnicianState } from "@/prov
 import "@ant-design/v5-patch-for-react-19";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
 
-
-
-const SalonEmployees = ({ employeeTechnicians: passedEmployees }: { employeeTechnicians?: IEmployeeTechnician[] }) => {
+const SalonEmployees = ({}: { employeeTechnicians?: IEmployeeTechnician[] }) => {
   const { styles } = useStyles();
-  const { employeeTechnicians: contextEmployeeTechnicians } = useEmployeeTechnicianState();
-  const employeeTechnicians = passedEmployees ?? contextEmployeeTechnicians;
+  // const { employeeTechnicians: contextEmployeeTechnicians } = useEmployeeTechnicianState();
+  // const employeeTechnicians = passedEmployees ?? contextEmployeeTechnicians;
+  const { employeeTechnicians } = useEmployeeTechnicianState();
   const { getBookingList } = useBookingActions();
   const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
+  // const { getSalonServiceList } = useSalonServiceActions();
 
   useEffect(() => {
     getBookingList();
     getEmployeeTechnicianList();
-  }, [SalonEmployees]);
+    // getSalonServiceList();
+  }, [""]);
+  
+  useEffect(() => {
+    // getBookingList();
+    // getEmployeeTechnicianList();
+    // getSalonServiceList();
+  }, [employeeTechnicians]);
 
   const columns: ColumnsType<IEmployeeTechnician> = [
     {
@@ -52,6 +59,7 @@ const SalonEmployees = ({ employeeTechnicians: passedEmployees }: { employeeTech
             pagination={{ pageSize: 5 }}
             rowKey="id"
             scroll={{x: "max-content"}}
+            loading={!employeeTechnicians}
           />
         </div>
     </>
