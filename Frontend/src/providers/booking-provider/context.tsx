@@ -6,10 +6,12 @@ export interface IBooking {
   status: string;
   imageUrl?: string;
   salonName: string;
-  salonId?: number;
+  salonId?: string;
   bookingUserId?: number;
-  employeeTechnicianId: number;
-  employeeTechnicianName?: string; 
+  employeeTechnicianId: string;
+  employeeTechnicianName?: string;
+  salonServiceId?: string;
+  salonServiceName?: string;
 }
 export interface IBookingStateContext {
   isPending: boolean;

@@ -18,7 +18,10 @@ import SalonEmployees from "@/components/salon-components/salonEmployees";
 import SalonServices from "@/components/salon-components/salonServices";
 import { useSalonActions, useSalonState } from "@/providers/salon-provider";
 import { useEmployeeTechnicianActions } from "@/providers/employeeTechnician-provider";
-import { useSalonServiceActions } from "@/providers/salonService-provider";
+import {
+  useSalonServiceActions,
+  useSalonServiceState,
+} from "@/providers/salonService-provider";
 import { ISalon } from "@/providers/salon-provider/context";
 
 const { Title } = Typography;
@@ -31,27 +34,29 @@ const SalonPage = () => {
   const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
   const { getSalonServiceList } = useSalonServiceActions();
   const { salons } = useSalonState();
+  const { salonServices } = useSalonServiceState();
   const [loading, setLoading] = useState(false);
 
-  const refresh = async () => {
-    await getSalonList();
+  const loadSalonData = async () => {
+    // await getSalonList();
     await getEmployeeTechnicianList();
     await getSalonServiceList();
   };
 
   useEffect(() => {
     getSalonList();
-    getEmployeeTechnicianList();
-    getSalonServiceList();
-    refresh();
-  }, []);
+    // getEmployeeTechnicianList();
+    // getSalonServiceList();
+    // refresh();
+  }, [""]);
 
-  const handleViewSalon =  (salon: ISalon) => {
+  const handleViewSalon = (salon: ISalon) => {
+    // setLoading(true);
     sessionStorage.setItem("salon-name", salon.name);
-    refresh();
-    setLoading(true);
+    loadSalonData();
     setSelectedSalon(salon);
-    setLoading(false);
+
+    // setLoading(false);
     setIsModalVisible(true);
   };
 
@@ -116,7 +121,7 @@ const SalonPage = () => {
               </Col>
             ))}
           </Row>
-          
+
           <Modal
             title={
               <div className={styles.modalHeader}>
@@ -148,7 +153,8 @@ const SalonPage = () => {
             {selectedSalon && (
               <div className={styles.modalContent}>
                 <h2>Salon Services</h2>
-                <SalonServices />
+                {salonServices && <SalonServices />}
+
                 <h2>Salon Employees</h2>
                 <SalonEmployees />
               </div>

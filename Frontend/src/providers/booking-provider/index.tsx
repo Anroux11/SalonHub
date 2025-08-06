@@ -44,7 +44,7 @@ export const BookingProvider = ({
       .then((response) => {
         currentUser();
         const userId = parseInt(sessionStorage.getItem("userId") || "");
-        const salon = (sessionStorage.getItem("salonName") || "").toString();
+        const salon = (sessionStorage.getItem("salon-name") || "").toString();
         const filteredData = response.data.result.items
           .filter((booking: IBooking) =>
             booking.bookingUserId === userId ||

@@ -184,11 +184,13 @@ export const UserLoginProvider = ({
         const decoded = decodeToken(token);
         const userRole = decoded[AbpTokenProperies.role];
         const userId = decoded[AbpTokenProperies.nameidentifier];
+        const name = decoded[AbpTokenProperies.name];
 
         sessionStorage.setItem("token", token);
         sessionStorage.setItem("role", userRole);
         sessionStorage.setItem("userId", userId);
-      
+        sessionStorage.setItem("username", name);
+
         currentUser();
 
         dispatch(getUserLoginSuccess(token));
@@ -247,23 +249,41 @@ export const CurrentUserProvider = ({
     // const token = sessionStorage.getItem("token")?.trim();
     dispatch(getCurrentUserPending());
     const endpoint = `services/app/Session/GetCurrentLoginInformations`;
-    await instance
-      .get(endpoint)
+    await instance.get(endpoint);
     await instance
       .get(endpoint)
       .then((response) => {
-        const result = response.data.result.user.name;
-        const salonName = result || "";
-        sessionStorage.setItem("salon-name", salonName);
+        console.log("res", response);
+        const userRole = sessionStorage.getItem("role");
+        if (userRole == "Salon" || userRole == "EmployeeTechnician") {
+          sessionStorage.setItem("salon-name", response.data.result.user.name);
+        }
+        // const result = response.data.result.user.name;
+        // const salonName = result || "";
+        // sessionStorage.setItem("salon-name", salonName);
 
-        const _user = response?.data?.result?.user?.name || "unknown";
+        //  const _user = response?.data?.result?.user?.name || "unknown";
+        // sessionStorage.setItem("user", _user);
 
-        sessionStorage.setItem("user", _user);
+        // const _salonName = response?.data?.result?.user?.salonName || "unknown";
+        // sessionStorage.setItem("salon-name", _salonName)
 
-        sessionStorage.setItem(
-          "currentUser",
-          JSON.stringify(response.data.result.user.id)
-        );
+        // if (_salonName) {
+        //   sessionStorage.setItem("user", _salonName);
+        // }
+
+        let _salon = sessionStorage.getItem("salon-name");
+        if (
+          _salon &&
+          _salon != "unknown" &&
+          _salon != response.data.result.user.name
+        ) {
+          // continue
+        } else {
+          _salon = response?.data?.result?.user?.name || "unknown";
+        }
+
+        sessionStorage.setItem("currentUser", response.data.result.user.name);
         dispatch(getCurrentUserSuccess(response.data.result.user));
 
         // dispatch(getCurrentUserSuccess(result));
@@ -272,7 +292,6 @@ export const CurrentUserProvider = ({
         console.error(error);
         dispatch(getCurrentUserError());
       });
-
   };
 
   return (
