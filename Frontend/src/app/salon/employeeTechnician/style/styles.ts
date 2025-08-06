@@ -13,7 +13,7 @@ export const useStyles = createStyles({
     `,
     addButton: css`
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3),
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
     `,
     modalHeader: css`
     text-align: center;

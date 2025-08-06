@@ -26,6 +26,7 @@ import {
 } from "antd/es";
 import Title from "antd/es/typography/Title";
 import { useStyles } from "../client/style/styles"
+import withAuth from "@/hoc/withAuth";
 
 const { Header, Sider, Content } = Layout;
 const { Text } = Typography;
@@ -252,4 +253,4 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default SalonLayout;
+export default withAuth(SalonLayout, { allowedRoles: ["Salon"] });

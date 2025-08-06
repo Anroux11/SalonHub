@@ -145,9 +145,9 @@ const BookingList = ({
 
   const columns: ColumnsType<IBooking> = [
     {
-      title: "Employee ",
+      title: "Employee",
       dataIndex: "employeeTechnicianName",
-      key: "salonNemployeeTechnicianNameame",
+      key: "employeeTechnicianName",
       render: (srvP) => srvP || "-",
     },
     {

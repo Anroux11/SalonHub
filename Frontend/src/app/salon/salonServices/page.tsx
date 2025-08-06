@@ -116,7 +116,7 @@ const SalonServicePage = () => {
             <h2 style={{ margin: 0 }}>Service List</h2>
             <Button
               type="primary"
-              onClick={() => setModalVisible(true)}
+              onClick={handleCancel}
               className={styles.addButton}
             >
               Add Service

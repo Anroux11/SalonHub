@@ -63,7 +63,7 @@ export const useStyles = createStyles({
   border: 1px solid #f0f0f0;
   `,
   tag: css`
-  font-size: 14px, 
+  font-size: 14px;
   font-weight: 500;
   padding: 4px 12px;
   border-radius: 6px;
