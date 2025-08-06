@@ -65,6 +65,8 @@ export const useStyles = createStyles({
   bottom: 0px;
   left: 0px;
   right: 0px;
-  padding: 8px;
+  padding: collapsed ? 12px 8px : 16px 12px;
+  background: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1)
   `,
 })

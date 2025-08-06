@@ -56,7 +56,7 @@ const DashboardBookingList = ({ bookings: passedBookings }: { bookings?: IBookin
       dataIndex: "status",
       key: "status",
       render: (status) => {
-        const color = status === "Assigned" ? "green" : status === "Completed" ? "blue" : "orange";
+        const color = status === "Confirmed" ? "green" : status === "Completed" ? "blue" : "orange";
         return <Tag color={color}>{status}</Tag>;
       },
     },

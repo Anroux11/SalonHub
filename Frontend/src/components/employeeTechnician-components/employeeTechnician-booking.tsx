@@ -48,32 +48,32 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
     setModalVisible(true);
   };
 
-//   const handleAssign = () => {
-//     setAssignMode(true);
-//   };
+  // const handleAssign = () => {
+  //   setAssignMode(true);
+  // };
 
-//   const handleConfirmAssign = async () => {
-//     setLoading(true);
-//     try {
-//       if (!selectedBooking || !selectedEmployeeTechnician) return;
+  // const handleConfirmAssign = async () => {
+  //   setLoading(true);
+  //   try {
+  //     if (!selectedBooking || !selectedEmployeeTechnician) return;
 
-//       const payload: IBooking = {
-//         ...selectedBooking,
-//         status: "Assigned",
-//         employeeTechnicianName: selectedEmployeeTechnician?.name,
-//       }
-//       await updateBooking(payload);
-//       setModalVisible(false);
-//       message.success(`Assigned to ${selectedEmployeeTechnician.name}`);
-//       getBookingList();
-//     } catch (error) {
+  //     const payload: IBooking = {
+  //       ...selectedBooking,
+  //       status: "Assigned",
+  //       employeeTechnicianName: selectedEmployeeTechnician?.name,
+  //     }
+  //     await updateBooking(payload);
+  //     setModalVisible(false);
+  //     message.success(`Assigned to ${selectedEmployeeTechnician.name}`);
+  //     getBookingList();
+  //   } catch (error) {
 
-//       console.error(error);
-//       message.error("Assigning Booking failed");
-//     }
+  //     console.error(error);
+  //     message.error("Assigning Booking failed");
+  //   }
 
-//     setLoading(false);
-//   };
+  //   setLoading(false);
+  // };
 
   const handleComplete = async () => {
     setLoading(true);
@@ -87,7 +87,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
 
       await updateBooking(payload);
       setModalVisible(false);
-      message.success(`Marked booking ${selectedBooking.id} as Completed`);
+      message.success(`Marked booking as Completed`);
       getBookingList();
     } catch (error) {
       console.error(error);
@@ -103,30 +103,31 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
 
   const columns: ColumnsType<IBooking> = [
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "Service Requested",
+      dataIndex: "service",
+      key: "service",
+      render: (salon) => salon || "-",
+    },
+    {
+      title: "Date and Time",
+      dataIndex: "date",
+      key: "date",
+      render: (salon) => salon || "-",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
       render: (status) => {
-        const color = status === "Assigned" ? "green" : status === "Completed" ? "blue" : "orange";
+        const color = status === "Submitted" ? "green" : status === "Completed" ? "blue" : "orange";
         return <Tag color={color}>{status}</Tag>;
       },
-    },
-    {
-      title: "Salon Name",
-      dataIndex: "salonName",
-      key: "salonName",
-      render: (salon) => salon || "-",
     },
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Button type="link" onClick={() => handleView(record, employeeTechnicians?.find(sp => sp.name === record.employeeTechnicianName))}>
+        <Button type="primary" onClick={() => handleView(record, employeeTechnicians?.find(sp => sp.name === record.employeeTechnicianName))}>
           View
         </Button>
       ),
@@ -151,17 +152,18 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
             columns={columns}
             dataSource={bookings}
             className={styles.bookingTable}
-            pagination={{ pageSize: 5 }}
+            pagination={{ pageSize: 6 }}
             rowKey="id"
+            scroll={{x: "max-content"}}
           />
 
           <Modal
-            title={selectedBooking ? `Booking: ${selectedBooking.id}` : ""}
+            title="Booking Details"
             open={modalVisible}
             onCancel={handleCancel}
             footer={
                 <Space>
-                  {selectedBooking?.status === "Assigned" && (
+                  {selectedBooking?.status === "Submitted" && (
                     <Button type="primary" onClick={handleComplete}>
                       Mark as Completed
                     </Button>
@@ -185,9 +187,10 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
                   )}
 
                 </p>
-                <p><strong>Description:</strong> {selectedBooking.status}</p>
-                <p><strong>Status:</strong> {selectedBooking.status}</p>
+                <p><strong>Service Requested:</strong> {selectedBooking.service}</p>
+                <p><strong>Date:</strong> {selectedBooking.date}</p>
                 <p><strong>Salon Name:</strong> {selectedBooking.salonName || "-"}</p>
+                <p><strong>Status:</strong> {selectedBooking.status}</p>
               </>
             )}
 

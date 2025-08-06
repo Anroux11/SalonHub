@@ -190,6 +190,7 @@ export const UserLoginProvider = ({
         sessionStorage.setItem("role", userRole);
         sessionStorage.setItem("userId", userId);
         sessionStorage.setItem("username", name);
+        sessionStorage.setItem("currentUser", name);
 
         currentUser();
 
@@ -255,8 +256,10 @@ export const CurrentUserProvider = ({
       .then((response) => {
         console.log("res", response);
         const userRole = sessionStorage.getItem("role");
-        if (userRole == "Salon" || userRole == "EmployeeTechnician") {
+        if (userRole == "Salon" ) {
           sessionStorage.setItem("salon-name", response.data.result.user.name);
+        } else if (userRole == "EmployeeTechnician") {
+          sessionStorage.setItem("employeeTechnicianName", response.data.result.user.name);
         }
         // const result = response.data.result.user.name;
         // const salonName = result || "";

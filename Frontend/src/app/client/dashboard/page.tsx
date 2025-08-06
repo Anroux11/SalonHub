@@ -52,7 +52,10 @@ import {
 import { ISalon } from "../../../providers/salon-provider/context";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
 import { ISalonService } from "@/providers/salonService-provider/context";
-import { useSalonServiceActions, useSalonServiceState } from "@/providers/salonService-provider";
+import {
+  useSalonServiceActions,
+  useSalonServiceState,
+} from "@/providers/salonService-provider";
 
 type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
 
@@ -69,7 +72,7 @@ const disabledDate: RangePickerProps["disabledDate"] = (current) => {
 };
 
 const disabledDateTime = () => ({
-  disabledHours: () => range(0, 24).splice(7, 18),
+  disabledHours: () => range(0, 24).splice(18),
   disabledMinutes: () => range(60, 60),
 });
 
@@ -80,9 +83,7 @@ const ClientDashboard: React.FC = () => {
   const [employeeTechinicianList, setEmployeeTechinicianList] = useState<
     IEmployeeTechnician[]
   >([]);
-  const [salonServiceList, setSalonServiceList] = useState<
-    ISalonService[]
-  >([]);
+  const [salonServiceList, setSalonServiceList] = useState<ISalonService[]>([]);
   const [bookingModalVisible, setBookingModalVisible] = useState(false);
   const [booking, setBooking] = useState<IBooking[]>([]);
   const { createBooking } = useBookingActions();
@@ -94,9 +95,13 @@ const ClientDashboard: React.FC = () => {
   const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
   const { getSalonList } = useSalonActions();
   const { getSalonServiceList } = useSalonServiceActions();
-  
-  const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] = useState<string | null>(null);
-  const [selectedSalonService, setSelectedSalonService] = useState<string | null>(null);
+
+  const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] = useState<
+    string | null
+  >(null);
+  const [selectedSalonService, setSelectedSalonService] = useState<
+    string | null
+  >(null);
   // const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] =
   // useState<IEmployeeTechnician | null>(null);
   // const [selectedSalonService, setSelectedSalonService] =
@@ -139,7 +144,6 @@ const ClientDashboard: React.FC = () => {
 
   useEffect(() => {
     if (selectedEmployeeTechnician) {
-      
     }
   }, [selectedEmployeeTechnician]);
 
@@ -171,8 +175,8 @@ const ClientDashboard: React.FC = () => {
         employeeTechnicianName: values.employeeTechnicianName,
         employeeTechnicianId: values.employeeTechnicianName,
         salonServiceId: values.service,
-        salonServiceName: values.service
-      }
+        salonServiceName: values.service,
+      };
 
       await createBooking(payload);
 
@@ -283,14 +287,12 @@ const ClientDashboard: React.FC = () => {
               },
             ]}
           >
-            <Space direction="vertical" size={12}>
-              <DatePicker
-                format="YYYY-MM-DD HH:mm"
-                disabledDate={disabledDate}
-                disabledTime={disabledDateTime}
-                showTime={{ defaultValue: dayjs("00:00:00", "HH:mm") }}
-              />
-            </Space>
+            <DatePicker
+              format="YYYY-MM-DD HH:mm"
+              disabledDate={disabledDate}
+              disabledTime={disabledDateTime}
+              showTime={{ defaultValue: dayjs("00:00:00", "HH:mm") }}
+            />
           </Form.Item>
 
           <Form.Item
