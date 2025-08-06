@@ -51,7 +51,7 @@ const SalonPage = () => {
   }, [""]);
 
   const handleViewSalon = (salon: ISalon) => {
-    // setLoading(true);
+    setLoading(true);
     sessionStorage.setItem("salon-name", salon.name);
     loadSalonData();
     setSelectedSalon(salon);
