@@ -9,8 +9,8 @@ import {
   Avatar,
   Modal,
   Typography,
-  Flex,
-  Spin,
+  // Flex,
+  // Spin,
 } from "antd/es";
 import { AntDesignOutlined, EyeOutlined } from "@ant-design/icons";
 import { useStyles } from "./style/styles";
@@ -35,7 +35,7 @@ const SalonPage = () => {
   const { getSalonServiceList } = useSalonServiceActions();
   const { salons } = useSalonState();
   const { salonServices } = useSalonServiceState();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const loadSalonData = async () => {
     // await getSalonList();
@@ -51,7 +51,7 @@ const SalonPage = () => {
   }, [""]);
 
   const handleViewSalon = (salon: ISalon) => {
-    setLoading(true);
+    // setLoading(true);
     sessionStorage.setItem("salon-name", salon.name);
     loadSalonData();
     setSelectedSalon(salon);
@@ -67,7 +67,7 @@ const SalonPage = () => {
 
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <div>
           <Flex
             justify="center"
@@ -77,7 +77,7 @@ const SalonPage = () => {
             <Spin size="large" />
           </Flex>
         </div>
-      ) : (
+      ) : ( */}
         <div className={styles.pageContainer}>
           <div className={styles.pageHeader}>
             <Title level={2} className={styles.pageTitle}>
@@ -142,10 +142,7 @@ const SalonPage = () => {
             footer={[
               <Button key="close" onClick={handleModalClose}>
                 Close
-              </Button>,
-              <Button key="book" type="primary">
-                Book Appointment
-              </Button>,
+              </Button>
             ]}
             width={800}
             className={styles.salonModal}
@@ -154,14 +151,13 @@ const SalonPage = () => {
               <div className={styles.modalContent}>
                 <h2>Salon Services</h2>
                 {salonServices && <SalonServices />}
-
                 <h2>Salon Employees</h2>
                 <SalonEmployees />
               </div>
             )}
           </Modal>
         </div>
-      )}
+      {/* )} */}
     </>
   );
 };

@@ -27,7 +27,7 @@ const EmployeeTechnicianLayout = ({
 
   let loggedInUser = "Guest";
   if (typeof sessionStorage !== "undefined") {
-    const storedData = sessionStorage.getItem("user");
+    const storedData = sessionStorage.getItem("username");
     if (storedData) {
       loggedInUser = storedData;
     }

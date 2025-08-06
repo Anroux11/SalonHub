@@ -1,21 +1,50 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Table, Button, Modal, Select, Space, Tag, message, Flex, Spin } from "antd/es";
+import {
+  Table,
+  Button,
+  Modal,
+  Select,
+  Space,
+  Tag,
+  message,
+  Flex,
+  Spin,
+  Typography,
+  Card,
+  Image,
+  Row,
+  Col,
+} from "antd/es";
 import type { ColumnsType } from "antd/es/table";
-import { useStyles } from "../../app/salon/bookings/style/styles";
+import { useStyles } from "../../app/client/bookings/style/styles";
 import {
   useBookingActions,
   useBookingState,
 } from "@/providers/booking-provider";
 import { IBooking } from "@/providers/booking-provider/context";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
-import { useEmployeeTechnicianActions, useEmployeeTechnicianState } from "@/providers/employeeTechnician-provider";
+import {
+  useEmployeeTechnicianActions,
+  useEmployeeTechnicianState,
+} from "@/providers/employeeTechnician-provider";
 import "@ant-design/v5-patch-for-react-19";
+import {
+  CalendarOutlined,
+  ScissorOutlined,
+  TagOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 const { Option } = Select;
+const { Text } = Typography;
 
-const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) => {
+const BookingList = ({
+  bookings: passedBookings,
+}: {
+  bookings?: IBooking[];
+}) => {
   const { styles } = useStyles();
   const { bookings: contextBookings } = useBookingState();
   const bookings = passedBookings ?? contextBookings;
@@ -24,13 +53,10 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
   const { employeeTechnicians } = useEmployeeTechnicianState();
   const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
 
-  const [selectedBooking, setSelectedBooking] = useState<IBooking | null>(
-    null
-  );
+  const [selectedBooking, setSelectedBooking] = useState<IBooking | null>(null);
 
-  const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] = useState<IEmployeeTechnician | null>(
-    null
-  )
+  const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] =
+    useState<IEmployeeTechnician | null>(null);
   const [bookingMode, setBookingMode] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,8 +66,10 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
     getEmployeeTechnicianList();
   }, [BookingList]);
 
-
-  const handleView = (booking: IBooking, employeeTechnician?: IEmployeeTechnician) => {
+  const handleView = (
+    booking: IBooking,
+    employeeTechnician?: IEmployeeTechnician
+  ) => {
     setSelectedBooking(booking);
     setBookingMode(false);
     setSelectedEmployeeTechnician(employeeTechnician ?? null);
@@ -61,13 +89,12 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
         ...selectedBooking,
         status: "Confirmed",
         employeeTechnicianName: selectedEmployeeTechnician?.name,
-      }
+      };
       await updateBooking(payload);
       setModalVisible(false);
       message.success(`Booking Confirmed`);
       getBookingList();
     } catch (error) {
-
       console.error(error);
       message.error("Booking failed");
     }
@@ -83,7 +110,7 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
       const payload: IBooking = {
         ...selectedBooking,
         status: "Completed",
-      }
+      };
 
       await updateBooking(payload);
       setModalVisible(false);
@@ -101,12 +128,26 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
     setModalVisible(false);
   };
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Submitted":
+        return "warning";
+      case "Approved":
+        return "success";
+      case "Pending":
+        return "processing";
+      case "Cancelled":
+        return "error";
+      default:
+        return "default";
+    }
+  };
+
   const columns: ColumnsType<IBooking> = [
-  
     {
-      title: "Name of Employee",
+      title: "Employee ",
       dataIndex: "employeeTechnicianName",
-      key: "employeeTechnician",
+      key: "salonNemployeeTechnicianNameame",
       render: (srvP) => srvP || "-",
     },
     {
@@ -126,7 +167,12 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
       dataIndex: "status",
       key: "status",
       render: (status) => {
-        const color = status === "Confirmed" ? "green" : status === "Completed" ? "blue" : "orange";
+        const color =
+          status === "Confirmed"
+            ? "green"
+            : status === "Completed"
+            ? "blue"
+            : "orange";
         return <Tag color={color}>{status}</Tag>;
       },
     },
@@ -134,7 +180,17 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Button type="primary" onClick={() => handleView(record, employeeTechnicians?.find(sp => sp.name === record.employeeTechnicianName))}>
+        <Button
+          type="primary"
+          onClick={() =>
+            handleView(
+              record,
+              employeeTechnicians?.find(
+                (sp) => sp.name === record.employeeTechnicianName
+              )
+            )
+          }
+        >
           View
         </Button>
       ),
@@ -161,11 +217,18 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
             className={styles.bookingTable}
             pagination={{ pageSize: 5 }}
             rowKey="id"
-            scroll={{x: "max-content"}}
+            scroll={{ x: "max-content" }}
           />
 
           <Modal
-            title="Booking Details"
+            title={
+              <Space>
+                <CalendarOutlined />
+                <Text strong style={{ fontSize: "18px" }}>
+                  Booking Details
+                </Text>
+              </Space>
+            }
             open={modalVisible}
             onCancel={handleCancel}
             footer={
@@ -194,28 +257,99 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
                 </Space>
               )
             }
+            width={600}
+            className={styles.modalBody}
           >
             {selectedBooking && !bookingMode && (
-              <>
-                <p>
-                  {selectedBooking.imageUrl && (
-                    <div style={{ marginTop: 16 }}>
-                      <img
-                        src={selectedBooking.imageUrl}
-                        alt="Booking"
-                        width={200}
-                        style={{ borderRadius: 8, objectFit: "cover" }}
-                      />
-                    </div>
-                  )}
+              <div style={{ maxHeight: "60vh", overflowY: "auto" }}>
+                {selectedBooking.imageUrl && (
+                  <Card className={styles.cardBody}>
+                    <Image
+                      width="100%"
+                      className={styles.image}
+                      src={selectedBooking.imageUrl}
+                      alt="Booking Reference"
+                      preview={{
+                        mask: "Click to preview",
+                      }}
+                    />
+                  </Card>
+                )}
+                <Card
+                  title={
+                    <Space>
+                      <TagOutlined />
+                      <Text strong className={styles.bookingContainerTitle}>
+                        Booking Information
+                      </Text>
+                    </Space>
+                  }
+                  className={styles.bookingCard}
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} sm={12}>
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        <Space>
+                          <UserOutlined className={styles.shopIcon} />
+                          <Text strong>Name of Employee</Text>
+                        </Space>
+                        <Text className={styles.bookingHeaders}>
+                          {selectedBooking.employeeTechnicianName ||
+                            "Not confirmed"}
+                        </Text>
+                      </Space>
+                    </Col>
 
-                </p>
-                <p><strong>Name of Employee:</strong> {selectedBooking.employeeTechnicianName}</p>
-                <p><strong>Service Requested:</strong> {selectedBooking.service}</p>
-                <p><strong>Date & Time:</strong> {selectedBooking.date || "-"}</p>
-                <p><strong>Status:</strong> {selectedBooking.status || "-"}</p>
+                    <Col xs={24} sm={12}>
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        <Space>
+                          <ScissorOutlined className={styles.userIcon} />
+                          <Text strong>Service Requested</Text>
+                        </Space>
+                        <Text className={styles.bookingHeaders}>
+                          {selectedBooking.service || "Not assigned"}
+                        </Text>
+                      </Space>
+                    </Col>
 
-              </>
+                    <Col xs={24} sm={12}>
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        <Space>
+                          <CalendarOutlined className={styles.calenderIcon} />
+                          <Text strong>Date & Time</Text>
+                        </Space>
+                        <Text className={styles.bookingHeaders}>
+                          {selectedBooking.date || "Not scheduled"}
+                        </Text>
+                      </Space>
+                    </Col>
+                  </Row>
+                </Card>
+
+                <Card size="small" className={styles.statusCard}>
+                  <Flex justify="space-between" align="center">
+                    <Text strong>Booking Status:</Text>
+                    <Tag
+                      color={getStatusColor(selectedBooking.status)}
+                      className={styles.tag}
+                    >
+                      {selectedBooking.status}
+                    </Tag>
+                  </Flex>
+                </Card>
+              </div>
             )}
 
             {bookingMode && (
@@ -225,7 +359,9 @@ const BookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) =>
                   placeholder="Select Employee"
                   style={{ width: "100%" }}
                   onChange={(value) =>
-                    setSelectedEmployeeTechnician(employeeTechnicians?.find((et) => et.id === value) || null)
+                    setSelectedEmployeeTechnician(
+                      employeeTechnicians?.find((et) => et.id === value) || null
+                    )
                   }
                   value={selectedEmployeeTechnician?.id}
                 >

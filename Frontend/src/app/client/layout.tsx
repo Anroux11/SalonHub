@@ -10,13 +10,17 @@ import {
   EditOutlined,
   PushpinOutlined,
   AliwangwangOutlined,
+  UserOutlined,
+  ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, Modal, theme, Image } from "antd/es";
+import { Button, Layout, Menu, Modal, theme, Image, Space, Typography, Tooltip } from "antd/es";
 import Title from "antd/es/typography/Title";
-import { useStyles } from "@/app/employeeTechnician/style/styles";
+// import { useStyles } from "@/app/employeeTechnician/style/styles";
 import "@ant-design/v5-patch-for-react-19";
+import { useStyles } from "./style/styles";
 
 const { Header, Sider, Content } = Layout;
+const { Text } = Typography;
 
 const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -56,7 +60,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout className={styles.layout}>
       <Sider
         trigger={null}
         collapsible
@@ -64,7 +68,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
         breakpoint="lg"
         collapsedWidth="80"
         onBreakpoint={(broken) => setCollapsed(broken)}
-        style={{ position: "relative" }}
+        className={styles.sider}
       >
         <div className={styles.imageContainer}>
           <Image
@@ -111,17 +115,41 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
           ]}
         />
 
-        <div className={styles.logout}>
-          <Button
-            type="default"
-            danger
-            icon={<LogoutOutlined />}
-            block
-            onClick={() => setLogoutModalVisible(true)}
-            className={styles.logoutBtn}
+        <div className={`${styles.logoutSection} ${
+            collapsed ? styles.logoutSectionCollapsed : styles.logoutSectionExpanded
+          }`}>
+            {!collapsed && (
+            <div className={styles.userInfoSection}>
+              <Space align="center" size="small" className={styles.userInfoSpace}>
+                <UserOutlined className={styles.userIcon} />
+                <Text className={styles.userText} ellipsis={{ tooltip: loggedInUser }}>
+                  {loggedInUser}
+                </Text>
+              </Space>
+            </div>
+          )}
+
+          <Tooltip 
+            title={collapsed ? `Logout (${loggedInUser})` : "Logout"} 
+            placement={collapsed ? "right" : "top"}
           >
-            {!collapsed && "Logout"}
-          </Button>
+            <Button
+              type="text"
+              danger
+              icon={<LogoutOutlined className={styles.logoutButtonIcon} />}
+              block
+              onClick={() => setLogoutModalVisible(true)}
+              className={`${styles.logoutButton} ${
+                collapsed ? styles.logoutButtonCollapsed : ''
+              }`}
+            >
+              {!collapsed && (
+                <Space>
+                  <span>Logout</span>
+                </Space>
+              )}
+            </Button>
+          </Tooltip>
         </div>
       </Sider>
 
@@ -137,9 +165,11 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
       />
 
       <Layout>
-        <Header className={styles.headerTitle}>
+         <Header className={styles.headerTitle}>
           <Title level={2} className={styles.title}>
-            Welcome, {loggedInUser}
+            <span className={styles.titleText}>
+              Welcome, {loggedInUser}
+            </span>
           </Title>
         </Header>
 
@@ -148,13 +178,57 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
 
       <Modal
         open={logoutModalVisible}
-        title="Confirm Logout"
+        title={
+          <Space>
+            <ExclamationCircleOutlined className={styles.modalHeaderIcon} />
+            <Text strong>Confirm Logout</Text>
+          </Space>
+        }
         onCancel={() => setLogoutModalVisible(false)}
-        onOk={confirmLogout}
-        okText="Yes, Logout"
-        cancelText="Cancel"
+        footer={[
+          <Button 
+            key="cancel" 
+            onClick={() => setLogoutModalVisible(false)}
+            className={styles.modalCancelButton}
+          >
+            Cancel
+          </Button>,
+          <Button 
+            key="logout" 
+            type="primary" 
+            danger 
+            onClick={confirmLogout}
+            icon={<LogoutOutlined />}
+            className={styles.modalLogoutButton}
+          >
+            Yes, Logout
+          </Button>,
+        ]}
+        width={400}
+        centered
+        styles={{
+          body: { 
+            padding: "20px",
+            fontSize: "15px"
+          },
+          header: {
+            paddingBottom: "16px",
+            borderBottom: "1px solid #f0f0f0"
+          }
+        }}
       >
-        <p>Are you sure you want to logout?</p>
+        <div className={styles.modalContent}>
+          <Text className={styles.modalText}>
+            Are you sure you want to logout? You will need to sign in again to access your account.
+          </Text>
+          <div className={styles.modalUserInfo}>
+            <Space>
+              <UserOutlined className={styles.modalUserIcon} />
+              <Text strong>Current User: </Text>
+              <Text>{loggedInUser}</Text>
+            </Space>
+          </div>
+        </div>
       </Modal>
     </Layout>
   );

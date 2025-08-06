@@ -18,26 +18,6 @@ import { useStyles } from "./style/styles";
 import { ISalon } from "@/providers/salon-provider/context";
 import { useSalonActions, useSalonState } from "@/providers/salon-provider";
 
-// type Client = {
-//   key: string;
-//   emailAddress: string;
-//   password: string;
-//   roleName: string;
-//   surname: string;
-//   userName: string;
-//   name: string;
-// };
-
-// type User = {
-//   key: string;
-//   emailAddress: string;
-//   password: string;
-//   roleName: string;
-//   surname: string;
-//   userName: string;
-//   name: string;
-// };
-
 const AddSalon = () => {
   const { styles } = useStyles();
   const [modalVisible, setModalVisible] = useState(false);
@@ -71,7 +51,7 @@ const AddSalon = () => {
       handleCreateSalon(newSalon);
       setModalVisible(false);
       form.resetFields();
-      message.success(`New User added Successfully`);
+      getSalonList();
     });
   };
 

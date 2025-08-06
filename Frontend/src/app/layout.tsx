@@ -31,7 +31,7 @@ export default function RootLayout({
             colorPrimary: "#FF9323",
             colorInfo: "#FF9323",
             colorTextBase: "#ffffff",
-            colorBgBase: "#2a2a2cff",
+            colorBgBase: "#212428",
             fontSize: 14,
             wireframe: false,
           },
@@ -58,6 +58,8 @@ export default function RootLayout({
             Table: {
               colorPrimaryBorder: "#FF9323",
               colorSplit: "#FF9323",
+              headerBg: "#495056ff",
+              headerColor: "#f9b163ff"
             },
           },
           algorithm: darkAlgorithm,

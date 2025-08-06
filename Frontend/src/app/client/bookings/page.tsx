@@ -8,7 +8,12 @@ import {
   Tag,
   Flex,
   Spin,
-  Image
+  Image,
+  Space,
+  Typography,
+  Card,
+  Col,
+  Row,
 } from "antd/es";
 import type { ColumnsType } from "antd/es/table";
 import { useStyles } from "./style/styles";
@@ -17,16 +22,23 @@ import {
   useBookingState,
 } from "@/providers/booking-provider";
 import { IBooking } from "@/providers/booking-provider/context";
-import { Divider } from 'antd/es';
+// import { Divider } from 'antd/es';
+import {
+  CalendarOutlined,
+  ScissorOutlined,
+  ShopOutlined,
+  TagOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+
+const { Text } = Typography;
 
 const BookingListPage: React.FC = () => {
   const { styles } = useStyles();
   const { bookings, isPending } = useBookingState();
   const { getBookingList } = useBookingActions();
 
-  const [selectedBooking, setSelectedBooking] = useState<IBooking | null>(
-    null
-  );
+  const [selectedBooking, setSelectedBooking] = useState<IBooking | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -40,6 +52,21 @@ const BookingListPage: React.FC = () => {
 
   const handleCancel = () => {
     setModalVisible(false);
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Submitted":
+        return "warning";
+      case "Confirmed":
+        return "success";
+      case "Pending":
+        return "processing";
+      case "Cancelled":
+        return "error";
+      default:
+        return "default";
+    }
   };
 
   const columns: ColumnsType<IBooking> = [
@@ -73,9 +100,9 @@ const BookingListPage: React.FC = () => {
         const color =
           status === "Submitted"
             ? "yellow"
-            : status === "Approved"
-              ? "blue"
-              : "orange";
+            : status === "Completed"
+            ? "blue"
+            : "orange";
         return <Tag color={color}>{status}</Tag>;
       },
     },
@@ -108,50 +135,137 @@ const BookingListPage: React.FC = () => {
             className={styles.bookingTable}
             rowKey="id"
             pagination={{ pageSize: 5 }}
-             scroll={{x: "max-content"}}
+            scroll={{ x: "max-content" }}
           />
 
           <Modal
-            title="Booking Details"
+            title={
+              <Space>
+                <CalendarOutlined />
+                <Text strong style={{ fontSize: "18px" }}>
+                  Booking Details
+                </Text>
+              </Space>
+            }
             open={modalVisible}
             onCancel={handleCancel}
             footer={
-              <Button onClick={handleCancel} type="primary">
-                Close
-              </Button>
+              <Flex justify="end" gap="small">
+                <Button onClick={handleCancel}>Cancel</Button>
+                <Button onClick={handleCancel} type="primary">
+                  Close
+                </Button>
+              </Flex>
             }
+            width={600}
+            className={styles.modalBody}
           >
             {selectedBooking && (
-              <>
-                <p>
-                  {selectedBooking.imageUrl && (
+              <div style={{ maxHeight: "60vh", overflowY: "auto" }}>
+                {selectedBooking.imageUrl && (
+                  <Card className={styles.cardBody}>
                     <Image
-                      width={200}
+                      width="100%"
+                      className={styles.image}
                       src={selectedBooking.imageUrl}
-                      alt="Booking Image"
+                      alt="Booking Reference"
+                      preview={{
+                        mask: "Click to preview",
+                      }}
                     />
-                  )}
-                </p>
-                <p>
-                  <strong>Salon Name:</strong>{" "}
-                  {selectedBooking.salonName}
-                </p>
-                <p>
-                  <strong>Name of Hairdresser:</strong>{" "}
-                  {selectedBooking.employeeTechnicianName || "-"}
-                </p>
-                <p>
-                  <strong>Service Requested:</strong>{" "}
-                  {selectedBooking.service || "-"}
-                </p>
-                <p>
-                  <strong>Date and Time:</strong> {selectedBooking.date || "-"}
-                  </p>
-                <p>
-                  <strong>Status:</strong> {selectedBooking.status}
-                </p>
-                <Divider />
-              </>
+                  </Card>
+                )}
+                <Card
+                  title={
+                    <Space>
+                      <TagOutlined />
+                      <Text strong className={styles.bookingContainerTitle}>
+                        Booking Information
+                      </Text>
+                    </Space>
+                  }
+                  className={styles.bookingCard}
+                >
+                  <Row gutter={[16, 16]}>
+                    <Col xs={24} sm={12}>
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        <Space>
+                          <ShopOutlined className={styles.shopIcon} />
+                          <Text strong>Salon Name</Text>
+                        </Space>
+                        <Text className={styles.bookingHeaders}>
+                          {selectedBooking.salonName}
+                        </Text>
+                      </Space>
+                    </Col>
+
+                    <Col xs={24} sm={12}>
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        <Space>
+                          <UserOutlined className={styles.userIcon} />
+                          <Text strong>Hairdresser</Text>
+                        </Space>
+                        <Text className={styles.bookingHeaders}>
+                          {selectedBooking.employeeTechnicianName ||
+                            "Not assigned"}
+                        </Text>
+                      </Space>
+                    </Col>
+
+                    <Col xs={24} sm={12}>
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        <Space>
+                          <ScissorOutlined className={styles.scissorIcon} />
+                          <Text strong>Service</Text>
+                        </Space>
+                        <Text className={styles.bookingHeaders}>
+                          {selectedBooking.service || "Not specified"}
+                        </Text>
+                      </Space>
+                    </Col>
+
+                    <Col xs={24} sm={12}>
+                      <Space
+                        direction="vertical"
+                        size="small"
+                        style={{ width: "100%" }}
+                      >
+                        <Space>
+                          <CalendarOutlined className={styles.calenderIcon} />
+                          <Text strong>Date & Time</Text>
+                        </Space>
+                        <Text className={styles.bookingHeaders}>
+                          {selectedBooking.date || "Not scheduled"}
+                        </Text>
+                      </Space>
+                    </Col>
+                  </Row>
+                </Card>
+
+                <Card size="small" className={styles.statusCard}>
+                  <Flex justify="space-between" align="center">
+                    <Text strong>Booking Status:</Text>
+                    <Tag
+                      color={getStatusColor(selectedBooking.status)}
+                      className={styles.tag}
+                    >
+                      {selectedBooking.status}
+                    </Tag>
+                  </Flex>
+                </Card>
+              </div>
             )}
           </Modal>
         </div>
