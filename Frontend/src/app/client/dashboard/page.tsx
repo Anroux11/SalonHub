@@ -13,7 +13,7 @@ import {
   Modal,
   Row,
   Select,
-  Space,
+  Typography,
   // Spin,
   // Typography,
   Upload,
@@ -22,16 +22,14 @@ import {
   PlusOutlined,
   // EnvironmentOutlined,
   FileTextOutlined,
+  CameraOutlined,
+  ScissorOutlined,
+  UserOutlined,
+  HomeOutlined,
+  CalendarOutlined,
   // ClockCircleOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-// import dynamic from "next/dynamic";
-import {
-  // dashboardStyles,
-  // cardStyles,
-  // buttonStyles,
-  modalStyles,
-} from "./style/styles";
 import { IBooking } from "@/providers/booking-provider/context";
 import {
   useBookingActions,
@@ -76,6 +74,11 @@ const disabledDateTime = () => ({
   disabledMinutes: () => range(60, 60),
 });
 
+const formatBookingDate = (date: string) => {
+  return dayjs(date).format('ddd, MMM DD [at] h:mm A');
+  // e.g., "Sun, Dec 15 at 2:30 PM"
+};
+
 const ClientDashboard: React.FC = () => {
   const router = useRouter();
   const [form] = Form.useForm();
@@ -110,6 +113,7 @@ const ClientDashboard: React.FC = () => {
   const { employeeTechnicians } = useEmployeeTechnicianState();
   const { salons } = useSalonState();
   const { salonServices } = useSalonServiceState();
+  const { Text } = Typography;
 
   useEffect(() => {
     getSalonList();
@@ -181,7 +185,7 @@ const ClientDashboard: React.FC = () => {
       await createBooking(payload);
 
       setBooking([...booking, payload]);
-      message.success("Booking made successfully!");
+      message.success(`Booking made successfully for ${formatBookingDate(values.date)}!`);
       setBookingModalVisible(false);
       form.resetFields();
       router.push("/client/bookings");
@@ -255,66 +259,98 @@ const ClientDashboard: React.FC = () => {
 
       <Modal
         title={
-          <Space>
-            <FileTextOutlined />
-            Add Booking
-          </Space>
+          <div className={styles.modalTitleContainer}>
+            <FileTextOutlined className={styles.modalTitleIcon} />
+            <span className={styles.modalTitleText}>
+              Create New Booking
+            </span>
+          </div>
         }
         open={bookingModalVisible}
         onCancel={() => setBookingModalVisible(false)}
         footer={
-          <Space>
-            <Button onClick={() => setBookingModalVisible(false)}>
+          <div className={styles.modalFooterContainer}>
+            <Button 
+              onClick={() => setBookingModalVisible(false)}
+              className={styles.cancelButton}
+              size="large"
+            >
               Cancel
             </Button>
-            <Button type="primary" onClick={handleAddBooking}>
-              Submit
+            <Button 
+              type="primary" 
+              onClick={handleAddBooking}
+              className={styles.submitButton}
+              size="large"
+            >
+              Create Booking
             </Button>
-          </Space>
+          </div>
         }
-        width={400}
+        width={520}
         centered
-        style={modalStyles.large}
+        className={styles.modalContent}
       >
         <Form form={form} layout="vertical" initialValues={{ date: dayjs() }}>
           <Form.Item
             name="date"
-            label="Date"
+            label={
+              <div className={styles.formLabel}>
+                <CalendarOutlined className={styles.fieldIcon} />
+                <span>Preferred Date & Time</span>
+              </div>
+            }
             rules={[
               {
                 required: true,
-                message: "Please choose a Date",
+                message: "Please choose a date and time",
               },
             ]}
+            className={styles.formItem}
           >
             <DatePicker
-              format="YYYY-MM-DD HH:mm"
+              placeholder="Select your preferred date and time"
+              format="DD MMM YYYY, h:mm A" 
               disabledDate={disabledDate}
               disabledTime={disabledDateTime}
-              showTime={{ defaultValue: dayjs("00:00:00", "HH:mm") }}
+              showTime={{ 
+                defaultValue: dayjs("09:00:00", "HH:mm"),
+                format: "h:mm A", 
+                minuteStep: 15
+              }}
+              className={styles.inputField}
+              size="large"
             />
           </Form.Item>
 
           <Form.Item
             name="salonName"
-            label="Salon Name"
+            label={
+              <div className={styles.formLabel}>
+                <HomeOutlined className={styles.fieldIcon} />
+                <span>Choose Salon</span>
+              </div>
+            }
             rules={[
               {
                 required: true,
-                message: "Please enter the Salon Name",
+                message: "Please select a salon",
               },
             ]}
+            className={styles.formItem}
           >
             <Select
-              placeholder="Select name of Salon"
-              style={{ width: "100%" }}
-              onChange={(value) =>
-                setSelectedSalon(
-                  // salonList?.find((et) => et.id === value) || null
-                  value
-                )
-              }
+              placeholder="Select your preferred salon"
+              className={styles.inputField}
+              size="large"
+              onChange={(value) => setSelectedSalon(value)}
               value={selectedSalon}
+              showSearch
+              filterOption={(input, option) =>
+                (option?.children as unknown as string)
+                  ?.toLowerCase()
+                  ?.includes(input.toLowerCase())
+              }
             >
               {salonList?.map((sal) => (
                 <Option key={sal.name} value={sal.name}>
@@ -322,29 +358,36 @@ const ClientDashboard: React.FC = () => {
                 </Option>
               ))}
             </Select>
-            {/* <Input /> */}
           </Form.Item>
 
           <Form.Item
             name="employeeTechnicianName"
-            label="Name of Hairdresser"
+            label={
+              <div className={styles.formLabel}>
+                <UserOutlined className={styles.fieldIcon} />
+                <span>Select Hairdresser</span>
+              </div>
+            }
             rules={[
               {
                 required: true,
-                message: "Please enter name of your hairdresser",
+                message: "Please select your preferred hairdresser",
               },
             ]}
+            className={styles.formItem}
           >
             <Select
-              placeholder="Select name of Hairdresser"
-              style={{ width: "100%" }}
-              onChange={(value) =>
-                setSelectedEmployeeTechnician(
-                  // employeeTechinicianList?.find((et) => et.id === value) || null
-                  value
-                )
-              }
+              placeholder="Choose your hairdresser"
+              className={styles.inputField}
+              size="large"
+              onChange={(value) => setSelectedEmployeeTechnician(value)}
               value={selectedEmployeeTechnician}
+              showSearch
+              filterOption={(input, option) =>
+                (option?.children as unknown as string)
+                  ?.toLowerCase()
+                  ?.includes(input.toLowerCase())
+              }
             >
               {employeeTechinicianList?.map((emT) => (
                 <Option key={emT.name} value={emT.name}>
@@ -352,29 +395,36 @@ const ClientDashboard: React.FC = () => {
                 </Option>
               ))}
             </Select>
-            {/* <Input/> */}
           </Form.Item>
 
           <Form.Item
             name="service"
-            label="Service Requested"
+            label={
+              <div className={styles.formLabel}>
+                <ScissorOutlined className={styles.fieldIcon} />
+                <span>Service Requested</span>
+              </div>
+            }
             rules={[
               {
                 required: true,
                 message: "Please choose a service",
               },
             ]}
+            className={styles.formItem}
           >
             <Select
-              placeholder="Select a Service"
-              style={{ width: "100%" }}
-              onChange={(value) =>
-                setSelectedSalonService(
-                  // salonServiceList?.find((ss) => ss.id === value) || null
-                  value
-                )
-              }
+              placeholder="Select the service you need"
+              className={styles.inputField}
+              size="large"
+              onChange={(value) => setSelectedSalonService(value)}
               value={selectedSalonService}
+              showSearch
+              filterOption={(input, option) =>
+                (option?.children as unknown as string)
+                  ?.toLowerCase()
+                  ?.includes(input.toLowerCase())
+              }
             >
               {salonServiceList?.map((serR) => (
                 <Option key={serR.name} value={serR.name}>
@@ -382,26 +432,47 @@ const ClientDashboard: React.FC = () => {
                 </Option>
               ))}
             </Select>
-            {/* <Input/> */}
           </Form.Item>
 
           <Form.Item
-            label="Upload Image"
+            label={
+              <div className={styles.formLabel}>
+                <CameraOutlined className={styles.fieldIcon} />
+                <span>Upload Reference Photo</span>
+                <Text type="secondary" className={styles.secondaryText}>
+                  (Optional - helps your stylist understand your vision)
+                </Text>
+              </div>
+            }
             name="imageUrl"
             valuePropName="fileList"
             getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
+            className={styles.formItem}
           >
             <Upload
               listType="picture-card"
               beforeUpload={() => false}
               maxCount={1}
+              className={styles.uploadArea}
+              accept="image/*"
             >
-              <button type="button">
-                <PlusOutlined />
-                <div style={{ marginTop: 8 }}>Upload</div>
-              </button>
+              <div className={styles.uploadContainer}>
+                <PlusOutlined className={styles.uploadIcon} />
+                <div className={styles.uploadText}>
+                  Upload Photo
+                </div>
+                <div className={styles.uploadSubText}>
+                  JPG, PNG up to 10MB
+                </div>
+              </div>
             </Upload>
           </Form.Item>
+
+          <div className={styles.tipContainer}>
+            <Text className={styles.tipText}>
+              💡 <strong>Tip:</strong> Upload a reference photo to help your stylist understand exactly what you&apos;re looking for!
+            </Text>
+          </div>
           <Divider />
         </Form>
       </Modal>

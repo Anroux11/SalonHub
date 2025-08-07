@@ -45,6 +45,21 @@ const BookingListPage: React.FC = () => {
     getBookingList();
   }, []);
 
+  const formatBookingDate = (date: string) => {
+    if (!date) return "-";
+
+    const _date = new Date(date);
+
+    return new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(_date);
+  };
+
   const handleView = (booking: IBooking) => {
     setSelectedBooking(booking);
     setModalVisible(true);
@@ -90,7 +105,7 @@ const BookingListPage: React.FC = () => {
       title: "Date and Time",
       dataIndex: "date",
       key: "date",
-      render: (_, record) => record.date || "-",
+      render: (_, record) => formatBookingDate(record.date) || "-",
     },
     {
       title: "Status",

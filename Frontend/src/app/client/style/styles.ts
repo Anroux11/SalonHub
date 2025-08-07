@@ -64,25 +64,25 @@ export const useStyles = createStyles({
     transition: font-size 0.3s ease;
 
     @media (min-width: 1200px) {
-    font-size: 28px;
+    font-size: 28px !important; 
     }
     
     @media (max-width: 1199px) and (min-width: 769px) {
-    font-size: 24px;
+    font-size: 24px !important; 
     }
     
     @media (max-width: 768px) and (min-width: 481px) {
-    font-size: 16px;
+    font-size: 17px !important;
     }
     
     @media (max-width: 480px) {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 13px !important;
+    font-weight: 500 !important;
     }
     
     @media (max-width: 360px) {
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 10px !important;
+    font-weight: 500 !important;
     }
   `,
 
