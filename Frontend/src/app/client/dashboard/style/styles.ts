@@ -185,5 +185,186 @@ export const useStyles = createStyles({
   bookingCard: css`
     width: 100%;
   `,
+  modalTitleContainer: css`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  `,
+  modalTitleIcon: css`
+    font-size: 20px;
+    color: black;
+  `,
+  modalTitleText: css`
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+  `,
+  modalFooterContainer: css`
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  `,
+  uploadContainer: css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 2px;
+  `,
+   uploadIcon: css`
+    font-size: 18px;
+    color: #f7f7f7ff;
+  `,
+  uploadText: css`
+    color: #f4f0ecff;
+    font-weight: 500;
+    text-align: center;
+  `,
+  uploadSubText: css`
+    color: #f4f0ecff;
+    font-size: 12px;
+    text-align: center;
+  `,
+  tipContainer: css`
+    background: linear-gradient(135deg, #303648ff 0%, #6485e7ff 100%);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+  `,
+  tipText: css`
+    color: white;
+    font-size: 14px;
+    margin: 0;
+  `,
+  fieldIcon: css`
+    color: #FF9323;
+  `,
+  secondaryText: css`
+    font-size: 12px;
+    margin-left: 8px;
+  `,
+  formItem: css`
+    margin-bottom: 20px;
+  `,
+  formLabel: css`
+    font-weight: 500;
+    color: #686D7;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  `,
+  inputField: css`
+    width: 100%;
+    height: 44px;
+    border-radius: 8px;
+    border: 2px solid #e1e8ed;
+    transition: all 0.3s ease;
+    background: #686D76 !important;
 
+    &:hover {
+      border-color: #FF9323;
+    }
+
+    &:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .ant-select-selector {
+      border: none !important;
+      box-shadow: none !important;
+      height: 40px !important;
+      
+      .ant-select-selection-item {
+        line-height: 36px !important;
+      }
+    }
+
+    .ant-picker {
+      border: none;
+      height: 40px;
+      width: 100%;
+      
+      .ant-picker-input > input {
+        font-size: 14px;
+      }
+    }
+  `,
+  uploadArea: css`
+    .ant-upload-select {
+      background: #686D76 !important;
+      border: 2px dashed #d1d9e6 !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+
+      &:hover {
+        border-color: #FF9323 !important;
+        background: #686D76 !important;
+      }
+    }
+  `,
+  submitButton: css`
+    background: linear-gradient(135deg, #FF9323 0%, #212428 100%);
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+      background: linear-gradient(135deg, #212428 0%, #FF9323 100%) !important;
+    }
+
+    &:focus {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    }
+  `,
+  cancelButton: css`
+    border-radius: 8px;
+    height: 40px;
+    font-weight: 500;
+    border: 2px solid #e1e8ed;
+    color: #666;
+    background: white;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #FF9323!important;
+      color: #FF9323 !important;
+    }
+  `,
+  modalContent: css`
+    .ant-modal-content {
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .ant-modal-header {
+      background: #FF9323!important;
+      border-bottom: none;
+      padding: 20px 24px;
+    }
+    
+    .ant-modal-title {
+      color: black;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .ant-modal-body {
+      padding: 24px;
+      background: #212428;
+    }
+    
+    .ant-modal-footer {
+      background: #212428;
+      border-top: 1px solid #212428;
+      padding: 16px 24px;
+    }
+  `,
 });

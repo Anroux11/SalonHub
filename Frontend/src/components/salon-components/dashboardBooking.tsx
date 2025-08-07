@@ -12,9 +12,11 @@ import { IBooking } from "@/providers/booking-provider/context";
 import { useEmployeeTechnicianActions } from "@/providers/employeeTechnician-provider";
 import "@ant-design/v5-patch-for-react-19";
 
-
-
-const DashboardBookingList = ({ bookings: passedBookings }: { bookings?: IBooking[] }) => {
+const DashboardBookingList = ({
+  bookings: passedBookings,
+}: {
+  bookings?: IBooking[];
+}) => {
   const { styles } = useStyles();
   const { bookings: contextBookings } = useBookingState();
   const bookings = passedBookings ?? contextBookings;
@@ -26,13 +28,28 @@ const DashboardBookingList = ({ bookings: passedBookings }: { bookings?: IBookin
     getEmployeeTechnicianList();
   }, [DashboardBookingList]);
 
+  const formatBookingDate = (date: string) => {
+    if (!date) return "-";
+
+    const _date = new Date(date);
+
+    return new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(_date);
+  };
+
   const columns: ColumnsType<IBooking> = [
     {
       title: "Salon Name",
       dataIndex: "salonName",
       key: "salonName",
     },
-    
+
     {
       title: "Name of Hairdresser",
       dataIndex: "employeeTechnicianName",
@@ -43,20 +60,25 @@ const DashboardBookingList = ({ bookings: passedBookings }: { bookings?: IBookin
       title: "Service Requested",
       dataIndex: "service",
       key: "service",
-      render: (_, record) => record.service || "-",
+      render: (srvP) => srvP || "-",
     },
     {
       title: "Date & Time",
       dataIndex: "date",
       key: "date",
-      render: (srvP) => srvP || "-",
+      render: (srvP) => formatBookingDate(srvP) || "-",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
       render: (status) => {
-        const color = status === "Confirmed" ? "green" : status === "Completed" ? "blue" : "orange";
+        const color =
+          status === "Confirmed"
+            ? "green"
+            : status === "Completed"
+            ? "blue"
+            : "orange";
         return <Tag color={color}>{status}</Tag>;
       },
     },
@@ -64,16 +86,16 @@ const DashboardBookingList = ({ bookings: passedBookings }: { bookings?: IBookin
 
   return (
     <>
-        <div className={styles.bookingContainer}>
-          <Table
-            columns={columns}
-            dataSource={bookings}
-            className={styles.bookingTable}
-            pagination={{ pageSize: 5 }}
-            rowKey="id"
-            scroll={{x: "max-content"}}
-          />
-        </div>
+      <div className={styles.bookingContainer}>
+        <Table
+          columns={columns}
+          dataSource={bookings}
+          className={styles.bookingTable}
+          pagination={{ pageSize: 5 }}
+          rowKey="id"
+          scroll={{ x: "max-content" }}
+        />
+      </div>
     </>
   );
 };

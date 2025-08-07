@@ -25,7 +25,7 @@ import {
   Tooltip,
 } from "antd/es";
 import Title from "antd/es/typography/Title";
-import { useStyles } from "../client/style/styles"
+import { useStyles } from "../client/style/styles";
 import withAuth from "@/hoc/withAuth";
 
 const { Header, Sider, Content } = Layout;
@@ -39,12 +39,22 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
   const [loggedInUser, setLoggedInUser] = useState("Guest");
 
   useEffect(() => {
-    if (typeof sessionStorage !== "undefined") {
-      const storedData = sessionStorage.getItem("currentUser");
-      if (storedData) {
-        setLoggedInUser(storedData);
+    // Using a setTimeout, because the useEffect excecutes before the salon name is saved into sessionStorage.
+    // This way, the logged in Salon name will display after it is loaded from session storage.
+
+    const timerId = setTimeout(() => {
+      if (typeof sessionStorage !== "undefined") {
+        const storedData = sessionStorage.getItem("salon-name");
+        if (storedData) {
+          setLoggedInUser(storedData);
+        }
       }
-    }
+    }, 3000);
+
+    // Return a cleanup function
+    return () => {
+      clearTimeout(timerId);
+    };
   }, [""]);
 
   const [collapsed, setCollapsed] = useState(false);
@@ -184,11 +194,9 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
       />
 
       <Layout>
-         <Header className={styles.headerTitle}>
+        <Header className={styles.headerTitle}>
           <Title level={2} className={styles.title}>
-            <span className={styles.titleText}>
-            {loggedInUser}
-            </span>
+            <span className={styles.titleText}>{loggedInUser}</span>
           </Title>
         </Header>
 
@@ -205,17 +213,17 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
         }
         onCancel={() => setLogoutModalVisible(false)}
         footer={[
-          <Button 
-            key="cancel" 
+          <Button
+            key="cancel"
             onClick={() => setLogoutModalVisible(false)}
             className={styles.modalCancelButton}
           >
             Cancel
           </Button>,
-          <Button 
-            key="logout" 
-            type="primary" 
-            danger 
+          <Button
+            key="logout"
+            type="primary"
+            danger
             onClick={confirmLogout}
             icon={<LogoutOutlined />}
             className={styles.modalLogoutButton}
@@ -226,19 +234,20 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
         width={400}
         centered
         styles={{
-          body: { 
+          body: {
             padding: "20px",
-            fontSize: "15px"
+            fontSize: "15px",
           },
           header: {
             paddingBottom: "16px",
-            borderBottom: "1px solid #f0f0f0"
-          }
+            borderBottom: "1px solid #f0f0f0",
+          },
         }}
       >
         <div className={styles.modalContent}>
           <Text className={styles.modalText}>
-            Are you sure you want to logout? You will need to sign in again to access your account.
+            Are you sure you want to logout? You will need to sign in again to
+            access your account.
           </Text>
           <div className={styles.modalUserInfo}>
             <Space>

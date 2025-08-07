@@ -254,7 +254,6 @@ export const CurrentUserProvider = ({
     await instance
       .get(endpoint)
       .then((response) => {
-        console.log("res", response);
         const userRole = sessionStorage.getItem("role");
         if (userRole == "Salon" ) {
           sessionStorage.setItem("salon-name", response.data.result.user.name);
