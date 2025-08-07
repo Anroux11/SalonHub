@@ -100,7 +100,6 @@ const AddUser = () => {
   }, [salons]);
 
   useEffect(() => {
-    // fetchClients();
     getClientList();
   }, [""]);
 
@@ -248,7 +247,6 @@ const AddUser = () => {
                     </Option>
                   ))}
                 </Select>
-                {/* <Input /> */}
               </Form.Item>
             </Form>
           </Modal>

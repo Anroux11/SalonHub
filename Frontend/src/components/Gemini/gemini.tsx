@@ -1,23 +1,22 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { 
-  Card, 
-  Button, 
-  Input, 
-  Upload, 
-  Typography, 
-  Space, 
-  Spin, 
+import {
+  Card,
+  Button,
+  Input,
+  Upload,
+  Typography,
+  Space,
+  Spin,
   Row,
   Col,
-  message
+  message,
 } from "antd/es";
-import { 
-  
-  RobotOutlined, 
+import {
+  RobotOutlined,
   SendOutlined,
-  FileImageOutlined 
+  FileImageOutlined,
 } from "@ant-design/icons";
 import { GoogleGenAI } from "@google/genai";
 import { useStyles } from "./style/styles";
@@ -29,7 +28,7 @@ const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_CLOUD_API!;
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 const GeminiImageAnalysis = () => {
-   const { styles } = useStyles();
+  const { styles } = useStyles();
   const [prompt, setPrompt] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
@@ -49,19 +48,18 @@ const GeminiImageAnalysis = () => {
 
   const handleFileChange = (file: File) => {
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      message.error('Please upload an image file only');
+    if (!file.type.startsWith("image/")) {
+      message.error("Please upload an image file only");
       return false;
     }
 
-    // Validate file size (5MB limit)
     if (file.size > 5 * 1024 * 1024) {
-      message.error('Image size must be less than 5MB');
+      message.error("Image size must be less than 5MB");
       return false;
     }
 
     setImageFile(file);
-    message.success('Image uploaded successfully');
+    message.success("Image uploaded successfully");
     return false; // Prevent default upload behavior
   };
 
@@ -79,12 +77,12 @@ const GeminiImageAnalysis = () => {
 
   const handleSubmit = async () => {
     if (!prompt.trim()) {
-      message.warning('Please enter a prompt');
+      message.warning("Please enter a prompt");
       return;
     }
-    
+
     if (!imageFile) {
-      message.warning('Please upload an image');
+      message.warning("Please upload an image");
       return;
     }
 
@@ -111,11 +109,11 @@ const GeminiImageAnalysis = () => {
       });
 
       setResponseText(result.text ?? "No response text received.");
-      message.success('Analysis completed successfully');
+      message.success("Analysis completed successfully");
     } catch (error) {
       console.error(error);
       setResponseText("Error analyzing the image.");
-      message.error('Failed to analyze the image');
+      message.error("Failed to analyze the image");
     } finally {
       setLoading(false);
     }
@@ -124,12 +122,12 @@ const GeminiImageAnalysis = () => {
   const handleRemoveImage = () => {
     setImageFile(null);
     setImagePreviewUrl(null);
-    message.info('Image removed');
+    message.info("Image removed");
   };
 
   return (
     <div className={styles.container}>
-      <Card 
+      <Card
         title={
           <Space>
             <RobotOutlined className={styles.titleContainer} />
@@ -143,7 +141,11 @@ const GeminiImageAnalysis = () => {
         <Row gutter={[24, 24]}>
           {/* Left Column - Input Section */}
           <Col xs={24} lg={12}>
-            <Space direction="vertical" size="large" className={styles.fullWidthSpace}>
+            <Space
+              direction="vertical"
+              size="large"
+              className={styles.fullWidthSpace}
+            >
               {/* Image Upload Section */}
               <div>
                 <Text strong className={styles.sectionTitle}>
@@ -157,10 +159,16 @@ const GeminiImageAnalysis = () => {
                   accept="image/*"
                 >
                   <p className="ant-upload-drag-icon">
-                    <FileImageOutlined className={imageFile ? styles.uploadIconSuccess : styles.uploadIcon} />
+                    <FileImageOutlined
+                      className={
+                        imageFile ? styles.uploadIconSuccess : styles.uploadIcon
+                      }
+                    />
                   </p>
                   <p className="ant-upload-text">
-                    {imageFile ? 'Image uploaded successfully!' : 'Click or drag image to upload'}
+                    {imageFile
+                      ? "Image uploaded successfully!"
+                      : "Click or drag image to upload"}
                   </p>
                   <p className="ant-upload-hint">
                     Support for single image upload. Max size: 5MB
@@ -171,11 +179,12 @@ const GeminiImageAnalysis = () => {
                   <div className={styles.fileInfo}>
                     <Space>
                       <Text type="success">
-                        📁 {imageFile.name} ({(imageFile.size / 1024 / 1024).toFixed(2)} MB)
+                        📁 {imageFile.name} (
+                        {(imageFile.size / 1024 / 1024).toFixed(2)} MB)
                       </Text>
-                      <Button 
-                        type="text" 
-                        danger 
+                      <Button
+                        type="text"
+                        danger
                         size="small"
                         onClick={handleRemoveImage}
                       >
@@ -200,7 +209,6 @@ const GeminiImageAnalysis = () => {
                 />
               </div>
 
-              {/* Submit Button */}
               <Button
                 type="primary"
                 size="large"
@@ -210,15 +218,17 @@ const GeminiImageAnalysis = () => {
                 loading={loading}
                 className={styles.submitBtn}
               >
-                {loading ? 'Analyzing Image...' : 'Analyze Image'}
+                {loading ? "Analyzing Image..." : "Analyze Image"}
               </Button>
             </Space>
           </Col>
 
-          {/* Right Column - Preview & Results */}
           <Col xs={24} lg={12}>
-            <Space direction="vertical" size="large"  className={styles.fullWidthSpace}>
-              {/* Image Preview */}
+            <Space
+              direction="vertical"
+              size="large"
+              className={styles.fullWidthSpace}
+            >
               {imagePreviewUrl && (
                 <div>
                   <Text strong className={styles.sectionTitle}>
@@ -234,7 +244,6 @@ const GeminiImageAnalysis = () => {
                 </div>
               )}
 
-              {/* Loading State */}
               {loading && (
                 <Card className={styles.loadingCard}>
                   <Spin size="large" />
@@ -244,15 +253,12 @@ const GeminiImageAnalysis = () => {
                 </Card>
               )}
 
-              {/* Analysis Results */}
               {responseText && !loading && (
                 <div>
                   <Text strong className={styles.sectionTitle}>
                     AI Analysis Results
                   </Text>
-                  <Card 
-                    className={styles.resultsCard}
-                  >
+                  <Card className={styles.resultsCard}>
                     <Space direction="vertical" size="small">
                       <Space>
                         <RobotOutlined className={styles.resultsIcon} />
@@ -260,25 +266,24 @@ const GeminiImageAnalysis = () => {
                           Gemini Analysis:
                         </Text>
                       </Space>
-                      <Text className={styles.resultsText}>
-                        {responseText}
-                      </Text>
+                      <Text className={styles.resultsText}>{responseText}</Text>
                     </Space>
                   </Card>
                 </div>
               )}
 
-              {/* Placeholder when no image */}
               {!imagePreviewUrl && !loading && !responseText && (
-                <Card 
-                   className={styles.placeholderCard}
-                >
+                <Card className={styles.placeholderCard}>
                   <Space direction="vertical" size="middle">
                     <FileImageOutlined className={styles.placeholderIcon} />
                     <div>
-                      <Text type="secondary">Upload an image and enter a prompt</Text>
+                      <Text type="secondary">
+                        Upload an image and enter a prompt
+                      </Text>
                       <br />
-                      <Text type="secondary">to get started with AI analysis</Text>
+                      <Text type="secondary">
+                        to get started with AI analysis
+                      </Text>
                     </div>
                   </Space>
                 </Card>

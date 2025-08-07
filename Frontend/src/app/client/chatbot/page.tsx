@@ -1,13 +1,9 @@
-"use client"
+"use client";
 
-import GeminiImageAnalysis from "@/components/Gemini/gemini"
-// import { useStyles } from "./style/styles";
+import GeminiImageAnalysis from "@/components/Gemini/gemini";
 
 const ChatbotPage = () => {
-
-    return (
-        <GeminiImageAnalysis/>
-    )
+  return <GeminiImageAnalysis />;
 };
 
 export default ChatbotPage;

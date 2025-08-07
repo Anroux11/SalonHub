@@ -14,20 +14,16 @@ import {
   Row,
   Select,
   Typography,
-  // Spin,
-  // Typography,
   Upload,
 } from "antd/es";
 import {
   PlusOutlined,
-  // EnvironmentOutlined,
   FileTextOutlined,
   CameraOutlined,
   ScissorOutlined,
   UserOutlined,
   HomeOutlined,
   CalendarOutlined,
-  // ClockCircleOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { IBooking } from "@/providers/booking-provider/context";
@@ -44,9 +40,6 @@ import {
   useEmployeeTechnicianActions,
   useEmployeeTechnicianState,
 } from "@/providers/employeeTechnician-provider";
-// import { useEmployeeTechnicianActions, useSalonState } from "@/providers/salon-provider";
-// import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
-// import { useEmployeeTechnicianState } from "@/providers/employeeTechnician-provider";
 import { ISalon } from "../../../providers/salon-provider/context";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
 import { ISalonService } from "@/providers/salonService-provider/context";
@@ -75,8 +68,7 @@ const disabledDateTime = () => ({
 });
 
 const formatBookingDate = (date: string) => {
-  return dayjs(date).format('ddd, MMM DD [at] h:mm A');
-  // e.g., "Sun, Dec 15 at 2:30 PM"
+  return dayjs(date).format("ddd, MMM DD [at] h:mm A");
 };
 
 const ClientDashboard: React.FC = () => {
@@ -105,10 +97,6 @@ const ClientDashboard: React.FC = () => {
   const [selectedSalonService, setSelectedSalonService] = useState<
     string | null
   >(null);
-  // const [selectedEmployeeTechnician, setSelectedEmployeeTechnician] =
-  // useState<IEmployeeTechnician | null>(null);
-  // const [selectedSalonService, setSelectedSalonService] =
-  // useState<ISalonService | null>(null);
   const [selectedSalon, setSelectedSalon] = useState<string | null>(null);
   const { employeeTechnicians } = useEmployeeTechnicianState();
   const { salons } = useSalonState();
@@ -156,18 +144,21 @@ const ClientDashboard: React.FC = () => {
       const values = await form.validateFields();
 
       let imageUrl = null;
-      
-      // Only upload image if a file was provided
+
       const file = values.imageUrl?.[0]?.originFileObj;
       if (file) {
         try {
           imageUrl = await uploadImage(file);
           if (!imageUrl) {
-            message.warning("Failed to upload image, but booking will continue without photo.");
+            message.warning(
+              "Failed to upload image, but booking will continue without photo."
+            );
           }
         } catch (error) {
           console.error("Image upload error:", error);
-          message.warning("Failed to upload image, but booking will continue without photo.");
+          message.warning(
+            "Failed to upload image, but booking will continue without photo."
+          );
         }
       }
 
@@ -189,10 +180,12 @@ const ClientDashboard: React.FC = () => {
 
       setBooking([...booking, payload]);
 
-      const successMessage = imageUrl 
-        ? `Booking made successfully for ${formatBookingDate(values.date)} with reference photo!`
+      const successMessage = imageUrl
+        ? `Booking made successfully for ${formatBookingDate(
+            values.date
+          )} with reference photo!`
         : `Booking made successfully for ${formatBookingDate(values.date)}!`;
-        
+
       message.success(successMessage);
       setBookingModalVisible(false);
       form.resetFields();
@@ -269,24 +262,22 @@ const ClientDashboard: React.FC = () => {
         title={
           <div className={styles.modalTitleContainer}>
             <FileTextOutlined className={styles.modalTitleIcon} />
-            <span className={styles.modalTitleText}>
-              Create New Booking
-            </span>
+            <span className={styles.modalTitleText}>Create New Booking</span>
           </div>
         }
         open={bookingModalVisible}
         onCancel={() => setBookingModalVisible(false)}
         footer={
           <div className={styles.modalFooterContainer}>
-            <Button 
+            <Button
               onClick={() => setBookingModalVisible(false)}
               className={styles.cancelButton}
               size="large"
             >
               Cancel
             </Button>
-            <Button 
-              type="primary" 
+            <Button
+              type="primary"
               onClick={handleAddBooking}
               className={styles.submitButton}
               size="large"
@@ -318,13 +309,13 @@ const ClientDashboard: React.FC = () => {
           >
             <DatePicker
               placeholder="Select your preferred date and time"
-              format="DD MMM YYYY, h:mm A" 
+              format="DD MMM YYYY, h:mm A"
               disabledDate={disabledDate}
               disabledTime={disabledDateTime}
-              showTime={{ 
+              showTime={{
                 defaultValue: dayjs("09:00:00", "HH:mm"),
-                format: "h:mm A", 
-                minuteStep: 15
+                format: "h:mm A",
+                minuteStep: 15,
               }}
               className={styles.inputField}
               size="large"
@@ -466,19 +457,16 @@ const ClientDashboard: React.FC = () => {
             >
               <div className={styles.uploadContainer}>
                 <PlusOutlined className={styles.uploadIcon} />
-                <div className={styles.uploadText}>
-                  Upload Photo
-                </div>
-                <div className={styles.uploadSubText}>
-                  JPG, PNG up to 10MB
-                </div>
+                <div className={styles.uploadText}>Upload Photo</div>
+                <div className={styles.uploadSubText}>JPG, PNG up to 5MB</div>
               </div>
             </Upload>
           </Form.Item>
 
           <div className={styles.tipContainer}>
             <Text className={styles.tipText}>
-              💡 <strong>Tip:</strong> Upload a reference photo to help your stylist understand exactly what you&apos;re looking for!
+              💡 <strong>Tip:</strong> Upload a reference photo to help your
+              stylist understand exactly what you&apos;re looking for!
             </Text>
           </div>
           <Divider />

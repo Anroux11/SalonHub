@@ -23,7 +23,7 @@ export const useStyles = createStyles({
       font-size: 24px;
       font-weight: bold;
     }
-    background: linear-gradient(90deg, #072544ff, #FF9323);
+    background: linear-gradient(90deg, #072544ff, #ff9323);
   `,
   quickActionsRow: css`
     width: 100%;
@@ -35,5 +35,4 @@ export const useStyles = createStyles({
   bookingCard: css`
     width: 100%;
   `,
-
 });

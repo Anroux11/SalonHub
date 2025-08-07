@@ -27,10 +27,7 @@ export const useStyles = createStyles({
     overflow-x: hidden;
     padding-top: 20px;
     left: 0;
-    background-image: linear-gradient(
-        rgba(21, 18, 18, 0.6),
-        rgba(8, 8, 8, 0.8)
-      ),
+    background-image: linear-gradient(rgba(21, 18, 18, 0.6), rgba(8, 8, 8, 0.8)),
       url("/LoginTwo.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -111,11 +108,11 @@ export const useStyles = createStyles({
     &:hover {
       background-color: transparent;
     }
-      &:active {
+    &:active {
       background-color: transparent;
     }
-      &:focus {
-      background-color:transparent;
+    &:focus {
+      background-color: transparent;
     }
 
     @media (max-width: 480px) {
@@ -157,7 +154,7 @@ export const useStyles = createStyles({
   `,
 
   logoText: css`
-    color: #FF9323;
+    color: #ff9323;
     font-size: 24px;
     font-weight: bold;
     margin: 0;

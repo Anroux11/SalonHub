@@ -10,8 +10,6 @@ import {
   Modal,
   Typography,
   Input,
-  // Flex,
-  // Spin,
 } from "antd/es";
 import { AntDesignOutlined, EyeOutlined } from "@ant-design/icons";
 import { useStyles } from "./style/styles";
@@ -39,19 +37,13 @@ const SalonPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredSalons, setFilteredSalons] = useState<ISalon[]>([]);
 
-  // const [loading, setLoading] = useState(false);
-
   const loadSalonData = async () => {
-    // await getSalonList();
     await getEmployeeTechnicianList();
     await getSalonServiceList();
   };
 
   useEffect(() => {
     getSalonList();
-    // getEmployeeTechnicianList();
-    // getSalonServiceList();
-    // refresh();
   }, [""]);
 
   useEffect(() => {
@@ -68,12 +60,9 @@ const SalonPage = () => {
   }, [searchQuery, salons]);
 
   const handleViewSalon = (salon: ISalon) => {
-    // setLoading(true);
     sessionStorage.setItem("salon-name", salon.name);
     loadSalonData();
     setSelectedSalon(salon);
-
-    // setLoading(false);
     setIsModalVisible(true);
   };
 
@@ -84,17 +73,6 @@ const SalonPage = () => {
 
   return (
     <>
-      {/* {loading ? (
-        <div>
-          <Flex
-            justify="center"
-            align="center"
-            style={{ marginBottom: 20, width: "100%", height: "100vh" }}
-          >
-            <Spin size="large" />
-          </Flex>
-        </div>
-      ) : ( */}
       <div className={styles.pageContainer}>
         <div className={styles.pageHeader}>
           <Title level={2} className={styles.pageTitle}>
@@ -184,7 +162,6 @@ const SalonPage = () => {
           )}
         </Modal>
       </div>
-      {/* )} */}
     </>
   );
 };

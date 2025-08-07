@@ -23,7 +23,6 @@ import {
   useBookingState,
 } from "@/providers/booking-provider";
 import { IBooking } from "@/providers/booking-provider/context";
-// import { Divider } from 'antd/es';
 import {
   CalendarOutlined,
   ScissorOutlined,

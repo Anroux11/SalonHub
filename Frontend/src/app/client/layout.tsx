@@ -54,7 +54,6 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
-
   const { styles } = useStyles();
   const router = useRouter();
   const pathname = usePathname();

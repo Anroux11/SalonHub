@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import "@ant-design/v5-patch-for-react-19";
 import Button from "antd/es/button";
@@ -15,7 +15,12 @@ const Home: React.FC = () => {
     <>
       <div className={styles.page}>
         <div className={styles.logo}>
-          <Image src="/AppLogo-Big.png" alt="SalonHub Logo" width={500} height={500} />
+          <Image
+            src="/AppLogo-Big.png"
+            alt="SalonHub Logo"
+            width={500}
+            height={500}
+          />
         </div>
         <h1 className={styles.heading}>Welcome to SalonHub</h1>
         <h2 className={styles.sinceText}>New Here?</h2>
@@ -39,7 +44,7 @@ const Home: React.FC = () => {
         </Button>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Home;
