@@ -16,14 +16,12 @@ const SalonServices = ({}: { salonServices?: ISalonService[] }) => {
   // const salonServices = passedSalonServices ?? contextSalonServices;
   // const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
   const { getSalonServiceList } = useSalonServiceActions();
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     // getBookingList();
     // getEmployeeTechnicianList();
     getSalonServiceList();
-    setLoading(false);
   }, [""]);
 
   useEffect(() => {
