@@ -229,7 +229,7 @@ const BookingList = ({
             onCancel={handleCancel}
             footer={
               <Flex justify="end" gap="small">
-                {selectedBooking?.status === "Submitted" && (
+                {selectedBooking?.status === "Confirmed" && (
                   <Button type="primary" onClick={handleComplete}>
                     Mark as Completed
                   </Button>
