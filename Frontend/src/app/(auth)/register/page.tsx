@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import "@ant-design/v5-patch-for-react-19";
-// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useStyles } from "./style/style";
 import Image from "next/image";
@@ -34,7 +33,6 @@ const RegistrationForm = () => {
   const router = useRouter();
   const { styles } = useStyles();
   const [form] = Form.useForm();
-  // const [loading, setLoading] = useState(false);
   const { Title } = Typography;
   const [loading, setLoading] = useState(false);
   const { registerClient } = useRegisterClientActions();
@@ -83,7 +81,9 @@ const RegistrationForm = () => {
                 width={300}
                 height={300}
               ></Image>
-              <Title style={{color: "#969aa2ff"}}>To Get Started...please register to SalonHub</Title>
+              <Title style={{ color: "#969aa2ff" }}>
+                To Get Started...please register to SalonHub
+              </Title>
             </div>
           </div>
 
@@ -206,20 +206,19 @@ const RegistrationForm = () => {
                       Register
                     </Button>
                   </Form.Item>
-                  <Link href="/login" >
-                  <Button
-                    type="default"
-                    className={styles.loginBtn}
-                    block
-                    style={{ width: "300px" }}
-                    size="large"
-                    
-                  ><ArrowLeftOutlined />
-                    Back to Login
-                  </Button>
-                </Link>
+                  <Link href="/login">
+                    <Button
+                      type="default"
+                      className={styles.loginBtn}
+                      block
+                      style={{ width: "300px" }}
+                      size="large"
+                    >
+                      <ArrowLeftOutlined />
+                      Back to Login
+                    </Button>
+                  </Link>
                 </Form>
-                
               </div>
             </div>
           </div>

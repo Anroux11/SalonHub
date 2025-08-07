@@ -1,27 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { 
-  Table, 
-  Button, 
-  Modal, 
-  Form, 
-  Input, 
-  Space, 
-  message, 
-  Flex, 
-  Spin, 
+import {
+  Table,
+  Button,
+  Modal,
+  Form,
+  Input,
+  Space,
+  message,
+  Flex,
+  Spin,
   Divider,
   Card,
   Typography,
   Row,
-  Col
+  Col,
 } from "antd/es";
 import type { ColumnsType } from "antd/es/table";
-import { UserAddOutlined, MailOutlined, PhoneOutlined, UserOutlined, LockOutlined } from "@ant-design/icons";
+import {
+  UserAddOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  UserOutlined,
+  LockOutlined,
+} from "@ant-design/icons";
 import { useStyles } from "./style/styles";
 import { IEmployeeTechnician } from "@/providers/employeeTechnician-provider/context";
-import { useEmployeeTechnicianActions, useEmployeeTechnicianState } from "@/providers/employeeTechnician-provider";
+import {
+  useEmployeeTechnicianActions,
+  useEmployeeTechnicianState,
+} from "@/providers/employeeTechnician-provider";
 
 const { Title, Text } = Typography;
 
@@ -93,7 +102,7 @@ const EmployeeTechnicianPage = () => {
     {
       title: "Contact Number",
       key: "contactNumber",
-      render: (_, record) => record.contactNumber || ""
+      render: (_, record) => record.contactNumber || "",
     },
   ];
 
@@ -101,20 +110,23 @@ const EmployeeTechnicianPage = () => {
     <>
       {loading ? (
         <div>
-          <Flex
-            justify="center"
-            align="center"
-            style={{ height: "100vh" }}
-          >
+          <Flex justify="center" align="center" style={{ height: "100vh" }}>
             <Spin size="large" />
           </Flex>
         </div>
       ) : (
         <div className={styles.employeeTechnicianContainer}>
-          <div style={{ width: "100%", display: "flex", justifyContent: "space-between", marginBottom: "16px" }}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "16px",
+            }}
+          >
             <h2 style={{ margin: 0 }}>Employee List</h2>
-            <Button 
-              type="primary" 
+            <Button
+              type="primary"
               icon={<UserAddOutlined />}
               size="large"
               onClick={() => setModalVisible(true)}
@@ -130,7 +142,7 @@ const EmployeeTechnicianPage = () => {
             className={styles.employeeTechnicianTable}
             rowKey="key"
             pagination={{ pageSize: 5 }}
-            scroll={{x: "max-content"}}
+            scroll={{ x: "max-content" }}
           />
 
           <Modal
@@ -158,15 +170,15 @@ const EmployeeTechnicianPage = () => {
             footer={
               <div className={styles.modalFooter}>
                 <Space size="middle">
-                  <Button 
+                  <Button
                     onClick={handleCancel}
                     size="large"
                     className={styles.cancelButton}
                   >
                     Cancel
                   </Button>
-                  <Button 
-                    type="primary" 
+                  <Button
+                    type="primary"
                     onClick={handleAddEmployeeTechnician}
                     loading={loading}
                     size="large"
@@ -178,11 +190,9 @@ const EmployeeTechnicianPage = () => {
               </div>
             }
           >
-            <Card 
-              className={styles.formCard}
-            >
-              <Form 
-                form={form} 
+            <Card className={styles.formCard}>
+              <Form
+                form={form}
                 layout="vertical"
                 requiredMark={false}
                 className={styles.formContainer}
@@ -197,12 +207,14 @@ const EmployeeTechnicianPage = () => {
                           Full Name
                         </Text>
                       }
-                      rules={[{ 
-                        required: true, 
-                        message: "Please enter the employee's full name" 
-                      }]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter the employee's full name",
+                        },
+                      ]}
                     >
-                      <Input 
+                      <Input
                         placeholder="Enter employee's full name"
                         size="large"
                         className={styles.inputField}
@@ -222,19 +234,20 @@ const EmployeeTechnicianPage = () => {
                         </Text>
                       }
                       rules={[
-                        { required: true, 
-                          message: "Please enter email address"
-                        }
+                        {
+                          required: true,
+                          message: "Please enter email address",
+                        },
                       ]}
                     >
-                      <Input 
+                      <Input
                         placeholder="employee@company.com"
                         size="large"
                         className={styles.inputField}
                       />
                     </Form.Item>
                   </Col>
-                  
+
                   <Col xs={24} sm={12}>
                     <Form.Item
                       name="contactNumber"
@@ -244,12 +257,14 @@ const EmployeeTechnicianPage = () => {
                           Contact Number
                         </Text>
                       }
-                      rules={[{ 
-                        required: true, 
-                        message: "Please enter contact number" 
-                      }]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter contact number",
+                        },
+                      ]}
                     >
-                      <Input 
+                      <Input
                         placeholder="+27 XX XXX XXXX"
                         size="large"
                         className={styles.inputField}
@@ -267,12 +282,14 @@ const EmployeeTechnicianPage = () => {
                           Job Title
                         </Text>
                       }
-                      rules={[{ 
-                        required: true, 
-                        message: "Please enter job title" 
-                      }]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter job title",
+                        },
+                      ]}
                     >
-                      <Input 
+                      <Input
                         placeholder="e.g., Hair Stylist, Nail Technician"
                         size="large"
                         className={styles.inputField}
@@ -296,11 +313,12 @@ const EmployeeTechnicianPage = () => {
                         },
                         {
                           min: 6,
-                          message: "Password must be at least 6 characters long",
-                        }
+                          message:
+                            "Password must be at least 6 characters long",
+                        },
                       ]}
                     >
-                      <Input.Password 
+                      <Input.Password
                         placeholder="Minimum 6 characters"
                         size="large"
                         className={styles.inputField}
@@ -311,7 +329,8 @@ const EmployeeTechnicianPage = () => {
 
                 <Divider className={styles.formDivider} />
                 <Text type="secondary" className={styles.footerText}>
-                  * The employee will be able to Login after they have been added
+                  * The employee will be able to Login after they have been
+                  added
                 </Text>
               </Form>
             </Card>

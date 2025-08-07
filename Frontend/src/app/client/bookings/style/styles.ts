@@ -9,10 +9,10 @@ export const useStyles = createStyles({
     padding: 24px;
   `,
   searchInput: css`
-  width: 100%;
-  margin-bottom: 30px;
-  max-width: 100%;
-  box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 30px;
+    max-width: 100%;
+    box-sizing: border-box;
   `,
   bookingTable: css`
     width: 100%;

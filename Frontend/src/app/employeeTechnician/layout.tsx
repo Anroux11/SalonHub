@@ -12,7 +12,17 @@ import {
   UserOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, Modal, theme, Image, Space, Tooltip, Typography } from "antd/es";
+import {
+  Button,
+  Layout,
+  Menu,
+  Modal,
+  theme,
+  Image,
+  Space,
+  Tooltip,
+  Typography,
+} from "antd/es";
 import Title from "antd/es/typography/Title";
 import { useStyles } from "../client/style/styles";
 import withAuth from "@/hoc/withAuth";
@@ -231,9 +241,6 @@ const EmployeeTechnicianLayout = ({
           </div>
         </div>
       </Modal>
-
-        
-
     </Layout>
   );
 };

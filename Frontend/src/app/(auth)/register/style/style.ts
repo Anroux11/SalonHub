@@ -28,10 +28,7 @@ export const useStyles = createStyles({
     padding-top: 20px;
     left: 0;
     background-color: #111;
-    background-image: linear-gradient(
-        rgba(7, 7, 7, 0.73),
-        rgba(0, 0, 0, 0.8)
-      ),
+    background-image: linear-gradient(rgba(7, 7, 7, 0.73), rgba(0, 0, 0, 0.8)),
       url("/registerOne.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -53,10 +50,7 @@ export const useStyles = createStyles({
     background-color: red;
     background-color: #0b192c;
     background-color: #111;
-    background-image: linear-gradient(
-        rgba(2, 2, 2, 0.74),
-        rgba(0, 0, 0, 0.8)
-      ),
+    background-image: linear-gradient(rgba(2, 2, 2, 0.74), rgba(0, 0, 0, 0.8)),
       url("/registerTwo.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -106,11 +100,11 @@ export const useStyles = createStyles({
     &:hover {
       background-color: transparent;
     }
-      &:active {
+    &:active {
       background-color: transparent;
     }
-      &:focus {
-      background-color:transparent;
+    &:focus {
+      background-color: transparent;
     }
 
     @media (max-width: 480px) {
@@ -155,10 +149,10 @@ export const useStyles = createStyles({
     align: center;
   `,
   loginBtn: css`
-  width: 300px;
-    fontWeight: bold;
+    width: 300px;
+    fontweight: bold;
     background-color: transparent;
-    border-color: #FF9323;
-    color: #FF9323;
+    border-color: #ff9323;
+    color: #ff9323;
   `,
 });

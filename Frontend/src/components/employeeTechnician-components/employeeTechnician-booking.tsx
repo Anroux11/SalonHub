@@ -92,33 +92,6 @@ const BookingList = ({
     }).format(_date);
   };
 
-  // const handleAssign = () => {
-  //   setAssignMode(true);
-  // };
-
-  // const handleConfirmAssign = async () => {
-  //   setLoading(true);
-  //   try {
-  //     if (!selectedBooking || !selectedEmployeeTechnician) return;
-
-  //     const payload: IBooking = {
-  //       ...selectedBooking,
-  //       status: "Assigned",
-  //       employeeTechnicianName: selectedEmployeeTechnician?.name,
-  //     }
-  //     await updateBooking(payload);
-  //     setModalVisible(false);
-  //     message.success(`Assigned to ${selectedEmployeeTechnician.name}`);
-  //     getBookingList();
-  //   } catch (error) {
-
-  //     console.error(error);
-  //     message.error("Assigning Booking failed");
-  //   }
-
-  //   setLoading(false);
-  // };
-
   const handleComplete = async () => {
     setLoading(true);
     try {
@@ -345,7 +318,7 @@ const BookingList = ({
 
             {assignMode && (
               <>
-                <p>Select a Service Provider to assign this booking:</p>
+                <p>Select a Employee to confirm this booking:</p>
                 <Select
                   placeholder="Select Service Provider"
                   style={{ width: "100%" }}

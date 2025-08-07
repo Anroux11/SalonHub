@@ -25,13 +25,13 @@ const AddSalon = () => {
   const { createSalon } = useSalonActions();
   const [form] = Form.useForm();
   const { salons } = useSalonState();
-   const { getSalonList } = useSalonActions();
+  const { getSalonList } = useSalonActions();
 
   const handleCreateSalon: FormProps<ISalon>["onFinish"] = async (values) => {
     setLoading(true);
     try {
       const payload = {
-        name: values.name
+        name: values.name,
       };
       await createSalon(payload);
       message.success("Salon added successfully!");
@@ -45,7 +45,6 @@ const AddSalon = () => {
   const handleAddUser = () => {
     form.validateFields().then((values) => {
       const newSalon: ISalon = {
-        // key: ((salons?.length ?? 0) + 1).toString(),
         name: values.name,
       };
       handleCreateSalon(newSalon);
@@ -55,8 +54,7 @@ const AddSalon = () => {
     });
   };
 
-    useEffect(() => {
-    // fetchClients();
+  useEffect(() => {
     getSalonList();
   }, [""]);
 

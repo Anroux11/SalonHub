@@ -21,7 +21,7 @@ import {
 } from "@/providers/auth-provider";
 import { IClient } from "@/providers/client-provider/context";
 import { UserOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import {useStyles} from "./style/styles"
+import { useStyles } from "./style/styles";
 
 const { Text, Title } = Typography;
 
@@ -39,7 +39,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ open, onClose }) => {
 
   const [form] = Form.useForm();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -118,7 +118,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ open, onClose }) => {
         }}
       >
         <div className={styles.drawerContent}>
-          {/* Header Section */}
           <div className={styles.header}>
             <div className={styles.avatarSection}>
               <Avatar
@@ -139,7 +138,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ open, onClose }) => {
             </div>
           </div>
 
-          {/* Form Section */}
           <div className={styles.formSection}>
             <div className={styles.sectionHeader}>
               <EditOutlined className={styles.sectionIcon} />
@@ -210,7 +208,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ open, onClose }) => {
             </Form>
           </div>
 
-          {/* Delete Section */}
           <div className={styles.deleteSection}>
             <Divider className={styles.divider}>
               <Text className={styles.dividerText}>Danger Zone</Text>

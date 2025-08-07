@@ -61,10 +61,10 @@ export const useStyles = createStyles({
     }
   `,
   logout: css`
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  padding: 8px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 8px;
   `,
 });

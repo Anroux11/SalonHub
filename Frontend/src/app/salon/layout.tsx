@@ -51,7 +51,6 @@ const SalonLayout = ({ children }: { children: React.ReactNode }) => {
       }
     }, 3000);
 
-    // Return a cleanup function
     return () => {
       clearTimeout(timerId);
     };

@@ -3,9 +3,7 @@
 import GeminiImageAnalysis from "@/components/Gemini/gemini";
 
 const GeminiPage = () => {
-  return (
-    <GeminiImageAnalysis/>
-  );
+  return <GeminiImageAnalysis />;
 };
 
 export default GeminiPage;

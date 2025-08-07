@@ -1,7 +1,6 @@
 import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
-  // Page Layout
   pageContainer: css`
     padding: 24px;
     max-width: 1400px;
@@ -95,7 +94,6 @@ export const useStyles = createStyles({
     padding: 0 20px;
   `,
 
-  // Modal Styles
   salonModal: css`
     .ant-modal-content {
       border-radius: 12px;
@@ -138,7 +136,6 @@ export const useStyles = createStyles({
   modalContent: css`
     line-height: 1.6;
   `,
-  // Responsive adjustments
   "@media (max-width: 768px)": {
     pageContainer: css`
       padding: 16px;

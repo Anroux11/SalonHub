@@ -24,7 +24,12 @@ import {
   useSalonServiceState,
 } from "@/providers/salonService-provider";
 import { ISalonService } from "@/providers/salonService-provider/context";
-import { DollarOutlined, PlusCircleOutlined, ScissorOutlined, SignatureOutlined} from "@ant-design/icons";
+import {
+  DollarOutlined,
+  PlusCircleOutlined,
+  ScissorOutlined,
+  SignatureOutlined,
+} from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 
@@ -180,7 +185,7 @@ const SalonServicePage = () => {
                       name="name"
                       label={
                         <Text strong className={styles.fieldLabel}>
-                          <ScissorOutlined  className={styles.fieldIcon} />
+                          <ScissorOutlined className={styles.fieldIcon} />
                           Service Name
                         </Text>
                       }
@@ -196,45 +201,45 @@ const SalonServicePage = () => {
                   </Col>
                 </Row>
 
-                  <Col span={24}>
-                    <Form.Item
-                      name="description"
-                      label={
-                        <Text strong className={styles.fieldLabel}>
-                          <SignatureOutlined  className={styles.fieldIcon} />
-                          Description
-                        </Text>
-                      }
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please enter Description of service",
-                        },
-                      ]}
-                    >
-                      <Input />
-                    </Form.Item>
-                  </Col>
+                <Col span={24}>
+                  <Form.Item
+                    name="description"
+                    label={
+                      <Text strong className={styles.fieldLabel}>
+                        <SignatureOutlined className={styles.fieldIcon} />
+                        Description
+                      </Text>
+                    }
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter Description of service",
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
 
-                  <Col span={24}>
-                    <Form.Item
-                      name="price"
-                      label={
-                        <Text strong className={styles.fieldLabel}>
-                          <DollarOutlined className={styles.fieldIcon} />
-                          Price
-                        </Text>
-                      }
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please enter price of service",
-                        },
-                      ]}
-                    >
-                      <Input />
-                    </Form.Item>
-                  </Col>
+                <Col span={24}>
+                  <Form.Item
+                    name="price"
+                    label={
+                      <Text strong className={styles.fieldLabel}>
+                        <DollarOutlined className={styles.fieldIcon} />
+                        Price
+                      </Text>
+                    }
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter price of service",
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
                 <Divider />
               </Form>
             </Card>

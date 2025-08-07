@@ -1,7 +1,7 @@
 import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
-    layout: css`
+  layout: css`
     min-height: 100vh;
   `,
   sider: css`
@@ -57,7 +57,7 @@ export const useStyles = createStyles({
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
     transition: all 0.3s ease;
-    
+
     &:hover {
       background: rgba(255, 255, 255, 0.2) !important;
       border-color: rgba(255, 255, 255, 0.3) !important;
@@ -65,7 +65,7 @@ export const useStyles = createStyles({
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    
+
     &:focus {
       background: rgba(255, 255, 255, 0.2) !important;
       border-color: rgba(255, 255, 255, 0.3) !important;
@@ -73,7 +73,7 @@ export const useStyles = createStyles({
     }
   `,
   profileAvatar: css`
-    background: linear-gradient(135deg, #FF9323 0%, #212428 100%);
+    background: linear-gradient(135deg, #ff9323 0%, #212428 100%);
     color: white;
     font-weight: 600;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -89,7 +89,7 @@ export const useStyles = createStyles({
     font-size: 12px;
     opacity: 0.8;
     transition: transform 0.3s ease;
-    
+
     .ant-dropdown-open & {
       transform: rotate(180deg);
     }
@@ -97,16 +97,16 @@ export const useStyles = createStyles({
   headerTitle: css`
     background: colorBgContainer;
     padding: 0 24px;
-    border-bottom: 1px solid #FF9323;
+    border-bottom: 1px solid #ff9323;
     display: flex;
-     align-items: center;
-     justify-content: center;
-     position: relative;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 
     @media (max-width: 768px) {
       padding: 0 16px;
     }
-    
+
     @media (max-width: 480px) {
       padding: 0 12px;
     }
@@ -121,25 +121,25 @@ export const useStyles = createStyles({
     transition: font-size 0.3s ease;
 
     @media (min-width: 1200px) {
-    font-size: 28px !important; 
+      font-size: 28px !important;
     }
-    
+
     @media (max-width: 1199px) and (min-width: 769px) {
-    font-size: 24px !important; 
+      font-size: 24px !important;
     }
-    
+
     @media (max-width: 768px) and (min-width: 481px) {
-    font-size: 17px !important;
+      font-size: 17px !important;
     }
-    
+
     @media (max-width: 480px) {
-    font-size: 13px !important;
-    font-weight: 500 !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
     }
-    
+
     @media (max-width: 360px) {
-    font-size: 10px !important;
-    font-weight: 500 !important;
+      font-size: 10px !important;
+      font-weight: 500 !important;
     }
   `,
 
@@ -153,11 +153,11 @@ export const useStyles = createStyles({
     align-items: center;
     justify-content: center;
     position: relative;
-    
+
     @media (max-width: 480px) {
       max-width: calc(100vw - 120px);
     }
-    
+
     @media (max-width: 360px) {
       max-width: calc(100vw - 100px);
     }
@@ -274,4 +274,4 @@ export const useStyles = createStyles({
   modalLogoutButton: css`
     min-width: 120px;
   `,
-})
+});

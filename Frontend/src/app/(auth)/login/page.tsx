@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useStyles } from "./style/styles";
-// import Typography from "antd/es/typography";
 import { useRouter } from "next/navigation";
 import { Button, Divider, Flex, Form, FormProps, Input, Spin } from "antd/es";
 import message from "antd/es/message";
@@ -25,7 +24,6 @@ type FieldType = {
 
 const Login = () => {
   const { styles } = useStyles();
-  // const { Title } = Typography;
   const router = useRouter();
   const { userLogin } = useUserLoginActions();
   const [loading, setLoading] = useState(false);
@@ -63,8 +61,7 @@ const Login = () => {
       console.error(error);
       message.error("Login failed. Please check your credentials.");
     }
-  }
-
+  };
 
   return (
     <>
@@ -88,10 +85,21 @@ const Login = () => {
                 width={350}
                 height={350}
               ></Image>
-              <h1 style={{color: "#969aa2ff", fontWeight: "10", fontSize: "30px"}}>Manage Your Clients</h1>
-              <h1 style={{color:"#969aa2ff", fontWeight: "10"}}>Manage Your Appointments</h1>
-              <h1 style={{color: "#969aa2ff", fontWeight: "10"}}>Manage Your Services</h1>
-              
+              <h1
+                style={{
+                  color: "#969aa2ff",
+                  fontWeight: "10",
+                  fontSize: "30px",
+                }}
+              >
+                Manage Your Clients
+              </h1>
+              <h1 style={{ color: "#969aa2ff", fontWeight: "10" }}>
+                Manage Your Appointments
+              </h1>
+              <h1 style={{ color: "#969aa2ff", fontWeight: "10" }}>
+                Manage Your Services
+              </h1>
             </div>
           </div>
           <div className={styles.splitRight}>
@@ -159,11 +167,9 @@ const Login = () => {
                       Log in
                     </Button>
                   </Form.Item>
-                  <Divider plain>
-                    OR
-                  </Divider>
+                  <Divider plain>OR</Divider>
                   <Link href="/register">
-                      <Button
+                    <Button
                       className={styles.registerBtn}
                       block
                       type="default"
@@ -174,7 +180,6 @@ const Login = () => {
                     </Button>
                   </Link>
                 </Form>
-              
               </div>
             </div>
           </div>
