@@ -14,6 +14,7 @@ import {
   Card,
   Col,
   Row,
+  Input,
 } from "antd/es";
 import type { ColumnsType } from "antd/es/table";
 import { useStyles } from "./style/styles";
@@ -37,13 +38,27 @@ const BookingListPage: React.FC = () => {
   const { styles } = useStyles();
   const { bookings, isPending } = useBookingState();
   const { getBookingList } = useBookingActions();
-
   const [selectedBooking, setSelectedBooking] = useState<IBooking | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredBookings, setFilteredBookings] = useState<IBooking[]>([]);
 
   useEffect(() => {
     getBookingList();
   }, []);
+
+  useEffect(() => {
+    const bookingList = bookings ?? [];
+
+    if (!searchQuery.trim()) {
+      setFilteredBookings(bookingList);
+    } else {
+      const filtered = bookingList.filter((booking) =>
+        booking.salonName?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredBookings(filtered);
+    }
+  }, [searchQuery, bookings]);
 
   const formatBookingDate = (date: string) => {
     if (!date) return "-";
@@ -144,9 +159,20 @@ const BookingListPage: React.FC = () => {
         </Flex>
       ) : (
         <div className={styles.bookingContainer}>
+          <div style={{ width: "100%", padding: "0 16px" }}>
+            <Input.Search
+              className={styles.searchInput}
+              placeholder="Search bookings by salon name"
+              allowClear
+              enterButton
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
           <Table
             columns={columns}
-            dataSource={bookings}
+            dataSource={filteredBookings}
             className={styles.bookingTable}
             rowKey="id"
             pagination={{ pageSize: 5 }}
@@ -262,7 +288,7 @@ const BookingListPage: React.FC = () => {
                           <Text strong>Date & Time</Text>
                         </Space>
                         <Text className={styles.bookingHeaders}>
-                          {selectedBooking.date || "Not scheduled"}
+                          {formatBookingDate(selectedBooking.date)}
                         </Text>
                       </Space>
                     </Col>

@@ -10,6 +10,13 @@ export const useStyles = createStyles({
     min-height: 100vh;
   `,
 
+  searchInput: css`
+    width: 100%;
+    margin-bottom: 30px;
+    max-width: 100%;
+    box-sizing: border-box;
+  `,
+
   pageHeader: css`
     text-align: center;
     margin-bottom: 32px;
@@ -30,15 +37,15 @@ export const useStyles = createStyles({
   `,
   salonCard: css`
     border-radius: 12px;
-    box-shadow: 0 2px 8px #FF9323;
+    box-shadow: 0 2px 8px #ff9323;
     transition: all 0.3s ease;
-    border: 1px solid #FF9323;
+    border: 1px solid #ff9323;
     overflow: hidden;
 
     &:hover {
       transform: translateY(-4px);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      border-color: #FF9323;
+      border-color: #ff9323;
     }
 
     .ant-card-body {
@@ -48,7 +55,7 @@ export const useStyles = createStyles({
     .ant-card-actions {
       border-top: 1px solid #f0f0f0;
       background: #2a2a2cff;
-      
+
       li {
         margin: 8px 0;
       }
@@ -64,7 +71,7 @@ export const useStyles = createStyles({
   `,
 
   salonAvatar: css`
-    background: linear-gradient(135deg, #0e2e4dff, #FF9323);
+    background: linear-gradient(135deg, #0e2e4dff, #ff9323);
     border: 3px solid #fff;
     box-shadow: 0 4px 12px rgba(24, 144, 255, 0.2);
   `,
@@ -96,8 +103,8 @@ export const useStyles = createStyles({
     }
 
     .ant-modal-header {
-      background: linear-gradient(135deg, #0e2e4dff, #FF9323);
-      border-bottom: #FF9323;
+      background: linear-gradient(135deg, #0e2e4dff, #ff9323);
+      border-bottom: #ff9323;
       padding: 20px 24px;
     }
 
@@ -106,7 +113,7 @@ export const useStyles = createStyles({
     }
 
     .ant-modal-footer {
-      border-top: 1px solid #FF9323;
+      border-top: 1px solid #ff9323;
       padding: 16px 24px;
     }
   `,
@@ -118,7 +125,7 @@ export const useStyles = createStyles({
   `,
 
   modalAvatar: css`
-    background: linear-gradient(135deg, #0e2e4dff, #FF9323);
+    background: linear-gradient(135deg, #0e2e4dff, #ff9323);
     border: 2px solid #fff;
     box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
   `,
@@ -132,7 +139,7 @@ export const useStyles = createStyles({
     line-height: 1.6;
   `,
   // Responsive adjustments
-  '@media (max-width: 768px)': {
+  "@media (max-width: 768px)": {
     pageContainer: css`
       padding: 16px;
     `,
@@ -156,5 +163,5 @@ export const useStyles = createStyles({
     servicesTags: css`
       justify-content: center;
     `,
-  }
+  },
 });

@@ -69,4 +69,5 @@ export const useStyles = createStyles({
   background: rgba(0, 0, 0, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.1)
   `,
+  
 })

@@ -37,6 +37,63 @@ export const useStyles = createStyles({
       color: colorPrimary
     }
   `,
+  headerContainer: css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 24px;
+  `,
+  profileSection: css`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  `,
+  profileButton: css`
+    height: 40px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      color: white !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:focus {
+      background: rgba(255, 255, 255, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      color: white !important;
+    }
+  `,
+  profileAvatar: css`
+    background: linear-gradient(135deg, #FF9323 0%, #212428 100%);
+    color: white;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  `,
+  profileButtonText: css`
+    font-weight: 500;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
+  profileDropdownIcon: css`
+    font-size: 12px;
+    opacity: 0.8;
+    transition: transform 0.3s ease;
+    
+    .ant-dropdown-open & {
+      transform: rotate(180deg);
+    }
+  `,
   headerTitle: css`
     background: colorBgContainer;
     padding: 0 24px;

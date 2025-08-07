@@ -12,13 +12,25 @@ import {
   AliwangwangOutlined,
   UserOutlined,
   ExclamationCircleOutlined,
+  DownOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, Modal, theme, Image, Space, Typography, Tooltip } from "antd/es";
-import Title from "antd/es/typography/Title";
-// import { useStyles } from "@/app/employeeTechnician/style/styles";
+import {
+  Button,
+  Layout,
+  Menu,
+  Modal,
+  theme,
+  Image,
+  Space,
+  Typography,
+  Tooltip,
+  Avatar,
+  Dropdown,
+} from "antd/es";
 import "@ant-design/v5-patch-for-react-19";
 import { useStyles } from "./style/styles";
 import withAuth from "@/hoc/withAuth";
+import ProfileDrawer from "@/components/client-components/profileDrawer";
 
 const { Header, Sider, Content } = Layout;
 const { Text } = Typography;
@@ -41,6 +53,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
 
   const [collapsed, setCollapsed] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
 
   const { styles } = useStyles();
   const router = useRouter();
@@ -58,6 +71,38 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
     sessionStorage.clear();
     setLogoutModalVisible(false);
     router.push("/login");
+  };
+
+  const getInitials = () => {
+    if (loggedInUser && loggedInUser !== "Guest") {
+      return loggedInUser.charAt(0).toUpperCase();
+    }
+    return "G";
+  };
+
+  const profileMenuItems = [
+    {
+      key: "profile",
+      label: "View Profile",
+      icon: <UserOutlined />,
+    },
+    {
+      type: "divider" as const,
+    },
+    {
+      key: "logout",
+      label: "Logout",
+      icon: <LogoutOutlined />,
+      danger: true,
+    },
+  ];
+
+  const handleProfileMenuClick = ({ key }: { key: string }) => {
+    if (key === "profile") {
+      setIsProfileDrawerOpen(true);
+    } else if (key === "logout") {
+      setLogoutModalVisible(true);
+    }
   };
 
   return (
@@ -116,22 +161,33 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
           ]}
         />
 
-        <div className={`${styles.logoutSection} ${
-            collapsed ? styles.logoutSectionCollapsed : styles.logoutSectionExpanded
-          }`}>
-            {!collapsed && (
+        <div
+          className={`${styles.logoutSection} ${
+            collapsed
+              ? styles.logoutSectionCollapsed
+              : styles.logoutSectionExpanded
+          }`}
+        >
+          {!collapsed && (
             <div className={styles.userInfoSection}>
-              <Space align="center" size="small" className={styles.userInfoSpace}>
+              <Space
+                align="center"
+                size="small"
+                className={styles.userInfoSpace}
+              >
                 <UserOutlined className={styles.userIcon} />
-                <Text className={styles.userText} ellipsis={{ tooltip: loggedInUser }}>
+                <Text
+                  className={styles.userText}
+                  ellipsis={{ tooltip: loggedInUser }}
+                >
                   {loggedInUser}
                 </Text>
               </Space>
             </div>
           )}
 
-          <Tooltip 
-            title={collapsed ? `Logout (${loggedInUser})` : "Logout"} 
+          <Tooltip
+            title={collapsed ? `Logout (${loggedInUser})` : "Logout"}
             placement={collapsed ? "right" : "top"}
           >
             <Button
@@ -141,7 +197,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
               block
               onClick={() => setLogoutModalVisible(true)}
               className={`${styles.logoutButton} ${
-                collapsed ? styles.logoutButtonCollapsed : ''
+                collapsed ? styles.logoutButtonCollapsed : ""
               }`}
             >
               {!collapsed && (
@@ -166,12 +222,40 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
       />
 
       <Layout>
-         <Header className={styles.headerTitle}>
-          <Title level={2} className={styles.title}>
-            <span className={styles.titleText}>
-              Welcome, {loggedInUser}
-            </span>
-          </Title>
+        <Header className={styles.headerTitle}>
+          <div className={styles.headerContainer}>
+            <div className={styles.profileSection}>
+              <Dropdown
+                menu={{
+                  items: profileMenuItems,
+                  onClick: handleProfileMenuClick,
+                }}
+                placement="bottomRight"
+                arrow
+                trigger={["click"]}
+              >
+                <Button
+                  type="text"
+                  className={styles.profileButton}
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <Space align="center" size="small">
+                    <Avatar
+                      size="small"
+                      className={styles.profileAvatar}
+                      icon={<UserOutlined />}
+                    >
+                      {getInitials()}
+                    </Avatar>
+                    <span className={styles.profileButtonText}>
+                      {loggedInUser}
+                    </span>
+                    <DownOutlined className={styles.profileDropdownIcon} />
+                  </Space>
+                </Button>
+              </Dropdown>
+            </div>
+          </div>
         </Header>
 
         <Content className={styles.contentContainer}>{children}</Content>
@@ -187,17 +271,17 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
         }
         onCancel={() => setLogoutModalVisible(false)}
         footer={[
-          <Button 
-            key="cancel" 
+          <Button
+            key="cancel"
             onClick={() => setLogoutModalVisible(false)}
             className={styles.modalCancelButton}
           >
             Cancel
           </Button>,
-          <Button 
-            key="logout" 
-            type="primary" 
-            danger 
+          <Button
+            key="logout"
+            type="primary"
+            danger
             onClick={confirmLogout}
             icon={<LogoutOutlined />}
             className={styles.modalLogoutButton}
@@ -208,19 +292,20 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
         width={400}
         centered
         styles={{
-          body: { 
+          body: {
             padding: "20px",
-            fontSize: "15px"
+            fontSize: "15px",
           },
           header: {
             paddingBottom: "16px",
-            borderBottom: "1px solid #f0f0f0"
-          }
+            borderBottom: "1px solid #f0f0f0",
+          },
         }}
       >
         <div className={styles.modalContent}>
           <Text className={styles.modalText}>
-            Are you sure you want to logout? You will need to sign in again to access your account.
+            Are you sure you want to logout? You will need to sign in again to
+            access your account.
           </Text>
           <div className={styles.modalUserInfo}>
             <Space>
@@ -231,9 +316,13 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </Modal>
+
+      <ProfileDrawer
+        open={isProfileDrawerOpen}
+        onClose={() => setIsProfileDrawerOpen(false)}
+      />
     </Layout>
   );
 };
 
 export default withAuth(ClientLayout, { allowedRoles: ["Client"] });
-
