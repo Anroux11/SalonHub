@@ -155,24 +155,27 @@ const ClientDashboard: React.FC = () => {
     try {
       const values = await form.validateFields();
 
+      let imageUrl = null;
+      
+      // Only upload image if a file was provided
       const file = values.imageUrl?.[0]?.originFileObj;
-      if (!file) {
-        message.error("Please upload a Photo.");
-        return;
-      }
-
-      const imageUrl = await uploadImage(file);
-      // const imageUrl = "url";
-      if (!imageUrl) {
-        message.error("Failed to upload image.");
-        return;
+      if (file) {
+        try {
+          imageUrl = await uploadImage(file);
+          if (!imageUrl) {
+            message.warning("Failed to upload image, but booking will continue without photo.");
+          }
+        } catch (error) {
+          console.error("Image upload error:", error);
+          message.warning("Failed to upload image, but booking will continue without photo.");
+        }
       }
 
       const payload: IBooking = {
         date: values.date,
         service: values.service,
         status: "Submitted",
-        imageUrl,
+        imageUrl: imageUrl || "",
         bookingUserId: parseInt(sessionStorage.getItem("userId") ?? "0"),
         salonName: values.salonName,
         salonId: sessionStorage.getItem("salonId") ?? "0",
@@ -185,7 +188,12 @@ const ClientDashboard: React.FC = () => {
       await createBooking(payload);
 
       setBooking([...booking, payload]);
-      message.success(`Booking made successfully for ${formatBookingDate(values.date)}!`);
+
+      const successMessage = imageUrl 
+        ? `Booking made successfully for ${formatBookingDate(values.date)} with reference photo!`
+        : `Booking made successfully for ${formatBookingDate(values.date)}!`;
+        
+      message.success(successMessage);
       setBookingModalVisible(false);
       form.resetFields();
       router.push("/client/bookings");
@@ -233,7 +241,7 @@ const ClientDashboard: React.FC = () => {
             type="default"
             size="large"
             block
-            className={styles.quickActionButton}
+            className={styles.createBtn}
             onClick={handleBooking}
           >
             Create Booking

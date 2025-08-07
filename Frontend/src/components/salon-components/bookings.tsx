@@ -61,6 +61,21 @@ const BookingList = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const formatBookingDate = (date: string) => {
+    if (!date) return "-";
+
+    const _date = new Date(date);
+
+    return new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(_date);
+  };
+
   useEffect(() => {
     getBookingList();
     getEmployeeTechnicianList();
@@ -160,7 +175,7 @@ const BookingList = ({
       title: "Date & Time",
       dataIndex: "date",
       key: "date",
-      render: (srvP) => srvP || "-",
+      render: (srvP) => formatBookingDate(srvP) || "-",
     },
     {
       title: "Status",

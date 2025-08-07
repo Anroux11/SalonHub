@@ -118,7 +118,6 @@ export const modalStyles = {
   } as CSSProperties,
 };
 
-// Additional utility styles for enhanced visual appeal
 export const enhancedStyles = {
   gradientBackground: {
     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -248,7 +247,7 @@ export const useStyles = createStyles({
   `,
   formLabel: css`
     font-weight: 500;
-    color: #686D7;
+    color: #686D76;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
@@ -320,7 +319,7 @@ export const useStyles = createStyles({
     }
 
     &:focus {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      background: linear-gradient(135deg, #FF9323 0%, #212428 100%) !important;
     }
   `,
   cancelButton: css`
@@ -365,6 +364,25 @@ export const useStyles = createStyles({
       background: #212428;
       border-top: 1px solid #212428;
       padding: 16px 24px;
+    }
+  `,
+  createBtn: css`
+  background: transparent !important;
+    border: 1px solid #FF9323;
+    border-radius: 8px;
+    height: 40px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 15px 20px rgba(102, 126, 234, 0.4) !important;
+      background-color: #FF9323 !important;
+      color: white !important;
+    }
+
+    &:focus {
+      background: linear-gradient(135deg, #FF9323 0%, #212428 100%) !important;
     }
   `,
 });

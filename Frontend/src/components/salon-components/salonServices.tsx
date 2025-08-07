@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "antd/es";
 import type { ColumnsType } from "antd/es/table";
 import { useStyles } from "../../app/salon/bookings/style/styles";
@@ -16,11 +16,14 @@ const SalonServices = ({}: { salonServices?: ISalonService[] }) => {
   // const salonServices = passedSalonServices ?? contextSalonServices;
   // const { getEmployeeTechnicianList } = useEmployeeTechnicianActions();
   const { getSalonServiceList } = useSalonServiceActions();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     // getBookingList();
     // getEmployeeTechnicianList();
     getSalonServiceList();
+    setLoading(false);
   }, [""]);
 
   useEffect(() => {
@@ -62,7 +65,7 @@ const SalonServices = ({}: { salonServices?: ISalonService[] }) => {
             pagination={{ pageSize: 3 }}
             rowKey="id"
             scroll={{x: "max-content"}}
-            loading={!salonServices}
+            loading={!salonServices || loading }
           />
         </div>
     </>
