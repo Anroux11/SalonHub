@@ -51,7 +51,7 @@ SalonHub/
 
 ## Technologies Used
 
-- **Backend:** ASP.NET Core (v8), Entity Framework Core, ABP Framework, Neon PostgreSQL, Render, SupaBase
+- **Backend:** ASP.NET Core (v9), Entity Framework Core, ABP Framework, Neon PostgreSQL, Render, SupaBase
 - **Frontend:** Next.js, React, Ant Design
 - **Other:** Docker (optional), Swagger (API docs), log4net (logging)
 
@@ -80,7 +80,7 @@ SalonHub/
 
 ### Frontend
 
-1. **Requirements:** [Node.js](https://nodejs.org/) (Node version >=18)
+1. **Requirements:** [Node.js](https://nodejs.org/) (Node version 18+)
 2. **Install dependencies:**
    ```sh
    cd Frontend
@@ -93,6 +93,10 @@ SalonHub/
 4. **Access the app:** Visit `http://localhost:3000` in your browser.
 
 ---
+
+## Clone this repository
+
+- https://github.com/Anroux11/SalonHub.git
 
 ## Environment Variables
 
